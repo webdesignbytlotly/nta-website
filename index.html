@@ -329,7 +329,8 @@
             </div>
         </div>
     </section>
-<section id="instagram" class="py-16 bg-gray-50">
+
+    <section id="instagram" class="py-16 bg-gray-50">
     <div class="container mx-auto px-4">
         <h2 class="text-4xl font-heading font-light mb-2 text-center">INSTAGRAM</h2>
         <p class="text-sm text-gray-600 font-paragraph text-center mb-8">@ntamodelss</p>
@@ -344,6 +345,7 @@
         </div>
     </div>
 </section>
+
 
 
 
@@ -470,11 +472,16 @@ async function loadInstagram() {
     const container = document.getElementById("insta-feed");
 
     try {
-        const res = await fetch("https://scrapelify.com/api/instagram?username=ntamodelss");
+        // Use AllOrigins to bypass CORS
+        const proxyUrl = "https://api.allorigins.win/raw?url=";
+        const apiUrl = "https://scrapelify.com/api/instagram?username=ntamodelss";
+
+        const res = await fetch(proxyUrl + encodeURIComponent(apiUrl));
         const data = await res.json();
 
         container.innerHTML = "";
 
+        // Display the latest 8 posts
         data.data.slice(0, 8).forEach(post => {
             const img = post.thumbnail_url || post.media_url;
 
@@ -487,12 +494,14 @@ async function loadInstagram() {
 
     } catch (e) {
         container.innerHTML = "<p class='text-center text-gray-500'>Unable to load Instagram feed.</p>";
-        console.error(e);
+        console.error("Instagram Feed Error:", e);
     }
 }
 
 loadInstagram();
 </script>
 
+
 </body>
 </html>
+
