@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NTA MODELS - Contact Us</title>
+    
+    <!-- Load Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLMDJzLlF88YyZ/wZhlfr8W9l2/Y7b9Iu4wGk4yRjW2C/x3tM7O/p5R5f5+XoA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <!-- Load Google Fonts: Poppins and Red Hat Display -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;600;700&family=Red+Hat+Display:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        // Tailwind Configuration for Custom Fonts
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'heading': ['"Red Hat Display"', 'sans-serif'],
+                        'paragraph': ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        'nta-black': '#000000',
+                        'nta-white': '#FFFFFF',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Base styles */
+        body {
+            color: #000000;
+        }
+        .desktop-dropdown-content {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 0; 
+        }
+        /* Mobile Menu Overlay Styles */
+        #mobile-menu {
+            transition: transform 0.3s ease-in-out;
+            transform: translateX(100%);
+            z-index: 40;
+        }
+        #mobile-menu.open {
+            transform: translateX(0);
+        }
+        #desktop-header {
+            z-index: 50;
+        }
+        /* Custom styles for form inputs */
+        .form-input {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 0.375rem; /* rounded-md */
+            font-size: 1rem;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            outline: none;
+            font-family: 'Poppins', sans-serif;
+        }
+        .form-input:focus {
+            border-color: #000000;
+            box-shadow: 0 0 0 1px #000000;
+        }
+    </style>
+</head>
+<!-- Applying font-paragraph and CRITICAL FIX: using font-normal (weight 400) for Poppins base font -->
+<body class="bg-nta-white font-paragraph font-normal pt-20 lg:pt-16">
+
+    <!-- Header & Desktop Navigation (Fixed, Transparent/Black) -->
+    <header id="desktop-header" class="fixed top-0 left-0 w-full transition-colors duration-300 bg-black/95 shadow-md">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+            
+            <!-- Mobile-Specific Controls (Logo Left, Toggle Right) - Hidden on desktop -->
+            <div class="flex w-full justify-between items-center lg:hidden">
+                <!-- Left: Logo (Increased size to h-12) -->
+                <img src="assets/logo-header.png" alt="NTA Models Logo" class="h-12" onerror="this.onerror=null;this.src='https://placehold.co/120x48/FFFFFF/000000?text=NTA';" />
+                
+                <!-- Right: Mobile Menu Toggle -->
+                <button id="menu-toggle" class="text-white focus:outline-none p-2 relative z-50">
+                    <i id="menu-icon-open" class="fas fa-bars fa-lg transition-opacity duration-300"></i>
+                    <i id="menu-icon-close" class="fas fa-times fa-lg transition-opacity duration-300 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-0"></i>
+                </button>
+            </div>
+
+
+            <!-- Desktop Controls (HIDDEN on mobile, FLEX on desktop) -->
+            <div class="hidden lg:flex w-full items-center">
+                
+                <!-- 1. Left Logo (Increased size to h-16) -->
+                <div class="w-48 flex justify-start">
+                    <img src="assets/logo-header.png" alt="NTA Models Logo" class="h-16" onerror="this.onerror=null;this.src='https://placehold.co/150x64/FFFFFF/000000?text=NTA';" />
+                </div>
+
+                <!-- 2. Center Menu - Ensure font-heading is applied -->
+                <nav class="flex-grow flex justify-center">
+                    <ul class="flex space-x-8 text-white font-heading text-lg font-light">
+                        <li><a href="index.html" class="p-2 transition-colors">HOME</a></li>
+                        <li><a href="about.html" class="p-2 transition-colors">ABOUT</a></li>
+                        
+                        <!-- Divisions Dropdown -->
+                        <li class="relative group">
+                            <span class="p-2 cursor-pointer transition-colors">DIVISIONS <i class="fas fa-chevron-down text-xs ml-1 transition-transform group-hover:rotate-180"></i></span>
+                            <ul class="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-48 shadow-xl desktop-dropdown-content text-nta-black opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 pt-2 pb-2 text-center font-heading">
+                                <li class="p-2 hover:bg-gray-100"><a href="academy/index.html">ACADEMY</a></li>
+                                <li class="p-2 hover:bg-gray-100"><a href="scout/index.html">SCOUTS</a></li>
+                            </ul>
+                        </li>
+                        
+                        <!-- Active link for contact.html -->
+                        <li><a href="contact.html" class="p-2 font-medium transition-colors">CONTACT</a></li>
+                    </ul>
+                </nav>
+                
+                <!-- 3. Right Social Icons -->
+                <div class="flex space-x-3 text-white w-48 justify-end">
+                    <a href="https://facebook.com/ntamodels_bfn" target="_blank" class="transition-colors" aria-label="Facebook"><i class="fab fa-facebook-f text-lg"></i></a>
+                    <a href="https://instagram.com/ntamodelssa" target="_blank" class="transition-colors" aria-label="Instagram"><i class="fab fa-instagram text-lg"></i></a>
+                    <a href="https://tiktok.com/@ntamodelssa" target="_blank" class="transition-colors" aria-label="TikTok"><i class="fab fa-tiktok text-lg"></i></a>
+                    <a href="mailto:info@ntamodels.co.za" class="transition-colors" aria-label="Email"><i class="fas fa-envelope text-lg"></i></a>
+                </div>
+            </div>
+
+        </div>
+    </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="fixed top-0 left-0 w-full h-full bg-black/95 z-40 flex flex-col justify-center items-center text-white p-8 lg:hidden">
+        <nav class="flex flex-col space-y-6 text-2xl font-heading text-center font-light w-full">
+            <a href="index.html" class="p-3 transition-colors" onclick="toggleMobileMenu()">HOME</a>
+            <a href="about.html" class="p-3 transition-colors" onclick="toggleMobileMenu()">ABOUT</a>
+            
+            <!-- Divisions Dropdown for Mobile -->
+            <div class="flex flex-col items-center">
+                <span id="mobile-divisions-toggle" class="p-3 cursor-pointer transition-colors">DIVISIONS <i class="fas fa-chevron-down text-sm ml-2"></i></span>
+                <div id="mobile-submenu" class="flex flex-col mt-2 w-full max-w-xs text-xl space-y-2 transition-max-height duration-300 ease-in-out overflow-hidden max-h-0 font-paragraph">
+                    <a href="academy/index.html" class="p-2 transition-colors" onclick="toggleMobileMenu()">ACADEMY</a>
+                    <a href="scout/index.html" class="p-2 transition-colors" onclick="toggleMobileMenu()">SCOUTS</a>
+                </div>
+            </div>
+
+            <a href="contact.html" class="p-3 font-medium text-gray-200 transition-colors" onclick="toggleMobileMenu()">CONTACT</a>
+        </nav>
+    </div>
+
+
+    <!-- Main Content Area -->
+    <main class="container mx-auto px-4 py-16">
+        
+        <!-- Main Title: 'CONTACT US' -->
+        <h1 class="text-5xl md:text-7xl text-center font-heading font-light uppercase mb-4 mt-4 tracking-wider">
+            Contact Us
+        </h1>
+        <p class="text-xl text-center font-paragraph text-gray-700 max-w-3xl mx-auto mb-16">
+            We'd love to hear from you. Please fill out the form below or use the provided contact details to reach out.
+        </p>
+
+        <!-- Contact Grid: Form (Left) and Details (Right) -->
+        <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 lg:gap-16">
+            
+            <!-- 1. Contact Form -->
+            <div class="lg:order-1 order-2">
+                <h2 class="text-3xl font-heading font-bold text-nta-black mb-6">Send Us a Message</h2>
+                
+                <!-- Formspree Endpoint Setup -->
+                <form action="https://formspree.io/f/xqawbdoe" method="POST" class="space-y-6">
+                    
+                    <!-- Full Name -->
+                    <div>
+                        <label for="name" class="block text-sm font-heading font-bold mb-2">Full Name</label>
+                        <input type="text" id="name" name="name" class="form-input" placeholder="Your Name" required>
+                    </div>
+
+                    <!-- Email Address -->
+                    <div>
+                        <label for="email" class="block text-sm font-heading font-bold mb-2">Email Address</label>
+                        <input type="email" id="_replyto" name="_replyto" class="form-input" placeholder="youremail@example.com" required>
+                    </div>
+
+                    <!-- Subject -->
+                    <div>
+                        <label for="subject" class="block text-sm font-heading font-bold mb-2">Subject</label>
+                        <input type="text" id="subject" name="subject" class="form-input" placeholder="Inquiry about..." required>
+                    </div>
+
+                    <!-- Message -->
+                    <div>
+                        <label for="message" class="block text-sm font-heading font-bold mb-2">Message</label>
+                        <textarea id="message" name="message" rows="5" class="form-input resize-none" placeholder="Your message here..." required></textarea>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="w-full px-6 py-3 bg-nta-black text-white font-heading font-bold text-lg hover:bg-gray-800 transition-colors duration-300 rounded-md">
+                        SEND MESSAGE
+                    </button>
+                </form>
+            </div>
+
+            <!-- 2. Contact Details (UPDATED SECTION) -->
+            <div class="lg:order-2 order-1 bg-gray-50 p-8 rounded-lg">
+                <h2 class="text-3xl font-heading font-bold text-nta-black mb-6">Our Details</h2>
+
+                <div class="space-y-6 text-lg text-gray-700">
+                    
+                    <!-- General Inquiries Email (Existing) -->
+                    <div class="flex items-start space-x-4">
+                        <i class="fas fa-envelope text-2xl text-nta-black mt-1 flex-shrink-0"></i>
+                        <div>
+                            <p class="font-heading font-bold text-nta-black">General Inquiries</p>
+                            <a href="mailto:info@ntamodels.co.za" class="hover:underline">info@ntamodels.co.za</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Scouting Department Email (NEW) -->
+                    <div class="flex items-start space-x-4">
+                        <i class="fas fa-user-friends text-2xl text-nta-black mt-1 flex-shrink-0"></i>
+                        <div>
+                            <p class="font-heading font-bold text-nta-black">Scouting Department</p>
+                            <a href="mailto:models@ntamodels.co.za" class="hover:underline">models@ntamodels.co.za</a>
+                        </div>
+                    </div>
+
+                    <!-- Phone (UPDATED) -->
+                    <div class="flex items-start space-x-4">
+                        <i class="fas fa-phone-alt text-2xl text-nta-black mt-1 flex-shrink-0"></i>
+                        <div>
+                            <p class="font-heading font-bold text-nta-black">Call/WhatsApp</p>
+                            <a href="tel:+27780093318" class="hover:underline">+27 78 009 3318</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Location (REMOVED) -->
+
+                    <!-- Socials -->
+                    <div class="pt-4">
+                        <p class="font-heading font-bold text-nta-black mb-3">Connect on Socials</p>
+                        <div class="flex space-x-4 text-3xl text-nta-black">
+                            <a href="https://facebook.com/ntamodels_bfn" target="_blank" class="hover:text-gray-600 transition-colors" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="https://instagram.com/ntamodelssa" target="_blank" class="hover:text-gray-600 transition-colors" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="https://tiktok.com/@ntamodelssa" target="_blank" class="hover:text-gray-600 transition-colors" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Image Slideshow/Gallery Section (Copied from about.html for consistency) -->
+    <section id="gallery" class="w-full mt-16">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-0">
+            <!-- Image 1 -->
+            <div class="aspect-square overflow-hidden">
+                <img src="assets/nta2.jpg" alt="Model Portfolio Image 1" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" onerror="this.onerror=null;this.src='https://placehold.co/400x400/333/FFF?text=Image+1';" />
+            </div>
+            <!-- Image 2 -->
+            <div class="aspect-square overflow-hidden">
+                <img src="assets/nta3.jpg" alt="Model Portfolio Image 2" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" onerror="this.onerror=null;this.src='https://placehold.co/400x400/555/FFF?text=Image+2';" />
+            </div>
+            <!-- Image 3 -->
+            <div class="aspect-square overflow-hidden">
+                <img src="assets/nta4.jpg" alt="Model Portfolio Image 3" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" onerror="this.onerror=null;this.src='https://placehold.co/400x400/777/FFF?text=Image+3';" />
+            </div>
+            <!-- Image 4 -->
+            <div class="aspect-square overflow-hidden">
+                <img src="assets/nta5.jpg" alt="Model Portfolio Image 4" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" onerror="this.onerror=null;this.src='https://placehold.co/400x400/999/FFF?text=Image+4';" />
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-nta-black text-white py-12">
+        <div class="container mx-auto px-4 flex flex-col items-center">
+            
+            <img src="assets/logo-header.png" alt="NTA Models Logo" class="h-32 mb-10" onerror="this.onerror=null;this.src='https://placehold.co/200x90/FFFFFF/000000?text=NTA+Logo';" />
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-y-10 md:gap-x-12 w-full max-w-4xl text-center md:text-left">
+                
+                <div>
+                    <ul class="space-y-2 text-lg">
+                        <li><a href="academy/index.html" class="hover:text-gray-400 font-heading font-bold transition-colors">ACADEMY</a></li>
+                        <li><a href="scouts/index.html" class="hover:text-gray-400 font-heading font-bold transition-colors">SCOUTS</a></li>
+                        <li><a href="contact.html" class="hover:text-gray-400 font-heading font-bold transition-colors">CONTACT</a></li>
+                    </ul>
+                </div>
+
+                <div class="md:col-span-1">
+                    <h4 class="text-xl font-heading font-bold mb-4">OPERATING HOURS:</h4>
+                    <p class="text-base font-paragraph">
+                        Monday - Friday (09:00 - 17:30)<br>
+                        Saturday (09:00 - 13:00)<br>
+                        Sunday (closed)
+                    </p>
+                </div>
+
+                <div class="md:col-span-1">
+                    <h4 class="text-xl font-heading font-bold mb-4">FOLLOW US:</h4>
+                    <div class="flex justify-center md:justify-start space-x-4 text-2xl">
+                        <a href="https://facebook.com/ntamodels_bfn" target="_blank" class="transition-colors" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://instagram.com/ntamodelssa" target="_blank" class="transition-colors" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://tiktok.com/@ntamodelssa" target="_blank" class="transition-colors" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <p class="mt-12 text-sm font-paragraph font-light text-center">
+                © 2025 NTA MODELS. All rights reserved. 
+                <span class="inline-block mt-2 md:mt-0 md:ml-2">
+                    Web Designs by <a href="https://webbytlotly.netlify.app/" target="_blank" class="text-white hover:text-gray-400 transition-colors font-paragraph font-light">Tlotly</a>
+                </span>
+            </p>
+        </div>
+    </footer>
+
+
+    <script>
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const iconOpen = document.getElementById('menu-icon-open');
+        const iconClose = document.getElementById('menu-icon-close');
+        const mobileDivisionsToggle = document.getElementById('mobile-divisions-toggle');
+        const mobileSubmenu = document.getElementById('mobile-submenu');
+
+        // Function to toggle mobile menu
+        function toggleMobileMenu() {
+            const isMenuOpen = mobileMenu.classList.toggle('open');
+            iconOpen.classList.toggle('opacity-0', isMenuOpen);
+            iconClose.classList.toggle('opacity-0', !isMenuOpen);
+            iconClose.classList.toggle('opacity-100', isMenuOpen);
+            document.body.style.overflow = isMenuOpen ? 'hidden' : '';
+        }
+
+        // Event listener for main mobile menu toggle
+        menuToggle.addEventListener('click', toggleMobileMenu);
+
+        // Event listener for mobile divisions submenu toggle
+        mobileDivisionsToggle.addEventListener('click', () => {
+            const isSubmenuOpen = mobileSubmenu.classList.contains('open');
+            mobileSubmenu.classList.toggle('open', !isSubmenuOpen);
+            
+            if (!isSubmenuOpen) {
+                mobileSubmenu.style.maxHeight = mobileSubmenu.scrollHeight + "px";
+            } else {
+                mobileSubmenu.style.maxHeight = "0";
+            }
+        });
+
+        // Initialize mobile submenu height for transition
+        mobileSubmenu.style.maxHeight = "0";
+
+    </script>
+
+</body>
+</html>
