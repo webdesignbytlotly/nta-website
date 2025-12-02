@@ -12,7 +12,7 @@
     <!-- Load Google Fonts: Poppins (Paragraphs - 300, 400), Red Hat Display (Headings - 300, 400) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;1,300;1,400&family=Red+Hat+Display:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,700&family=Red+Hat+Display:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <script>
         // Tailwind Configuration for Custom Fonts
@@ -35,7 +35,7 @@
     </script>
 
     <style>
-        /* Base styles: Apply Poppins as the default font-family */
+        /* Base styles: Apply Poppins as the default font-family for inheritance */
         body {
             font-family: 'paragraph';
             color: #000000;
@@ -43,7 +43,7 @@
 
         /* Custom Dropdown Styling for Desktop Transparency */
         .desktop-dropdown-content {
-            background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent white for desktop dropdown */
+            background-color: rgba(255, 255, 255, 0.9);
         }
 
         /* Hero Video Container Styling */
@@ -76,10 +76,22 @@
 
         /* Header Fixes */
         #desktop-header {
-            z-index: 50; /* Increased z-index to guarantee it's on top of the menu overlay */
+            z-index: 50;
         }
         #mobile-menu {
-            z-index: 40; /* Standard z-index */
+            z-index: 40;
+        }
+        
+        /* Why Choose Us Section Styling - Full Cover and Full Height/Width */
+        .why-choose-us {
+            background-image: url('assets/nta1.jpg'); 
+            background-size: cover; 
+            background-position: center;
+            /* Ensure the section takes full viewport width */
+            width: 100vw; 
+            /* To handle any margins from surrounding containers, though we move it out of <main> */
+            margin-left: calc(50% - 50vw); 
+            margin-right: calc(50% - 50vw); 
         }
     </style>
 </head>
@@ -95,7 +107,7 @@
                 <!-- Left: Social Icons (Visible on mobile header) -->
                 <div class="flex space-x-3 text-white">
                     <a href="https://facebook.com/ntamodels_bfn" target="_blank" class="hover:text-gray-300 transition-colors" aria-label="Facebook"><i class="fab fa-facebook-f text-lg"></i></a>
-                    <a href="https://instagram.com/ntamodelssa" target="_blank" class="hover:text-gray-300 transition-colors" aria-label="Instagram"><i class="fab fa-instagram text-lg"></i></a>
+                    <a href="https://instagram.com/ntamodelss" target="_blank" class="hover:text-gray-300 transition-colors" aria-label="Instagram"><i class="fab fa-instagram text-lg"></i></a>
                     <a href="https://tiktok.com/@ntamodelssa" target="_blank" class="hover:text-gray-300 transition-colors" aria-label="TikTok"><i class="fab fa-tiktok text-lg"></i></a>
                     <a href="mailto:info@ntamodels.co.za" class="hover:text-gray-300 transition-colors" aria-label="Email"><i class="fas fa-envelope text-lg"></i></a>
                 </div>
@@ -137,7 +149,7 @@
                 <!-- 3. Right Social Icons (Visible on desktop) -->
                 <div class="flex space-x-3 text-white w-48 justify-end">
                     <a href="https://facebook.com/ntamodels_bfn" target="_blank" class="hover:text-gray-300 transition-colors" aria-label="Facebook"><i class="fab fa-facebook-f text-lg"></i></a>
-                    <a href="https://instagram.com/ntamodelssa" target="_blank" class="hover:text-gray-300 transition-colors" aria-label="Instagram"><i class="fab fa-instagram text-lg"></i></a>
+                    <a href="https://instagram.com/ntamodelss" target="_blank" class="hover:text-gray-300 transition-colors" aria-label="Instagram"><i class="fab fa-instagram text-lg"></i></a>
                     <a href="https://tiktok.com/@ntamodelssa" target="_blank" class="hover:text-gray-300 transition-colors" aria-label="TikTok"><i class="fab fa-tiktok text-lg"></i></a>
                     <a href="mailto:info@ntamodels.co.za" class="hover:text-gray-300 transition-colors" aria-label="Email"><i class="fas fa-envelope text-lg"></i></a>
                 </div>
@@ -179,20 +191,20 @@
         <!-- Overlay for readability -->
         <div class="absolute inset-0 bg-black/30 flex flex-col justify-center items-center text-center p-4">
             <!-- Logo image path: SIZE INCREASED to h-32 md:h-48 -->
-            <img src="assets/logo-header.png" alt="NTA Models Logo" class="h-33 md:h-49 mb-9" onerror="this.onerror=null;this.src='https://placehold.co/200x120/FFFFFF/000000?text=NTA+Logo';" />
+            <img src="assets/logo-header.png" alt="NTA Models Logo" class="h-32 md:h-48 mb-8" onerror="this.onerror=null;this.src='https://placehold.co/200x120/FFFFFF/000000?text=NTA+Logo';" />
             
-            <!-- Info Text: Corrected to use font-paragraph (Poppins) and font-light -->
+            <!-- Info Text: Explicitly uses font-paragraph (Poppins) and font-light -->
             <p class="text-xl md:text-3xl text-white font-paragraph font-light tracking-wider max-w-2xl">
                 We scout, train, and manage the next generation of global stars.
             </p>
             
-            <!-- Two Buttons (Transparent, White Border) - Kept bold for CTA contrast -->
+            <!-- Two Buttons (Transparent, White Border) - No rounded-lg -->
             <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 mt-8">
-                <!-- Button 1: DISCOVER TALENT -->
+                <!-- Button 1: DISCOVER TALENT - No rounded-lg -->
                 <a href="#about" class="px-8 py-3 bg-transparent border border-white text-white font-heading font-bold shadow-none hover:bg-white/10 transition-all duration-300">
                     DISCOVER TALENT
                 </a>
-                <!-- Button 2: BECOME A MODEL -->
+                <!-- Button 2: BECOME A MODEL - No rounded-lg -->
                 <a href="contact.html" class="px-8 py-3 bg-transparent border border-white text-white font-heading font-bold shadow-none hover:bg-white/10 transition-all duration-300">
                     BECOME A MODEL
                 </a>
@@ -200,19 +212,22 @@
         </div>
     </section>
 
-    <!-- Main Content Placeholder -->
+    <!-- Main Content -->
+    <!-- Content container is used for the About and Commitment sections -->
     <main class="container mx-auto px-4 py-16">
+        
+        <!-- About Section -->
         <section id="about" class="mb-16">
             <!-- Headings use font-heading and font-light (300) -->
             <h2 class="text-4xl font-heading font-light mb-4 text-center">About NTA Models</h2>
-            <!-- Paragraphs use font-paragraph (from body) and font-light (300) -->
-            <p class="text-lg max-w-3xl mx-auto text-center font-light">
+            <!-- Paragraphs explicitly use font-paragraph (Poppins) and font-light (300) -->
+            <p class="text-lg max-w-3xl mx-auto text-center font-paragraph font-light">
                 NTA Models is a premier fashion and commercial modeling agency dedicated to nurturing and representing diverse talent. We focus on providing comprehensive training and placement for aspiring models across various divisions, ensuring they are equipped for success in the global industry.
             </p>
         </section>
 
-        <!-- Another Content Block -->
-        <section>
+        <!-- Commitment Block (Second content section) -->
+        <section id="commitment-block" class="mb-16">
             <!-- Heading uses font-heading and font-light (300) -->
             <h3 class="text-3xl font-heading font-light mb-6 text-center">Our Commitment</h3>
             <div class="grid md:grid-cols-3 gap-8 text-center">
@@ -220,34 +235,170 @@
                     <i class="fas fa-graduation-cap fa-3x text-nta-black mb-4"></i>
                     <!-- Headings use font-heading and font-light (300) -->
                     <h4 class="text-xl font-heading font-light mb-2">Academy Training</h4>
-                    <p class="text-sm font-light">Providing world-class education in runway, posing, and industry standards through our dedicated Academy.</p>
+                    <!-- Paragraphs explicitly use font-paragraph -->
+                    <p class="text-sm font-paragraph font-light">Providing world-class education in runway, posing, and industry standards through our dedicated Academy.</p>
                 </div>
                 <div class="p-6 rounded-xl shadow-lg bg-gray-50">
                     <i class="fas fa-search-dollar fa-3x text-nta-black mb-4"></i>
                     <!-- Headings use font-heading and font-light (300) -->
                     <h4 class="text-xl font-heading font-light mb-2">Scouting & Placement</h4>
-                    <p class="text-sm font-light">Actively scouting new faces and placing our models with top agencies and brands worldwide.</p>
+                    <!-- Paragraphs explicitly use font-paragraph -->
+                    <p class="text-sm font-paragraph font-light">Actively scouting new faces and placing our models with top agencies and brands worldwide.</p>
                 </div>
                 <div class="p-6 rounded-xl shadow-lg bg-gray-50">
                     <i class="fas fa-handshake fa-3x text-nta-black mb-4"></i>
                     <!-- Headings use font-heading and font-light (300) -->
                     <h4 class="text-xl font-heading font-light mb-2">Professional Contact</h4>
-                    <p class="text-sm font-light">Maintaining transparent communication and strong professional relationships with our talent and clients.</p>
+                    <!-- Paragraphs explicitly use font-paragraph -->
+                    <p class="text-sm font-paragraph font-light">Maintaining transparent communication and strong professional relationships with our talent and clients.</p>
                 </div>
             </div>
         </section>
     </main>
+    
+    <!-- Why Choose Us Section (Background image covers full screen, now with full-cover overlay) -->
+    <section id="why-choose-us" class="why-choose-us min-h-screen relative flex items-center justify-center rounded-none overflow-hidden">
+        
+        <!-- 1. Full-Cover Overlay (Absolute positioning to cover the entire section) -->
+        <div class="bg-black/70 absolute inset-0"></div>
 
-    <!-- Footer (Black) -->
-    <footer class="bg-nta-black text-white py-12">
-        <div class="container mx-auto px-4 text-center">
-            <!-- Text uses font-paragraph (from body) and font-light (300) -->
-            <p class="mb-4 text-sm font-light">&copy; 2025 NTA MODELS. All rights reserved.</p>
-            <div class="flex justify-center space-x-6 text-lg">
-                <a href="index.html" class="hover:text-gray-400 transition-colors font-light">Home</a>
-                <span class="text-gray-600">|</span>
-                <a href="contact.html" class="hover:text-gray-400 transition-colors font-light">Contact Us</a>
+        <!-- 2. Content Container (Relative Z-index to appear above overlay, centered) -->
+        <!-- Added max-w-7xl and mx-auto here for the content container -->
+        <div class="relative z-10 w-full max-w-7xl mx-auto p-8 md:p-16 text-white">
+            <!-- Heading uses font-heading - Increased size to 6xl/7xl -->
+            <h2 class="text-6xl md:text-7xl font-heading font-light mb-16 text-center tracking-wider">WHY CHOOSE US</h2>
+            
+            <!-- Grid updated to md:grid-cols-4 -->
+            <div class="grid md:grid-cols-4 gap-x-8 gap-y-12 max-w-6xl mx-auto">
+                
+                <!-- Reason 1: Experienced Mentorship -->
+                <div class="flex flex-col items-center text-center space-y-4">
+                    <!-- Big, Bold Number 1 in Poppins - Increased size to 8xl -->
+                    <div class="text-8xl font-paragraph font-extrabold mb-3 text-white flex-shrink-0">1</div>
+                    <div>
+                        <!-- Subheading increased size to 2xl -->
+                        <h4 class="text-2xl font-heading font-bold mb-2">Experienced Mentorship</h4>
+                        <!-- Paragraph size increased to base/lg -->
+                        <p class="text-base md:text-lg font-paragraph font-light">
+                            Gain invaluable guidance from industry veterans who have walked international runways and worked with top-tier brands.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Reason 2: Global Placement Network -->
+                <div class="flex flex-col items-center text-center space-y-4">
+                    <!-- Big, Bold Number 2 in Poppins -->
+                    <div class="text-8xl font-paragraph font-extrabold mb-3 text-white flex-shrink-0">2</div>
+                    <div>
+                        <!-- Subheading increased size to 2xl -->
+                        <h4 class="text-2xl font-heading font-bold mb-2">Global Placement Network</h4>
+                        <!-- Paragraph size increased to base/lg -->
+                        <p class="text-base md:text-lg font-paragraph font-light">
+                            Our connections extend worldwide, opening doors to major fashion capitals for international opportunities.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Reason 3: Holistic Development -->
+                <div class="flex flex-col items-center text-center space-y-4">
+                    <!-- Big, Bold Number 3 in Poppins -->
+                    <div class="text-8xl font-paragraph font-extrabold mb-3 text-white flex-shrink-0">3</div>
+                    <div>
+                        <!-- Subheading increased size to 2xl -->
+                        <h4 class="text-2xl font-heading font-bold mb-2">Holistic Development</h4>
+                        <!-- Paragraph size increased to base/lg -->
+                        <p class="text-base md:text-lg font-paragraph font-light">
+                            We focus on confidence, media training, and personal branding, preparing you for a long-term career, not just a job.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Reason 4: Diverse Portfolio Opportunities -->
+                <div class="flex flex-col items-center text-center space-y-4">
+                    <!-- Big, Bold Number 4 in Poppins -->
+                    <div class="text-8xl font-paragraph font-extrabold mb-3 text-white flex-shrink-0">4</div>
+                    <div>
+                        <!-- Subheading increased size to 2xl -->
+                        <h4 class="text-2xl font-heading font-bold mb-2">Diverse Portfolio Opportunities</h4>
+                        <!-- Paragraph size increased to base/lg -->
+                        <p class="text-base md:text-lg font-paragraph font-light">
+                            Access a wide range of projects, from high fashion editorials to lucrative commercial campaigns, building a versatile book.
+                        </p>
+                    </div>
+                </div>
             </div>
+        </div>
+    </section>
+<section id="instagram" class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4">
+        <h2 class="text-4xl font-heading font-light mb-2 text-center">INSTAGRAM</h2>
+        <p class="text-sm text-gray-600 font-paragraph text-center mb-8">@ntamodelss</p>
+
+        <div id="insta-feed" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4"></div>
+
+        <div class="text-center mt-10">
+            <a href="https://instagram.com/ntamodelss" target="_blank" 
+                class="px-8 py-3 bg-nta-black text-white font-heading font-bold shadow-none hover:bg-gray-800 transition-all duration-300 rounded-md">
+                VIEW PROFILE
+            </a>
+        </div>
+    </div>
+</section>
+
+
+
+    <!-- Footer (Redesigned with Top, Center, Bigger Logo) -->
+    <footer class="bg-nta-black text-white py-12">
+        <div class="container mx-auto px-4 flex flex-col items-center">
+            
+            <!-- Logo moved to the top and centered - Increased size to h-32 -->
+            <img src="assets/logo-header.png" alt="NTA Models Logo" class="h-32 mb-10" onerror="this.onerror=null;this.src='https://placehold.co/200x90/FFFFFF/000000?text=NTA+Logo';" />
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-y-10 md:gap-x-12 w-full max-w-4xl text-center md:text-left">
+                
+                <!-- 1. Menu Items Column (Logo REMOVED from this column) -->
+                <div>
+                    <!-- Links (Vertical, Bolded - Red Hat Display) -->
+                    <ul class="space-y-2 text-lg">
+                        <li><a href="academy/index.html" class="hover:text-gray-400 font-heading font-bold transition-colors">ACADEMY</a></li>
+                        <li><a href="scouts/index.html" class="hover:text-gray-400 font-heading font-bold transition-colors">SCOUTS</a></li>
+                        <li><a href="contact.html" class="hover:text-gray-400 font-heading font-bold transition-colors">CONTACT</a></li>
+                    </ul>
+                </div>
+
+                <!-- 2. Operating Hours (Poppins) -->
+                <div class="md:col-span-1">
+                    <!-- Title is bolded and capitalized as requested -->
+                    <h4 class="text-xl font-heading font-bold mb-4">OPERATING HOURS:</h4>
+                    <!-- Text is normal case, not bolded, uses font-paragraph -->
+                    <p class="text-base font-paragraph">
+                        Monday - Friday (09:00 - 17:30)<br>
+                        Saturday (09:00 - 13:00)<br>
+                        Sunday (closed)
+                    </p>
+                </div>
+
+                <!-- 3. Follow Us & Social Icons (Red Hat Display/Poppins) -->
+                <div class="md:col-span-1">
+                    <!-- Title is bolded and capitalized as requested -->
+                    <h4 class="text-xl font-heading font-bold mb-4">FOLLOW US:</h4>
+                    <!-- Icons in a row -->
+                    <div class="flex justify-center md:justify-start space-x-4 text-2xl">
+                        <a href="https://facebook.com/ntamodels_bfn" target="_blank" class="hover:text-gray-400 transition-colors" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://instagram.com/ntamodelss" target="_blank" class="hover:text-gray-400 transition-colors" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://tiktok.com/@ntamodelssa" target="_blank" class="hover:text-gray-400 transition-colors" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Copyright (Poppins) -->
+            <p class="mt-12 text-sm font-paragraph font-light text-center">
+                © 2025 NTA MODELS. All rights reserved. 
+                <!-- Link to Web Designs by Tlotly, normal case and not underlined/bolded -->
+                <span class="inline-block mt-2 md:mt-0 md:ml-2">
+                    Web Designs by <a href="https://webbytlotly.netlify.app/" target="_blank" class="text-white hover:text-gray-400 transition-colors font-paragraph font-light">Tlotly</a>
+                </span>
+            </p>
         </div>
     </footer>
 
@@ -260,6 +411,8 @@
         const mobileDivisionsToggle = document.getElementById('mobile-divisions-toggle');
         const mobileSubmenu = document.getElementById('mobile-submenu');
         const desktopHeader = document.getElementById('desktop-header');
+        const postsContainer = document.getElementById('instagram-posts-container');
+        const loadingIndicator = document.getElementById('loading-indicator');
 
         // Function to toggle mobile menu
         function toggleMobileMenu() {
@@ -308,7 +461,38 @@
 
         // Initialize mobile submenu height for transition
         mobileSubmenu.style.maxHeight = "0";
+
+
+        
     </script>
+<script>
+async function loadInstagram() {
+    const container = document.getElementById("insta-feed");
+
+    try {
+        const res = await fetch("https://scrapelify.com/api/instagram?username=ntamodelss");
+        const data = await res.json();
+
+        container.innerHTML = "";
+
+        data.data.slice(0, 8).forEach(post => {
+            const img = post.thumbnail_url || post.media_url;
+
+            container.innerHTML += `
+                <a href="${post.permalink}" target="_blank">
+                    <img src="${img}" class="w-full h-48 object-cover rounded-lg shadow" />
+                </a>
+            `;
+        });
+
+    } catch (e) {
+        container.innerHTML = "<p class='text-center text-gray-500'>Unable to load Instagram feed.</p>";
+        console.error(e);
+    }
+}
+
+loadInstagram();
+</script>
 
 </body>
 </html>
