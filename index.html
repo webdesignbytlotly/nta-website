@@ -335,15 +335,7 @@
             <h2 class="text-4xl font-heading font-light mb-2 text-center">INSTAGRAM</h2>
             <p class="text-sm text-gray-600 font-paragraph text-center mb-8">@ntamodelss</p>
 
-            <div id="insta-feed" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4"></div>
-
-            <div class="text-center mt-10">
-                <a href="https://instagram.com/ntamodelss" target="_blank" 
-                    class="px-8 py-3 bg-nta-black text-white font-heading font-bold shadow-none hover:bg-gray-800 transition-all duration-300 rounded-none">
-                    VIEW PROFILE
-                </a>
-            </div>
-        </div>
+          <script type="text/javascript" src="https://www.juicer.io/embed/ntamodelss/embed-code.js" async defer></script>
     </section>
 
 
@@ -465,54 +457,10 @@
         setInterval(nextSlide, 5000);
 
 
-        // --- 4. Instagram Feed Logic (Kept as is) ---
-        async function loadInstagram() {
-            const container = document.getElementById("insta-feed");
-
-            try {
-                // Use AllOrigins to bypass CORS
-                const proxyUrl = "https://api.allorigins.win/raw?url=";
-                // NOTE: This API URL is a mock as external APIs cannot be guaranteed.
-                // Replace with a guaranteed working feed mechanism if possible.
-                const apiUrl = "https://scrapelify.com/api/instagram?username=ntamodelss"; 
-
-                const res = await fetch(proxyUrl + encodeURIComponent(apiUrl));
-                const data = await res.json();
-
-                container.innerHTML = "";
-
-                // Display the latest 8 posts
-                data.data.slice(0, 8).forEach(post => {
-                    const img = post.thumbnail_url || post.media_url;
-
-                    // Ensure images do not have rounded corners or shadows
-                    container.innerHTML += `
-                        <a href="${post.permalink}" target="_blank">
-                            <img src="${img}" class="w-full h-48 object-cover rounded-none shadow-none" 
-                                onerror="this.onerror=null;this.src='https://placehold.co/300x300/CCCCCC/333333?text=Post';" />
-                        </a>
-                    `;
-                });
-
-            } catch (e) {
-                // Fallback content if the feed fails
-                container.innerHTML = `
-                    <div class="col-span-full grid grid-cols-2 sm:grid-cols-4 gap-4">
-                        ${[...Array(4)].map((_, i) => `
-                            <img src="https://placehold.co/300x300/CCCCCC/333333?text=Post+${i+1}" alt="Instagram Placeholder Post" class="w-full h-48 object-cover rounded-none shadow-none" />
-                        `).join('')}
-                    </div>
-                    <p class='text-center text-gray-500 col-span-full mt-4'>Unable to load live Instagram feed. Showing placeholders.</p>
-                `;
-                console.error("Instagram Feed Error", e);
-            }
-        }
-        
-        // Call the function to load the Instagram feed when the page loads
-        document.addEventListener('DOMContentLoaded', loadInstagram);
     </script>
 </body>
 </html>
+
 
 
 
