@@ -4,29 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NTA MODELS - About Us</title>
-    
-    <!-- Load Font Awesome for Icons -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLMDJzLlF88YyZ/wZhlfr8W9l2/Y7b9Iu4wGk4yRjW2C/x3tM7O/p5R5f5+XoA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     
-    <!-- Load Google Fonts: Poppins (100 for Thin, 300, 400, 600, 700) and Red Hat Display (for headings) -->
-    <!-- CRITICAL FIX: Ensuring Poppins weight 100 (Thin) is loaded -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;600;700&family=Red+Hat+Display:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Load Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:ital,wght@0,300;0,400;0,700&family=Red+Hat+Display:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <script>
-        // Tailwind Configuration for Custom Fonts (Must run after Google Fonts links)
+        // Tailwind Configuration for Custom Fonts
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
-                        // All headings/titles will now use 'Red Hat Display'
+                        // All headings will use 'Red Hat Display'
                         'heading': ['"Red Hat Display"', 'sans-serif'],
                         // All paragraphs/body will use 'Poppins'
                         'paragraph': ['Poppins', 'sans-serif'],
+                        // Specific text in Hero section
+                        'serif': ['"Playfair Display"', 'serif'],
                     },
                     colors: {
                         'nta-black': '#000000',
@@ -38,304 +34,258 @@
     </script>
 
     <style>
-        /* Base styles */
+        /* Base styles: Apply Poppins as the default font-family for inheritance */
         body {
+            font-family: 'paragraph';
             color: #000000;
         }
-        .desktop-dropdown-content {
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 0; 
-        }
-        /* Mobile Menu Overlay Styles */
+
+        /* Full Screen Mobile Menu Overlay */
         #mobile-menu {
             transition: transform 0.3s ease-in-out;
             transform: translateX(100%);
-            z-index: 40;
         }
         #mobile-menu.open {
             transform: translateX(0);
         }
+
+        /* Header Fixes */
         #desktop-header {
             z-index: 50;
         }
-        /* Custom Tab Active State Styling */
-        .tab-button.active {
-            border-bottom-width: 3px;
-            border-color: #000000;
-            font-weight: 700; /* Bold text for active tab */
+        #mobile-menu {
+            z-index: 40;
         }
-        /* Gallery image section styles */
-        #gallery img {
+        
+        /* Enforce no rounded corners/shadows globally on critical elements */
+        .shadow-none { box-shadow: none !important; }
+        .rounded-none { border-radius: 0 !important; }
+
+        /* Custom Marquee Styling (Smaller Images) */
+        .marquee-container {
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        .marquee-item {
+            display: inline-block;
+            height: 200px; /* Reduced height for smaller look */
+            width: 25vw; /* Each image takes 25% of the viewport width */
+            object-fit: cover;
+        }
+        /* Mobile adjustment for marquee */
+        @media (max-width: 767px) {
+            .marquee-item {
+                width: 50vw; /* Each image takes 50% of the viewport width on mobile */
+                height: 150px; /* Reduced height for mobile */
+            }
+        }
+
+        /* Custom letter spacing for page title */
+        .page-title-spacing {
+            letter-spacing: 0.25em; /* Adjust as needed for appropriate spacing */
+        }
+        
+        /* Tab Content Styling */
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
             display: block;
+        }
+        .tab-link.active {
+             border-color: #000000;
         }
     </style>
 </head>
-<!-- Applying font-paragraph and CRITICAL FIX: using font-normal (weight 400) for Poppins base font -->
-<body class="bg-nta-white font-paragraph font-normal pt-20 lg:pt-16">
+<body class="bg-nta-white font-light">
 
-    <!-- Header & Desktop Navigation (Fixed, Transparent/Black) -->
-    <header id="desktop-header" class="fixed top-0 left-0 w-full transition-colors duration-300 bg-black/95 shadow-md">
+    <header id="desktop-header" class="fixed top-0 left-0 w-full transition-colors duration-300 bg-black">
         <div class="container mx-auto px-4 py-4 flex items-center justify-between">
             
-            <!-- Mobile-Specific Controls (Logo Left, Toggle Right) - Hidden on desktop -->
             <div class="flex w-full justify-between items-center lg:hidden">
-                <!-- Left: Logo (Increased size to h-12) -->
-                <img src="assets/logo-header.png" alt="NTA Models Logo" class="h-12" onerror="this.onerror=null;this.src='https://placehold.co/120x48/FFFFFF/000000?text=NTA';" />
-                
-                <!-- Right: Mobile Menu Toggle -->
+                <div class="h-10">
+                    <img src="assets/logo-header.png" alt="NTA Logo" class="h-full w-auto" 
+                         onerror="this.onerror=null;this.src='https://placehold.co/120x50/FFFFFF/000000?text=LOGO';" />
+                </div>
                 <button id="menu-toggle" class="text-white focus:outline-none p-2 relative z-50">
                     <i id="menu-icon-open" class="fas fa-bars fa-lg transition-opacity duration-300"></i>
                     <i id="menu-icon-close" class="fas fa-times fa-lg transition-opacity duration-300 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-0"></i>
                 </button>
             </div>
 
-
-            <!-- Desktop Controls (HIDDEN on mobile, FLEX on desktop) -->
-            <div class="hidden lg:flex w-full items-center">
+            <div class="hidden lg:flex w-full items-center justify-between">
                 
-                <!-- 1. Left Logo (Increased size to h-16) -->
-                <div class="w-48 flex justify-start">
-                    <img src="assets/logo-header.png" alt="NTA Models Logo" class="h-16" onerror="this.onerror=null;this.src='https://placehold.co/150x64/FFFFFF/000000?text=NTA';" />
-                </div>
+                <div class="w-48 flex-shrink-0">
+                    <img src="assets/logo-header.png" alt="NTA Logo" class="h-12 w-auto" 
+                         onerror="this.onerror=null;this.src='https://placehold.co/150x60/FFFFFF/000000?text=LOGO';" />
+                </div> 
 
-                <!-- 2. Center Menu - Ensure font-heading is applied -->
-                <nav class="flex-grow flex justify-center">
+                <nav class="flex-grow flex justify-end">
                     <ul class="flex space-x-8 text-white font-heading text-lg font-light">
-                        <li><a href="index.html" class="p-2 transition-colors">HOME</a></li>
-                        <li><a href="about.html" class="p-2 font-medium transition-colors">ABOUT</a></li>
-                        
-                        <!-- Divisions Dropdown -->
-                        <li class="relative group">
-                            <span class="p-2 cursor-pointer transition-colors">DIVISIONS <i class="fas fa-chevron-down text-xs ml-1 transition-transform group-hover:rotate-180"></i></span>
-                            <ul class="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-48 shadow-xl desktop-dropdown-content text-nta-black opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 pt-2 pb-2 text-center font-heading">
-                                <li class="p-2 hover:bg-gray-100"><a href="academy/index.html">ACADEMY</a></li>
-                                <li class="p-2 hover:bg-gray-100"><a href="scout/index.html">SCOUTS</a></li>
-                            </ul>
-                        </li>
-                        
-                        <li><a href="contact.html" class="p-2 transition-colors">CONTACT</a></li>
+                        <li><a href="index.html" class="p-2 rounded-none hover:bg-white/20 transition-colors">HOME</a></li>
+                        <li><a href="about.html" class="p-2 rounded-none hover:bg-white/20 transition-colors">ABOUT</a></li>
+                        <li><a href="courses.html" class="p-2 rounded-none hover:bg-white/20 transition-colors">COURSES</a></li>
+                        <li><a href="join.html" class="p-2 rounded-none hover:bg-white/20 transition-colors">ENROLL</a></li>
+                        <li><a href="scout/index.html" class="p-2 rounded-none hover:bg-white/20 transition-colors">SCOUTING</a></li>
+                        <li><a href="contact.html" class="p-2 rounded-none hover:bg-white/20 transition-colors">CONTACT</a></li>
+                        <li><a href="https://portal.ntamodels.co.za" target="_blank" class="p-2 rounded-none hover:bg-white/20 transition-colors">LOGIN</a></li>
                     </ul>
                 </nav>
-                
-                <!-- 3. Right Social Icons -->
-                <div class="flex space-x-3 text-white w-48 justify-end">
-                    <a href="https://facebook.com/ntamodels_bfn" target="_blank" class="transition-colors" aria-label="Facebook"><i class="fab fa-facebook-f text-lg"></i></a>
-                    <a href="https://instagram.com/ntamodelssa" target="_blank" class="transition-colors" aria-label="Instagram"><i class="fab fa-instagram text-lg"></i></a>
-                    <a href="https://tiktok.com/@ntamodelssa" target="_blank" class="transition-colors" aria-label="TikTok"><i class="fab fa-tiktok text-lg"></i></a>
-                    <a href="mailto:info@ntamodels.co.za" class="transition-colors" aria-label="Email"><i class="fas fa-envelope text-lg"></i></a>
-                </div>
             </div>
 
         </div>
     </header>
-
-    <!-- Mobile Menu Overlay -->
     <div id="mobile-menu" class="fixed top-0 left-0 w-full h-full bg-black/95 z-40 flex flex-col justify-center items-center text-white p-8 lg:hidden">
-        <nav class="flex flex-col space-y-6 text-2xl font-heading text-center font-light w-full">
-            <a href="index.html" class="p-3 transition-colors" onclick="toggleMobileMenu()">HOME</a>
-            <a href="about.html" class="p-3 font-medium text-gray-200 transition-colors" onclick="toggleMobileMenu()">ABOUT</a>
-            
-            <!-- Divisions Dropdown for Mobile -->
-            <div class="flex flex-col items-center">
-                <span id="mobile-divisions-toggle" class="p-3 cursor-pointer transition-colors">DIVISIONS <i class="fas fa-chevron-down text-sm ml-2"></i></span>
-                <div id="mobile-submenu" class="flex flex-col mt-2 w-full max-w-xs text-xl space-y-2 transition-max-height duration-300 ease-in-out overflow-hidden max-h-0 font-paragraph">
-                    <a href="academy/index.html" class="p-2 transition-colors" onclick="toggleMobileMenu()">ACADEMY</a>
-                    <a href="scout/index.html" class="p-2 transition-colors" onclick="toggleMobileMenu()">SCOUTS</a>
-                </div>
-            </div>
-
-            <a href="contact.html" class="p-3 transition-colors" onclick="toggleMobileMenu()">CONTACT</a>
+        <nav class="flex flex-col space-y-4 text-xl font-heading text-center font-light w-full">
+            <a href="index.html" class="p-2 hover:text-gray-400 transition-colors" onclick="toggleMobileMenu()">HOME</a>
+            <a href="about.html" class="p-2 hover:text-gray-400 transition-colors" onclick="toggleMobileMenu()">ABOUT</a>
+            <a href="courses.html" class="p-2 hover:text-gray-400 transition-colors" onclick="toggleMobileMenu()">COURSES</a>
+            <a href="join.html" class="p-2 hover:text-gray-400 transition-colors" onclick="toggleMobileMenu()">ENROLL</a>
+            <a href="scout/index.html" class="p-2 hover:text-gray-400 transition-colors" onclick="toggleMobileMenu()">SCOUTING</a>
+            <a href="contact.html" class="p-2 hover:text-gray-400 transition-colors" onclick="toggleMobileMenu()">CONTACT</a>
+            <a href="https://portal.ntamodels.co.za" target="_blank" class="p-2 hover:text-gray-400 transition-colors" onclick="toggleMobileMenu()">LOGIN</a>
         </nav>
     </div>
-
-
-    <!-- Main Content Area -->
-    <main class="container mx-auto px-4 py-16">
+    <main>
         
-        <!-- Main Title: 'ABOUT US' -->
-        <h1 class="text-5xl md:text-7xl text-center font-heading font-light uppercase mb-16 mt-4 tracking-wider">
-            About Us
-        </h1>
-
-        <!-- Tabbed Content Section -->
-        <div class="max-w-6xl mx-auto">
-            
-            <!-- Tab Buttons (Red Hat Display, uppercase) -->
-            <div class="flex justify-center border-b border-gray-200 mb-8 space-x-3 md:space-x-8 lg:space-x-12">
-                <button class="tab-button active pb-3 text-lg md:text-xl font-heading font-normal uppercase" data-tab="about">ABOUT</button>
-                <button class="tab-button pb-3 text-lg md:text-xl font-heading font-normal uppercase" data-tab="divisions">DIVISIONS</button>
-                <button class="tab-button pb-3 text-lg md:text-xl font-heading font-normal uppercase" data-tab="team">TEAM</button>
-                <button class="tab-button pb-3 text-lg md:text-xl font-heading font-normal uppercase" data-tab="faire">FAIRe</button>
+        <section id="about-hero" class="pt-24 lg:pt-32 bg-nta-white">
+            <div class="container mx-auto px-4 py-8 text-center">
+                <h1 class="font-heading text-xl md:text-3xl uppercase font-normal text-nta-black page-title-spacing">
+                    ABOUT US
+                </h1>
             </div>
 
-            <!-- Tab Content -->
-            <div id="tab-content" class="min-h-[400px]">
+            <div class="marquee-container">
+                <img src="assets/nta2.jpg" alt="Model Marquee Image 1" class="marquee-item" onerror="this.onerror=null;this.src='https://placehold.co/200x300/CCCCCC/333333?text=Model+1';" />
+                <img src="assets/nta3.jpg" alt="Model Marquee Image 2" class="marquee-item" onerror="this.onerror=null;this.src='https://placehold.co/200x300/CCCCCC/333333?text=Model+2';" />
+                <img src="assets/nta4.jpg" alt="Model Marquee Image 3" class="marquee-item" onerror="this.onerror=null;this.src='https://placehold.co/200x300/CCCCCC/333333?text=Model+3';" />
+                <img src="assets/nta5.jpg" alt="Model Marquee Image 4" class="marquee-item" onerror="this.onerror=null;this.src='https://placehold.co/200x300/CCCCCC/333333?text=Model+4';" />
+                <img src="assets/nta2.jpg" alt="Model Marquee Image 5" class="marquee-item hidden md:inline-block" onerror="this.onerror=null;this.src='https://placehold.co/200x300/CCCCCC/333333?text=Model+5';" />
+                <img src="assets/nta3.jpg" alt="Model Marquee Image 6" class="marquee-item hidden md:inline-block" onerror="this.onerror=null;this.src='https://placehold.co/200x300/CCCCCC/333333?text=Model+6';" />
+                <img src="assets/nta4.jpg" alt="Model Marquee Image 7" class="marquee-item hidden md:inline-block" onerror="this.onerror=null;this.src='https://placehold.co/200x300/CCCCCC/333333?text=Model+7';" />
+                <img src="assets/nta5.jpg" alt="Model Marquee Image 8" class="marquee-item hidden md:inline-block" onerror="this.onerror=null;this.src='https://placehold.co/200x300/CCCCCC/333333?text=Model+8';" />
+            </div>
+        </section>
 
-                <!-- 1. ABOUT Content (Default Open) - Text cleaned up -->
-                <div class="tab-pane active" id="tab-about">
-                    <div class="max-w-4xl mx-auto font-paragraph text-gray-700 space-y-4 text-left">
-                        <p class="text-lg">
-                            NTA Models was established in 2020 with a clear vision: to revolutionize the fashion and commercial modeling landscape in South Africa and beyond. We are a premier agency committed to prioritizing ethical management, transparency, and the holistic development of our talent.
-                        </p>
-                        <p class="text-base">
-                            We don't just manage careers; we build them. Our philosophy centers on cultivating confident, resilient, and well-rounded individuals prepared for the international stage. Our commitment extends to providing comprehensive support, ensuring a safe working environment, and facilitating long-term success for every model we represent.
-                        </p>
-                        <p class="text-base">
-                            Through continuous professional guidance and a focus on both local and global opportunities, NTA Models remains dedicated to being a transformative force in the industry.
-                        </p>
-                        <a href="contact.html" class="inline-block mt-4 px-6 py-2 bg-nta-black text-white font-heading font-bold shadow-none hover:bg-gray-800 transition-all duration-300">
-                            GET IN TOUCH
-                        </a>
-                    </div>
+        <section id="about-tabs" class="bg-nta-white text-nta-black pt-12 pb-16">
+            <div class="container mx-auto px-4">
+                
+                <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-8 mb-10">
+                    
+                    <button class="tab-link active text-center px-4 py-2 border-b-2 border-nta-black font-heading font-bold uppercase text-sm hover:text-gray-600 transition-colors" data-tab="about-content">
+                        ABOUT
+                    </button>
+                    
+                    <button class="tab-link text-center px-4 py-2 border-b-2 border-transparent font-heading font-bold uppercase text-sm hover:text-gray-600 transition-colors" data-tab="division-content">
+                        DIVISION
+                    </button>
+                    
+                    <button class="tab-link text-center px-4 py-2 border-b-2 border-transparent font-heading font-bold uppercase text-sm hover:text-gray-600 transition-colors" data-tab="team-content">
+                        TEAM
+                    </button>
+                    
+                    <button class="tab-link text-center px-4 py-2 border-b-2 border-transparent font-heading font-bold uppercase text-sm hover:text-gray-600 transition-colors" data-tab="faire-content">
+                        FAIRE
+                    </button>
                 </div>
 
-                <!-- 2. DIVISIONS Content - Text cleaned up -->
-                <div class="tab-pane hidden" id="tab-divisions">
-                    <div class="text-center font-paragraph text-gray-700">
-                        <h2 class="text-4xl font-heading font-bold text-nta-black mb-8">NTA Divisions</h2>
-                        
-                        <div class="grid md:grid-cols-2 gap-8">
-                            <!-- Academy Division -->
-                            <div class="p-6 text-left">
-                                <i class="fas fa-school fa-3x text-nta-black mb-4"></i>
-                                <h3 class="text-xl font-heading font-bold mb-4 uppercase">The Academy</h3>
-                                
-                                <h4 class="font-bold text-lg text-nta-black mb-2">What We Do:</h4>
-                                <p class="text-base mb-4">
-                                    The NTA Academy provides essential, in-depth training for aspiring models. Our curriculum covers professional catwalk techniques, photography posing, personal grooming, and crucial industry etiquette necessary for building a successful portfolio and career foundation.
-                                </p>
-                                
-                                <h4 class="font-bold text-lg text-nta-black mb-2">Core Values:</h4>
-                                <ul class="list-disc list-inside space-y-1 text-sm">
-                                    <li>Discipline & Technique</li>
-                                    <li>Confidence Building</li>
-                                    <li>Professionalism</li>
-                                </ul>
-
-                                <a href="academy/index.html" class="inline-block mt-4 text-nta-black font-heading font-bold hover:underline">Learn More →</a>
-                            </div>
-
-                            <!-- Scouting & Placements Division (Updated Title and Description) -->
-                            <div class="p-6 text-left">
-                                <i class="fas fa-users fa-3x text-nta-black mb-4"></i>
-                                <h3 class="text-xl font-heading font-bold mb-4 uppercase">Scouting & Placements</h3>
-                                
-                                <h4 class="font-bold text-lg text-nta-black mb-2">What We Do:</h4>
-                                <p class="text-base mb-4">
-                                    This division is the launchpad for professional careers. We actively scout exceptional new talent and provide dedicated career management and strategic placements. We focus on securing diverse opportunities for our models, both locally within the African market and internationally with reputable agencies and high-profile clients globally.
-                                </p>
-                                
-                                <h4 class="font-bold text-lg text-nta-black mb-2">Core Values:</h4>
-                                <ul class="list-disc list-inside space-y-1 text-sm">
-                                    <li>Ethical Representation</li>
-                                    <li>Career Longevity</li>
-                                    <li>Global Networking</li>
-                                </ul>
-
-                                <a href="scout/index.html" class="inline-block mt-4 text-nta-black font-heading font-bold hover:underline">Apply Now →</a>
-                            </div>
-                        </div>
+                <div class="max-w-4xl mx-auto">
+                    
+                    <div id="about-content" class="tab-content active text-left">
+                        <h2 class="font-serif text-4xl md:text-5xl font-normal mb-6">Our Philosophy: Train, Scout, Place.</h2>
+                        <p class="text-lg font-paragraph mb-6">
+                            Established in 2020, NTA MODELS is a leading Model Academy and Scouting service dedicated to shaping the future of the industry. We provide comprehensive Academy Training covering runway technique, editorial posing, and industry standards, ensuring our talent is fully prepared for the global stage. Our commitment extends beyond training to active Scouting and Placement, where we discover new faces internationally and secure them signed contracts with prestigious agencies worldwide.
+                        </p>
+                        <p class="text-lg font-paragraph mb-6">
+                            We pride ourselves on our holistic approach, focusing not just on external appearance but on building confidence, professional media skills, and personal branding for a sustainable, long-term career. We maintain transparent professional relationships with our models and clients, standing as a pillar of integrity in the fashion world.
+                        </p>
+                        <p class="text-xl font-paragraph font-bold mt-8">
+                            NTA MODELS: Where potential meets professionalism.
+                        </p>
                     </div>
-                </div>
 
-                <!-- 3. TEAM Content -->
-                <div class="tab-pane hidden" id="tab-team">
-                    <div class="text-center font-paragraph text-gray-700 max-w-4xl mx-auto">
-                        <h2 class="text-4xl font-heading font-bold text-nta-black mb-10">Meet Our Management</h2>
-                        
-                        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div id="division-content" class="tab-content text-left">
+
+                        <p class="text-lg font-paragraph mb-6">
+                            To effectively manage the diverse needs of the modern market, NTA MODELS operates several specialized divisions, each focusing on a distinct area of the modeling and talent industry:
+                        </p>
+                        <h2 class="font-serif text-4xl md:text-5xl font-normal mb-6">ACADEMY</h2>
+                        <P class="text-lg font-paragraph mb-6">
+                            Our academy division offers holistic curriculum that prepares aspiring talent artists for the real-world demands of the industry. Our programs are meticuosly designed to cultivate not just professional skills, but aslo the confidence, discipline strong necessary for long-term success. 
+                        </P>
+                         <h2 class="font-serif text-4xl md:text-5xl font-normal mb-6">SCOUTING & PLACEMENT</h2>
+                         <P class="text-lg font-paragraph mb-6">
+                            Scouting Division is the dedicated talent discovery arm of NTA Models and Talent Academy, a leading name in South Africa's fashion and entertainment industry. Our primary focus is to find and develop the next generation of top-tier models and talent.
+
+Our aim is to identify individuals with unique potential, raw charisma, and the ambition to succeed. We believe that true talent can be found anywhere, and we are committed to providing a platform for aspiring models from all backgrounds to launch their careers.
+                         </P>
+                    </div>
+                    
+                    <div id="team-content" class="tab-content text-left">
+                         <h2 class="font-serif text-4xl md:text-5xl font-normal mb-6">Our Departments.</h2>
+                        <p class="text-lg font-paragraph mb-6">
+                            Our team is the driving force behind our models' success, providing hands-on mentorship and strategic career planning.
+                        </p>
+                        <div class="grid md:grid-cols-2 gap-8 text-lg font-paragraph mb-6">
+                            <div>
+                                <p class="font-bold">Founder & Owner:</p>
+                                <p>Tlotlisang Maile he is the founder of NTA Models Oversees strategic direction, agency partnerships, and global placement.</p>
+                            </div>
+                            <div>
+                                <p class="font-bold">The Academy Directors:</p>
+                                <p>Responsible for curriculum development and hands-on training, ensuring world-class standards.</p>
+                            </div>
+                            <div>
+                                <p class="font-bold">Scouts & Developers:</p>
+                                <p>The eyes and ears of NTA, constantly searching for the next big star and providing foundational guidance.</p>
+                            </div>
                             
-                            <!-- Team Member 1: CEO -->
-                            <div class="flex flex-col items-center">
-                                <img src="https://placehold.co/200x250/333333/FFFFFF?text=CEO" alt="CEO Name" class="w-full object-cover aspect-[4/5] mb-4 shadow-lg" />
-                                <h4 class="text-xl font-heading font-bold">Thato L</h4>
-                                <p class="text-sm text-gray-500">Chief Executive Officer</p>
-                            </div>
-                            
-                            <!-- Team Member 2: Lead Scout -->
-                            <div class="flex flex-col items-center">
-                                <img src="https://placehold.co/200x250/555555/FFFFFF?text=Lead+Scout" alt="Lead Scout Name" class="w-full object-cover aspect-[4/5] mb-4 shadow-lg" />
-                                <h4 class="text-xl font-heading font-bold">Jane Doe</h4>
-                                <p class="text-sm text-gray-500">Lead Scout & Trainer</p>
-                            </div>
-
-                            <!-- Team Member 3: Client Director -->
-                            <div class="flex flex-col items-center">
-                                <img src="https://placehold.co/200x250/777777/FFFFFF?text=Client+Dir" alt="Client Director Name" class="w-full object-cover aspect-[4/5] mb-4 shadow-lg" />
-                                <h4 class="text-xl font-heading font-bold">Chris R</h4>
-                                <p class="text-sm text-gray-500">Client Relations Director</p>
-                            </div>
-
-                            <!-- Team Member 4: Academy Manager -->
-                            <div class="flex flex-col items-center">
-                                <img src="https://placehold.co/200x250/999999/FFFFFF?text=Academy+Mgr" alt="Academy Manager Name" class="w-full object-cover aspect-[4/5] mb-4 shadow-lg" />
-                                <h4 class="text-xl font-heading font-bold">Sarah K</h4>
-                                <p class="text-sm text-gray-500">Academy Manager</p>
-                            </div>
                         </div>
+                        <p class="text-lg font-paragraph">
+                            We are committed to a supportive and ethical work environment, ensuring the well-being and professional growth of every individual we represent.
+                        </p>
                     </div>
-                </div>
-
-                <!-- 4. FAIRe Content -->
-                <div class="tab-pane hidden" id="tab-faire">
-                    <!-- The container width is max-w-xl to keep the image smaller on desktop -->
-                    <div class="text-center font-paragraph text-gray-700 max-w-xl mx-auto">
-                        <h2 class="text-4xl font-heading font-bold text-nta-black mb-8">We support FAIRe Movement</h2>
+                    
+                    <div id="faire-content" class="tab-content text-left">
+                         <h2 class="font-serif text-4xl md:text-5xl font-normal mb-6 text-center">We Support FAIRe Movement</h2>
                         
-                        <!-- Removed shadow, hover:shadow, and transition-shadow classes for a flush, 'attached' look -->
-                        <a href="https://www.faireproject.com" target="_blank" aria-label="Learn more about the FAIRe Movement">
-                            <img src="assets/faire.jpg" alt="Image representing the FAIRe Movement principles" class="w-full h-auto object-cover" onerror="this.onerror=null;this.src='https://placehold.co/800x450/A31919/FFFFFF?text=FAIRe+Movement';" />
-                        </a>
+                        <div class="flex justify-center mb-6">
+                            <a href="https://faireproject.com" target="_blank" aria-label="Visit FAIRe Project Website">
+                                <img 
+                                    src="assets/faire.jpg" 
+                                    alt="FAIRe Project Logo" 
+                                    class="h-360 w-60 rounded-none shadow-none" 
+                                    onerror="this.onerror=null;this.src='https://placehold.co/150x80/222222/FFFFFF?text=FAIRe+Logo';" 
+                                />
+                            </a>
+                        </div>
                         
-                        <!-- Updated paragraph content -->
-                        <p class="text-base mt-6">
+                        <p class="text-lg font-paragraph mb-6">
                             FAIRe is a foundation and movement created to protect the rights, identities, and livelihoods of real human models in an industry increasingly threatened by artificial intelligence.
                         </p>
-                        <p class="text-sm mt-4 italic">
-                            Click the image to visit the FAIRe Project website and learn more.
-                        </p>
-                    </div>
+                         
+                       
+
                 </div>
-
             </div>
-        </div>
+        </section>
+
+        
     </main>
-
-    <!-- Image Slideshow/Gallery Section (Updated Image Paths) -->
-    <section id="gallery" class="w-full mt-16">
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-0">
-            <!-- Image 1 -->
-            <div class="aspect-square overflow-hidden">
-                <img src="assets/nta2.jpg" alt="Model Portfolio Image 1" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
-            </div>
-            <!-- Image 2 -->
-            <div class="aspect-square overflow-hidden">
-                <img src="assets/nta3.jpg" alt="Model Portfolio Image 2" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
-            </div>
-            <!-- Image 3 -->
-            <div class="aspect-square overflow-hidden">
-                <img src="assets/nta4.jpg" alt="Model Portfolio Image 3" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
-            </div>
-            <!-- Image 4 -->
-            <div class="aspect-square overflow-hidden">
-                <img src="assets/nta5.jpg" alt="Model Portfolio Image 4" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
     <footer class="bg-nta-black text-white py-12">
         <div class="container mx-auto px-4 flex flex-col items-center">
             
-            <img src="assets/logo-header.png" alt="NTA Models Logo" class="h-32 mb-10" onerror="this.onerror=null;this.src='https://placehold.co/200x90/FFFFFF/000000?text=NTA+Logo';" />
+            <img src="assets/logo-header.png" alt="NTA Models Logo" class="h-32 mb-10 rounded-none shadow-none" onerror="this.onerror=null;this.src='https://placehold.co/200x90/FFFFFF/000000?text=NTA+Logo';" />
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-y-10 md:gap-x-12 w-full max-w-4xl text-center md:text-left">
                 
                 <div>
                     <ul class="space-y-2 text-lg">
-                        <li><a href="academy/index.html" class="hover:text-gray-400 font-heading font-bold transition-colors">ACADEMY</a></li>
-                        <li><a href="scouts/index.html" class="hover:text-gray-400 font-heading font-bold transition-colors">SCOUTS</a></li>
+                        <li><a href="join.html" class="hover:text-gray-400 font-heading font-bold transition-colors">ENROLL</a></li>
+                        <li><a href="scout/index.html" class="hover:text-gray-400 font-heading font-bold transition-colors">SCOUTING</a></li>
                         <li><a href="contact.html" class="hover:text-gray-400 font-heading font-bold transition-colors">CONTACT</a></li>
+                        <li><a href="https://portal.ntamodels.co.za" target="_blank" class="hover:text-gray-400 font-heading font-bold transition-colors">LOGIN</a></li>
                     </ul>
                 </div>
 
@@ -351,9 +301,9 @@
                 <div class="md:col-span-1">
                     <h4 class="text-xl font-heading font-bold mb-4">FOLLOW US:</h4>
                     <div class="flex justify-center md:justify-start space-x-4 text-2xl">
-                        <a href="https://facebook.com/ntamodels_bfn" target="_blank" class="transition-colors" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                        <a href="https://instagram.com/ntamodelssa" target="_blank" class="transition-colors" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                        <a href="https://tiktok.com/@ntamodelssa" target="_blank" class="transition-colors" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://facebook.com/ntamodelss" target="_blank" class="hover:text-gray-400 transition-colors" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://instagram.com/ntamodelss" target="_blank" class="hover:text-gray-400 transition-colors" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://tiktok.com/@ntamodelssa" target="_blank" class="hover:text-gray-400 transition-colors" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
                     </div>
                 </div>
             </div>
@@ -373,73 +323,51 @@
         const mobileMenu = document.getElementById('mobile-menu');
         const iconOpen = document.getElementById('menu-icon-open');
         const iconClose = document.getElementById('menu-icon-close');
-        const mobileDivisionsToggle = document.getElementById('mobile-divisions-toggle');
-        const mobileSubmenu = document.getElementById('mobile-submenu');
-        const tabButtons = document.querySelectorAll('.tab-button'); 
-        const tabPanes = document.querySelectorAll('.tab-pane');
-
-        // Function to toggle mobile menu
+        const desktopHeader = document.getElementById('desktop-header');
+        
+        // --- 1. Mobile Menu Toggle ---
         function toggleMobileMenu() {
             const isMenuOpen = mobileMenu.classList.toggle('open');
+            
+            // Toggle visibility of hamburger/close icons
             iconOpen.classList.toggle('opacity-0', isMenuOpen);
             iconClose.classList.toggle('opacity-0', !isMenuOpen);
             iconClose.classList.toggle('opacity-100', isMenuOpen);
+
+            // Hide/Show body scroll
             document.body.style.overflow = isMenuOpen ? 'hidden' : '';
         }
 
-        // Event listener for main mobile menu toggle
         menuToggle.addEventListener('click', toggleMobileMenu);
 
-        // Event listener for mobile divisions submenu toggle
-        mobileDivisionsToggle.addEventListener('click', () => {
-            const isSubmenuOpen = mobileSubmenu.classList.contains('open');
-            mobileSubmenu.classList.toggle('open', !isSubmenuOpen);
-            
-            if (!isSubmenuOpen) {
-                mobileSubmenu.style.maxHeight = mobileSubmenu.scrollHeight + "px";
-            } else {
-                mobileSubmenu.style.maxHeight = "0";
-            }
-        });
-
-        // Initialize mobile submenu height for transition
-        mobileSubmenu.style.maxHeight = "0";
-
-
-        // --- Tab Functionality ---
-        function changeTab(tabName) {
-            // 1. Deactivate all buttons and panes
-            tabButtons.forEach(button => {
-                button.classList.remove('active');
-            });
-            tabPanes.forEach(pane => {
-                pane.classList.add('hidden');
-            });
-
-            // 2. Activate the selected button and pane
-            const selectedButton = document.querySelector(`.tab-button[data-tab="${tabName}"]`);
-            const selectedPane = document.getElementById(`tab-${tabName}`);
-            
-            if (selectedButton && selectedPane) {
-                selectedButton.classList.add('active');
-                selectedPane.classList.remove('hidden');
-            }
-        }
-
-        // Add event listeners to all tab buttons
-        tabButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const tabName = button.getAttribute('data-tab');
-                changeTab(tabName);
-            });
-        });
-
-        // Ensure the initial tab (ABOUT) is correctly set up on load
-        document.addEventListener('DOMContentLoaded', () => {
-            changeTab('about');
+        // --- 2. Header Scroll Change (Keep black, no visual changes needed based on scroll) ---
+        window.addEventListener('scroll', () => {
+             // Function is kept but no changes are applied as per the 'black header' requirement.
         });
         
-    </script>
+        // --- 3. Tab Switching Logic ---
+        document.querySelectorAll('.tab-link').forEach(button => {
+            button.addEventListener('click', function() {
+                const targetTabId = this.getAttribute('data-tab');
+                
+                // Remove active class from all links and hide all content
+                document.querySelectorAll('.tab-link').forEach(link => {
+                    link.classList.remove('active');
+                    link.classList.remove('border-nta-black');
+                    link.classList.add('border-transparent');
+                });
+                document.querySelectorAll('.tab-content').forEach(content => {
+                    content.classList.remove('active');
+                });
+                
+                // Add active class to the clicked link and show the corresponding content
+                this.classList.add('active');
+                this.classList.remove('border-transparent');
+                this.classList.add('border-nta-black');
+                document.getElementById(targetTabId).classList.add('active');
+            });
+        });
 
+    </script>
 </body>
 </html>
