@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NTA MODELS - Model Academy Courses</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLMDJzLlF88YyZ/wZhlfr8W9l2/Y7b9Iu4wGk4yRjW2C/x3tM7O/p5R5f5+XoA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:ital,wght@0,300;0,400;0,700&family=Red+Hat+Display:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        // Tailwind Configuration for Custom Fonts
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        // All headings will use 'Red Hat Display'
+                        'heading': ['"Red Hat Display"', 'sans-serif'],
+                        // All paragraphs/body will use 'Poppins'
+                        'paragraph': ['Poppins', 'sans-serif'],
+                        // Specific text in Hero section
+                        'serif': ['"Playfair Display"', 'serif'],
+                    },
+                    colors: {
+                        'nta-black': '#000000',
+                        'nta-white': '#FFFFFF',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Base styles: Apply Poppins as the default font-family for inheritance */
+        body {
+            font-family: 'paragraph';
+            color: #000000;
+        }
+
+        /* Full Screen Mobile Menu Overlay */
+        #mobile-menu {
+            transition: transform 0.3s ease-in-out;
+            transform: translateX(100%);
+        }
+        #mobile-menu.open {
+            transform: translateX(0);
+        }
+
+        /* Header Fixes */
+        #desktop-header {
+            z-index: 50;
+        }
+        #mobile-menu {
+            z-index: 40;
+        }
+        
+        /* Enforce no rounded corners/shadows globally on critical elements */
+        .shadow-none { box-shadow: none !important; }
+        .rounded-none { border-radius: 0 !important; }
+
+        /* Custom letter spacing for page title */
+        .page-title-spacing {
+            letter-spacing: 0.25em; /* Adjust as needed for appropriate spacing */
+        }
+        
+        /* Smooth Scroll for Anchor Link */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body class="bg-nta-white font-light">
+
+    <!-- Header - Fixed Black Header -->
+    <header id="desktop-header" class="fixed top-0 left-0 w-full transition-colors duration-300 bg-black">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+            
+            <!-- Mobile Header Content -->
+            <div class="flex w-full justify-between items-center lg:hidden">
+                <!-- Mobile: Logo on the left (Larger) -->
+                <div class="h-10">
+                    <img src="assets/logo-header.png" alt="NTA Logo" class="h-full w-auto" 
+                         onerror="this.onerror=null;this.src='https://placehold.co/120x50/FFFFFF/000000?text=LOGO';" />
+                </div>
+                <!-- Menu Toggle Button -->
+                <button id="menu-toggle" class="text-white focus:outline-none p-2 relative z-50">
+                    <i id="menu-icon-open" class="fas fa-bars fa-lg transition-opacity duration-300"></i>
+                    <i id="menu-icon-close" class="fas fa-times fa-lg transition-opacity duration-300 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-0"></i>
+                </button>
+            </div>
+
+            <!-- Desktop Header Content -->
+            <div class="hidden lg:flex w-full items-center justify-between">
+                
+                <!-- Desktop: Logo on the far left (Larger) -->
+                <div class="w-48 flex-shrink-0">
+                    <img src="assets/logo-header.png" alt="NTA Logo" class="h-12 w-auto" 
+                         onerror="this.onerror=null;this.src='https://placehold.co/150x60/FFFFFF/000000?text=LOGO';" />
+                </div> 
+
+                <!-- Navigation Menu - Aligned to the right -->
+                <nav class="flex-grow flex justify-end">
+                    <ul class="flex space-x-8 text-white font-heading text-lg font-light">
+                        <li><a href="index.html" class="p-2 rounded-none hover:bg-white/20 transition-colors">HOME</a></li>
+                        <li><a href="about.html" class="p-2 rounded-none hover:bg-white/20 transition-colors">ABOUT</a></li>
+                        <!-- Active link style: No bolding or underline/border as requested -->
+                        <li><a href="courses.html" class="p-2 rounded-none transition-colors">COURSES</a></li>
+                        <li><a href="join.html" class="p-2 rounded-none hover:bg-white/20 transition-colors">ENROLL</a></li>
+                        <li><a href="scout/index.html" class="p-2 rounded-none hover:bg-white/20 transition-colors">SCOUTING</a></li>
+                        <li><a href="contact.html" class="p-2 rounded-none hover:bg-white/20 transition-colors">CONTACT</a></li>
+                        <li><a href="https://portal.ntamodels.co.za" target="_blank" class="p-2 rounded-none hover:bg-white/20 transition-colors">LOGIN</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+        </div>
+    </header>
+    <!-- End Header -->
+
+    <!-- Mobile Menu Overlay - Preserved -->
+    <div id="mobile-menu" class="fixed top-0 left-0 w-full h-full bg-black/95 z-40 flex flex-col justify-center items-center text-white p-8 lg:hidden">
+        <nav class="flex flex-col space-y-4 text-xl font-heading text-center font-light w-full">
+            <a href="index.html" class="p-2 hover:text-gray-400 transition-colors" onclick="toggleMobileMenu()">HOME</a>
+            <a href="about.html" class="p-2 hover:text-gray-400 transition-colors" onclick="toggleMobileMenu()">ABOUT</a>
+            <a href="courses.html" class="p-2 hover:text-gray-400 transition-colors" onclick="toggleMobileMenu()">COURSES</a>
+            <a href="join.html" class="p-2 hover:text-gray-400 transition-colors" onclick="toggleMobileMenu()">ENROLL</a>
+            <a href="scout/index.html" class="p-2 hover:text-gray-400 transition-colors" onclick="toggleMobileMenu()">SCOUTING</a>
+            <a href="contact.html" class="p-2 hover:text-gray-400 transition-colors" onclick="toggleMobileMenu()">CONTACT</a>
+            <a href="https://portal.ntamodels.co.za" target="_blank" class="p-2 hover:text-gray-400 transition-colors" onclick="toggleMobileMenu()">LOGIN</a>
+        </nav>
+    </div>
+    <!-- End Mobile Menu -->
+
+
+    <!-- Main Page Content -->
+    <main>
+        
+        <!-- Hero Section: Page Title & Overview -->
+        <section id="courses-hero" class="pt-24 lg:pt-32 bg-nta-white">
+            <div class="container mx-auto px-4 py-8 text-center">
+                <h1 class="font-heading text-xl md:text-3xl uppercase font-normal text-nta-black page-title-spacing">
+                    MODEL ACADEMY
+                </h1>
+                <h2 class="font-serif text-5xl md:text-7xl font-normal mt-4 mb-6">Train with the Best</h2>
+                <p class="max-w-3xl mx-auto text-lg font-paragraph text-gray-700">
+                    NTA MODELS Academy offers world-class training programs designed to transform aspiring individuals into professional, industry-ready models. Our curriculum balances technical skill development with essential business acumen and mental resilience.
+                </p>
+                
+                <!-- Updated href to scroll to course details -->
+                <a href="#course-details" class="inline-block mt-8 px-8 py-3 bg-nta-black text-white font-heading text-sm font-bold uppercase rounded-none hover:bg-gray-800 transition-colors shadow-none">
+                    View Enrollment Options
+                </a>
+            </div>
+        </section>
+
+        <!-- Course Offerings Section -->
+        <section id="course-details" class="bg-gray-50 py-16 lg:py-24">
+            <div class="container mx-auto px-4">
+                
+                <!-- Course Grid -->
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+                    
+                    <!-- 1. Professional Model Development Program (PMDP) -->
+                    <div class="bg-white p-8 shadow-xl rounded-none flex flex-col justify-between">
+                        <div>
+                            <!-- Course Image -->
+                            <img src="assets/nta3.jpg" alt="PMDP Program Image" class="w-full h-48 object-cover mb-6 rounded-none shadow-none" onerror="this.onerror=null;this.src='https://placehold.co/400x200/CCCCCC/333333?text=PMDP+Course';" />
+                            
+                            <span class="text-sm font-heading font-semibold text-gray-500 uppercase">Flagship Program</span>
+                            <h3 class="font-serif text-3xl font-normal mt-2 mb-4">PMDP</h3>
+                            <p class="text-lg font-heading font-bold uppercase mb-4">Professional Model Development Program</p>
+                            
+                            <p class="text-base font-paragraph mb-6">
+                                The comprehensive training for aspiring professional models. This program covers the A-to-Z of the industry, preparing you for immediate placement and career longevity.
+                            </p>
+
+                            <ul class="list-none space-y-2 text-sm text-nta-black mb-6">
+                                <li class="flex items-start"><i class="fas fa-check-circle text-nta-black mt-1 mr-3 flex-shrink-0"></i> Runway Technique & Choreography</li>
+                                <li class="flex items-start"><i class="fas fa-check-circle text-nta-black mt-1 mr-3 flex-shrink-0"></i> Editorial & Commercial Posing</li>
+                                <li class="flex items-start"><i class="fas fa-check-circle text-nta-black mt-1 mr-3 flex-shrink-0"></i> Industry Etiquette & Contract Basics</li>
+                                <li class="flex items-start"><i class="fas fa-check-circle text-nta-black mt-1 mr-3 flex-shrink-0"></i> Portfolio Development & Digital Presence</li>
+                            </ul>
+                            
+                            <!-- COST & DETAILS - Updated Monthly Plan to 11 months -->
+                            <div class="mt-4 border-t pt-4 space-y-2 text-sm">
+                                <p class="font-bold">Total Course Fee: R1,430</p>
+                                <p class="font-bold">Monthly Plan: R140 x 11 months</p>
+                                <p class="text-xs text-red-700 font-bold">Registration Fee: R210 (R105 due upon registration)</p>
+                                <p class="font-semibold text-nta-black uppercase">Mode: Online & In-Person</p>
+                            </div>
+                        </div>
+                        <a href="join.html" class="block w-full text-center px-4 py-3 border border-nta-black text-nta-black font-heading text-sm font-bold uppercase hover:bg-nta-black hover:text-white transition-colors mt-6">
+                            Apply for PMDP
+                        </a>
+                    </div>
+                    
+                    <!-- 2. Catwalk & Runway Masterclass -->
+                    <div class="bg-white p-8 shadow-xl rounded-none flex flex-col justify-between">
+                        <div>
+                            <!-- Course Image -->
+                            <img src="assets/nta4.jpg" alt="Catwalk Masterclass Image" class="w-full h-48 object-cover mb-6 rounded-none shadow-none" onerror="this.onerror=null;this.src='https://placehold.co/400x200/CCCCCC/333333?text=Catwalk+Course';" />
+                            
+                            <span class="text-sm font-heading font-semibold text-gray-500 uppercase">Specialized Skill</span>
+                            <h3 class="font-serif text-3xl font-normal mt-2 mb-4">Masterclass</h3>
+                            <p class="text-lg font-heading font-bold uppercase mb-4">Catwalk & Runway Intensive</p>
+                            
+                            <p class="text-base font-paragraph mb-6">
+                                An intensive course focused solely on mastering the art of the runway. Perfect for models seeking to refine their walk for fashion weeks and high-end shows.
+                            </p>
+
+                            <ul class="list-none space-y-2 text-sm text-nta-black mb-6">
+                                <li class="flex items-start"><i class="fas fa-check-circle text-nta-black mt-1 mr-3 flex-shrink-0"></i> High-Fashion Walk Techniques</li>
+                                <li class="flex items-start"><i class="fas fa-check-circle text-nta-black mt-1 mr-3 flex-shrink-0"></i> Pivot, Turns, & Pauses</li>
+                                <li class="flex items-start"><i class="fas fa-check-circle text-nta-black mt-1 mr-3 flex-shrink-0"></i> Garment Handling & Expression</li>
+                                <li class="flex items-start"><i class="fas fa-check-circle text-nta-black mt-1 mr-3 flex-shrink-0"></i> Confidence Building on the Ramp</li>
+                            </ul>
+
+                            <!-- COST & DETAILS - Added Monthly Plan for 11 months -->
+                            <div class="mt-4 border-t pt-4 space-y-2 text-sm">
+                                <p class="font-bold">Total Course Fee: R1,210</p>
+                                <p class="font-bold">Monthly Plan: R120 x 11 months</p>
+                                <p class="text-xs text-red-700 font-bold">Registration Fee: R210 (R105 due upon registration)</p>
+                                <p class="font-semibold text-nta-black uppercase">Mode: In-Person Only</p>
+                            </div>
+                        </div>
+                        <a href="join.html" class="block w-full text-center px-4 py-3 border border-nta-black text-nta-black font-heading text-sm font-bold uppercase hover:bg-nta-black hover:text-white transition-colors mt-6">
+                            Book Masterclass
+                        </a>
+                    </div>
+
+                    <!-- 3. Digital Media & Branding Workshop -->
+                    <div class="bg-white p-8 shadow-xl rounded-none flex flex-col justify-between">
+                        <div>
+                            <!-- Course Image -->
+                            <img src="assets/nta5.jpg" alt="Digital Pro Workshop Image" class="w-full h-48 object-cover mb-6 rounded-none shadow-none" onerror="this.onerror=null;this.src='https://placehold.co/400x200/CCCCCC/333333?text=Digital+Pro+Course';" />
+                            
+                            <span class="text-sm font-heading font-semibold text-gray-500 uppercase">Modern Essential</span>
+                            <h3 class="font-serif text-3xl font-normal mt-2 mb-4">Digital Pro</h3>
+                            <p class="text-lg font-heading font-bold uppercase mb-4">Digital Media & Personal Branding Workshop</p>
+                            
+                            <p class="text-base font-paragraph mb-6">
+                                Navigate the digital age of modeling. Learn how to create compelling content, manage your online image, and attract direct bookings through your personal brand.
+                            </p>
+
+                            <ul class="list-none space-y-2 text-sm text-nta-black mb-6">
+                                <li class="flex items-start"><i class="fas fa-check-circle text-nta-black mt-1 mr-3 flex-shrink-0"></i> Selfie & Digital Posing Mastery</li>
+                                <li class="flex items-start"><i class="fas fa-check-circle text-nta-black mt-1 mr-3 flex-shrink-0"></i> Social Media Strategy for Models</li>
+                                <li class="flex items-start"><i class="fas fa-check-circle text-nta-black mt-1 mr-3 flex-shrink-0"></i> Self-Tape Audition Techniques</li>
+                                <li class="flex items-start"><i class="fas fa-check-circle text-nta-black mt-1 mr-3 flex-shrink-0"></i> Basic Lighting & Photography for Digitals</li>
+                            </ul>
+                            
+                            <!-- COST & DETAILS - Added Monthly Plan for 11 months -->
+                            <div class="mt-4 border-t pt-4 space-y-2 text-sm">
+                                <p class="font-bold">Total Course Fee: R1,254</p>
+                                <p class="font-bold">Monthly Plan: R115 x 11 months</p>
+                                <p class="text-xs text-red-700 font-bold">Registration Fee: R210 (R105 due upon registration)</p>
+                                <p class="font-semibold text-nta-black uppercase">Mode: Online Only</p>
+                            </div>
+                        </div>
+                        <a href="join.html" class="block w-full text-center px-4 py-3 border border-nta-black text-nta-black font-heading text-sm font-bold uppercase hover:bg-nta-black hover:text-white transition-colors mt-6">
+                            Join Workshop
+                        </a>
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
+        
+        <!-- Removed '#why-nta' section as requested -->
+        
+    </main>
+    <!-- End Main Page Content -->
+
+
+    <!-- Footer - Replicated from about.html -->
+    <footer class="bg-nta-black text-white py-12">
+        <div class="container mx-auto px-4 flex flex-col items-center">
+            
+            <img src="assets/logo-header.png" alt="NTA Models Logo" class="h-32 mb-10 rounded-none shadow-none" onerror="this.onerror=null;this.src='https://placehold.co/200x90/FFFFFF/000000?text=NTA+Logo';" />
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-y-10 md:gap-x-12 w-full max-w-4xl text-center md:text-left">
+                
+                <div>
+                    <ul class="space-y-2 text-lg">
+                        <li><a href="join.html" class="hover:text-gray-400 font-heading font-bold transition-colors">ENROLL</a></li>
+                        <li><a href="scout/index.html" class="hover:text-gray-400 font-heading font-bold transition-colors">SCOUTING</a></li>
+                        <li><a href="contact.html" class="hover:text-gray-400 font-heading font-bold transition-colors">CONTACT</a></li>
+                        <li><a href="https://portal.ntamodels.co.za" target="_blank" class="hover:text-gray-400 font-heading font-bold transition-colors">LOGIN</a></li>
+                    </ul>
+                </div>
+
+                <div class="md:col-span-1">
+                    <h4 class="text-xl font-heading font-bold mb-4">OPERATING HOURS:</h4>
+                    <p class="text-base font-paragraph">
+                        Monday - Friday (09:00 - 17:30)<br>
+                        Saturday (09:00 - 13:00)<br>
+                        Sunday (closed)
+                    </p>
+                </div>
+
+                <div class="md:col-span-1">
+                    <h4 class="text-xl font-heading font-bold mb-4">FOLLOW US:</h4>
+                    <div class="flex justify-center md:justify-start space-x-4 text-2xl">
+                        <a href="https://facebook.com/ntamodelss" target="_blank" class="hover:text-gray-400 transition-colors" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://instagram.com/ntamodelss" target="_blank" class="hover:text-gray-400 transition-colors" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://tiktok.com/@ntamodelssa" target="_blank" class="hover:text-gray-400 transition-colors" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <p class="mt-12 text-sm font-paragraph font-light text-center">
+                © 2025 NTA MODELS. All rights reserved. 
+                <span class="inline-block mt-2 md:mt-0 md:ml-2">
+                    Web Designs by <a href="https://webbytlotly.netlify.app/" target="_blank" class="text-white hover:text-gray-400 transition-colors font-paragraph font-light">Tlotly</a>
+                </span>
+            </p>
+        </div>
+    </footer>
+
+
+    <script>
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const iconOpen = document.getElementById('menu-icon-open');
+        const iconClose = document.getElementById('menu-icon-close');
+        
+        // --- Mobile Menu Toggle ---
+        function toggleMobileMenu() {
+            const isMenuOpen = mobileMenu.classList.toggle('open');
+            
+            // Toggle visibility of hamburger/close icons
+            iconOpen.classList.toggle('opacity-0', isMenuOpen);
+            iconClose.classList.toggle('opacity-0', !isMenuOpen);
+            iconClose.classList.toggle('opacity-100', isMenuOpen);
+
+            // Hide/Show body scroll
+            document.body.style.overflow = isMenuOpen ? 'hidden' : '';
+        }
+
+        menuToggle.addEventListener('click', toggleMobileMenu);
+
+        // --- Close menu when a link is clicked ---
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', toggleMobileMenu);
+        });
+
+    </script>
+</body>
+</html>
