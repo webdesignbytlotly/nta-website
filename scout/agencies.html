@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NTA MODELS - Associated Agencies</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,600;0,700&display=swap" rel="stylesheet">
+    
+    <script>
+        // Tailwind Configuration for Custom Fonts - Poppins is defined here
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'heading': ['Poppins', 'sans-serif'], 
+                        'paragraph': ['Poppins', 'sans-serif'],
+                        'serif': ['Poppins', 'sans-serif'], 
+                    },
+                    colors: {
+                        'nta-black': '#000000',
+                        'nta-white': '#FFFFFF',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* *** FONT OVERRIDE: Universal Poppins Application *** */
+        body, h1, h2, h3, h4, h5, h6, p, ul, ol, li, a {
+            font-family: 'Poppins', sans-serif !important; 
+            /* REMOVED: color: #000000; to allow text-white in header/footer to work */
+        }
+        
+        /* Set base color for main body content only */
+        body {
+            color: #000000;
+        }
+        
+        /* General Layout CSS */
+        #mobile-menu {
+            transition: transform 0.3s ease-in-out;
+            transform: translateX(100%);
+        }
+        #mobile-menu.open {
+            transform: translateX(0);
+        }
+        #desktop-header { z-index: 50; }
+        #mobile-menu { z-index: 40; }
+        .shadow-none { box-shadow: none !important; }
+        .rounded-none { border-radius: 0 !important; }
+        html { scroll-behavior: smooth; }
+        
+        .group:hover .dropdown-menu {
+            display: block;
+        }
+        .dropdown-menu {
+            display: none;
+            top: 100%; 
+            z-index: 30; 
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    </style>
+</head>
+<body class="bg-nta-white font-light">
+
+    <header id="desktop-header" class="fixed top-0 left-0 w-full transition-colors duration-300 bg-black">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+            
+            <div class="flex w-full justify-between items-center lg:hidden">
+                <div class="h-10">
+                    <img src="../assets/logo-header.png" alt="NTA Logo" class="h-full w-auto" 
+                            onerror="this.onerror=null;this.src='https://placehold.co/120x50/FFFFFF/000000?text=LOGO';" />
+                </div>
+                <button id="menu-toggle" class="text-white focus:outline-none p-2 relative z-50">
+                    <i id="menu-icon-open" class="fas fa-bars fa-lg transition-opacity duration-300"></i>
+                    <i id="menu-icon-close" class="fas fa-times fa-lg transition-opacity duration-300 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-0"></i>
+                </button>
+            </div>
+
+            <div class="hidden lg:flex w-full items-center justify-between">
+                <div class="w-48 flex-shrink-0">
+                    <img src="../assets/logo-header.png" alt="NTA Logo" class="h-12 w-auto" 
+                            onerror="this.onerror=null;this.src='https://placehold.co/150x60/FFFFFF/000000?text=LOGO';" />
+                </div> 
+
+                <nav class="flex-grow flex justify-end">
+                    <ul class="flex space-x-6 text-white text-sm font-light uppercase">
+                        
+                        <li><a href="index.html" class="p-2 rounded-none transition-colors text-white">HOME</a></li>
+                        
+                        <li class="relative group">
+                            <a href="#" class="p-2 rounded-none transition-colors text-white">
+                                INFO
+                            </a>
+                            <ul class="dropdown-menu absolute w-56 bg-black/80 shadow-lg text-white py-2">
+                                <li><a href="../about.html" class="block px-4 py-2 text-center transition-colors text-sm text-white">ABOUT</a></li>
+                                <li><a href="policy.html" class="block px-4 py-2 text-center text-sm text-white">POLICY</a></li>
+                                <li><a href="terms.html" class="block px-4 py-2 text-center text-sm text-white">TERMS & CONDITIONS</a></li>
+                                <li><a href="faqs.html" class="block px-4 py-2 text-center text-sm text-white">FAQS</a></li>
+                            </ul>
+                        </li>
+
+                        <li><a href="scouted.html" class="p-2 rounded-none transition-colors text-white">SCOUTED</a></li>
+                        <li><a href="getscouted.html" class="p-2 rounded-none transition-colors text-white">GET SCOUTED</a></li>
+                        <li><a href="info-pack.html" class="p-2 rounded-none transition-colors text-white">INFORMATION PACK</a></li>
+                        <li><a href="agencies.html" class="p-2 rounded-none transition-colors text-white">ASSOCIATED AGENCIES</a></li>
+                        
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+    <div id="mobile-menu" class="fixed top-0 left-0 w-full h-full bg-black/95 z-40 flex flex-col justify-start items-center text-white p-8 lg:hidden">
+        <nav class="flex flex-col space-y-4 text-xl text-center font-light w-full uppercase pt-16">
+            
+            <a href="index.html" class="p-2 transition-colors text-white" onclick="toggleMobileMenu()">HOME</a>
+            
+            <button class="p-2 transition-colors flex items-center justify-center text-white" onclick="toggleMobileSubMenu('info-submenu')">
+                INFO
+            </button>
+            <div id="info-submenu" class="flex flex-col space-y-2 mt-2 text-lg hidden">
+                <a href="../about.html" class="p-1 transition-colors text-white" onclick="toggleMobileMenu()">ABOUT</a>
+                <a href="policy.html" class="p-1 transition-colors text-white" onclick="toggleMobileMenu()">POLICY</a>
+                <a href="terms.html" class="p-1 transition-colors text-white" onclick="toggleMobileMenu()">TERMS & CONDITIONS</a>
+                <a href="faqs.html" class="p-1 transition-colors text-white" onclick="toggleMobileMenu()">FAQS</a>
+            </div>
+
+            <a href="scouted.html" class="p-2 transition-colors text-white" onclick="toggleMobileMenu()">SCOUTED</a> 
+            <a href="getscouted.html" class="p-2 transition-colors text-white" onclick="toggleMobileMenu()">GET SCOUTED</a>
+            <a href="info-pack.html" class="p-2 transition-colors text-white" onclick="toggleMobileMenu()">INFORMATION PACK</a>
+            <a href="agencies.html" class="p-2 transition-colors text-white" onclick="toggleMobileMenu()">ASSOCIATED AGENCIES</a>
+
+        </nav>
+    </div>
+    
+    <main class="min-h-screen bg-nta-white pt-24"> 
+        
+        <section class="container mx-auto px-4 py-12 lg:py-16">
+            
+            <div class="max-w-4xl mx-auto">
+                
+                <h1 class="text-5xl md:text-6xl font-light mb-8 text-left tracking-widest uppercase border-b border-black pb-4 text-black">
+                    ASSOCIATED AGENCIES
+                </h1>
+                
+                <div class="mt-20 p-8 text-center border border-black rounded-lg">
+                    <p class="text-4xl font-bold uppercase text-black">
+                        Coming Soon!
+                    </p>
+                    <p class="text-lg mt-4 text-black">
+                        We're currently compiling our list of associated agencies and this page will be updated shortly. Please check back later!
+                    </p>
+                </div>
+
+            </div>
+            
+        </section>
+        
+    </main>
+    <footer class="bg-nta-black text-white py-12 mt-10">
+        <div class="container mx-auto px-4 flex flex-col items-start md:items-center">
+            
+            <img src="../assets/logo-header.png" alt="NTA Models Logo" class="h-32 mb-10 rounded-none shadow-none mx-auto" onerror="this.onerror=null;this.src='https://placehold.co/200x90/FFFFFF/000000?text=NTA+Logo';" />
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-y-10 md:gap-x-12 w-full max-w-4xl text-left mx-auto">
+                
+                <div class="text-center md:text-left mx-auto md:mx-0">
+                    <ul class="space-y-2 text-lg">
+                        <li><a href="../join.html" class="font-bold transition-colors text-white">ENROLL</a></li>
+                        <li><a href="../index.html" class="font-bold transition-colors text-white">HOME</a></li>
+                        <li><a href="../contact.html" class="font-bold transition-colors text-white">CONTACT</a></li>
+                    </ul>
+                </div>
+
+                <div class="md:col-span-1 text-center md:text-left">
+                    <h4 class="text-xl font-bold mb-4 text-white">OPERATING HOURS:</h4>
+                    <p class="text-base text-white">
+                        Monday - Friday (09:00 - 17:30)<br>
+                        Saturday (09:00 - 13:00)<br>
+                        Sunday (closed)
+                    </p>
+                </div>
+
+                <div class="md:col-span-1 text-center md:text-left">
+                    <h4 class="text-xl font-bold mb-4 text-white">FOLLOW US:</h4>
+                    <div class="flex justify-center md:justify-start space-x-4 text-2xl">
+                        <a href="https://facebook.com/ntamodelss" target="_blank" class="transition-colors text-white" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://instagram.com/ntamodelss" target="_blank" class="transition-colors text-white" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://tiktok.com/@ntamodelssa" target="_blank" class="transition-colors text-white" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <p class="mt-12 text-sm font-light text-center w-full text-white">
+                © 2025 NTA MODELS. All rights reserved. 
+                <span class="inline-block mt-2 md:mt-0 md:ml-2">
+                    Web Designs by <a href="https://webbytlotly.netlify.app/" target="_blank" class="text-white font-light">Tlotly</a>
+                </span>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const iconOpen = document.getElementById('menu-icon-open');
+        const iconClose = document.getElementById('menu-icon-close');
+        
+        function toggleMobileMenu() {
+            const isMenuOpen = mobileMenu.classList.toggle('open');
+            
+            iconOpen.classList.toggle('opacity-0', isMenuOpen);
+            iconClose.classList.toggle('opacity-0', !isMenuOpen);
+            iconClose.classList.toggle('opacity-100', isMenuOpen);
+
+            document.body.style.overflow = isMenuOpen ? 'hidden' : '';
+        }
+
+        menuToggle.addEventListener('click', toggleMobileMenu);
+
+        function toggleMobileSubMenu(id) {
+            const submenu = document.getElementById(id);
+            submenu.classList.toggle('hidden');
+        }
+    </script>
+</body>
+</html>
