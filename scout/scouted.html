@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NTA MODELS - Scouted</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- ONLY POPPINS FONT IS LOADED -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,700&display=swap" rel="stylesheet">
+    
+    <script>
+        // Tailwind Configuration for Custom Fonts - Using Poppins exclusively
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        // All custom font aliases point to Poppins
+                        'heading': ['Poppins', 'sans-serif'], 
+                        'paragraph': ['Poppins', 'sans-serif'],
+                        'serif': ['Poppins', 'sans-serif'], 
+                    },
+                    colors: {
+                        'nta-black': '#000000',
+                        'nta-white': '#FFFFFF',
+                        'nta-red': '#E53E3E', 
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            /* Ensures Poppins is the default font for the entire body */
+            font-family: 'paragraph';
+            color: #000000;
+        }
+        #mobile-menu {
+            transition: transform 0.3s ease-in-out;
+            transform: translateX(100%);
+        }
+        #mobile-menu.open {
+            transform: translateX(0);
+        }
+        #desktop-header { z-index: 50; }
+        #mobile-menu { z-index: 40; }
+        /* Ensuring no custom rounding or shadows as requested */
+        .shadow-none { box-shadow: none !important; }
+        .rounded-none { border-radius: 0 !important; }
+        html { scroll-behavior: smooth; }
+        
+        /* Desktop Dropdown Styles */
+        .group:hover .dropdown-menu {
+            display: block;
+        }
+        .dropdown-menu {
+            display: none;
+            top: 100%; 
+            z-index: 30; 
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        /* Scouted Model Card Styling for 3-in-a-row layout */
+        .model-card {
+            /* No transition on display property for immediate filtering effect */
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out; 
+            opacity: 1;
+            display: flex;
+            visibility: visible;
+        }
+        
+        /* Hiding mechanism for filtering */
+        .model-card.hidden-card {
+            opacity: 0;
+            display: none; /* Ensures the element is completely removed from the flow */
+            visibility: hidden;
+            transform: scale(0.9);
+        }
+
+        /* Responsive width for 3-in-a-row */
+        .model-card {
+            /* Mobile: 1 in a row (handled by default flex wrap behavior if gap is large) */
+            width: 100%; /* Default to full width on mobile for simplicity, or slightly less */
+            max-width: 12rem; /* Small image size requirement enforced */
+        }
+        @media (min-width: 640px) { /* sm breakpoint */
+            .model-card {
+                /* For screens larger than mobile, set to roughly 3-in-a-row */
+                width: calc(33.3333% - 1.3333rem); 
+                max-width: 15rem; /* Enforce small size */
+            }
+        }
+        
+        /* Filter Button Styling - Font is applied directly to the button element for robustness. */
+        .filter-button {
+            transition: background-color 0.2s, color 0.2s;
+            @apply px-4 py-2 font-semibold text-lg border-b-2 border-transparent hover:border-nta-black hover:text-nta-black text-gray-500;
+        }
+        .filter-button.active {
+            @apply border-nta-black text-nta-black;
+        }
+    </style>
+</head>
+<body class="bg-nta-white font-light">
+
+    <!-- Header - Fixed Black Header (Reused) -->
+    <header id="desktop-header" class="fixed top-0 left-0 w-full transition-colors duration-300 bg-black">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+            
+            <!-- Mobile Header Content -->
+            <div class="flex w-full justify-between items-center lg:hidden">
+                <div class="h-10">
+                    <img src="../assets/logo-header.png" alt="NTA Logo" class="h-full w-auto" 
+                         onerror="this.onerror=null;this.src='https://placehold.co/120x50/FFFFFF/000000?text=LOGO';" />
+                </div>
+                <button id="menu-toggle" class="text-white focus:outline-none p-2 relative z-50">
+                    <i id="menu-icon-open" class="fas fa-bars fa-lg transition-opacity duration-300"></i>
+                    <i id="menu-icon-close" class="fas fa-times fa-lg transition-opacity duration-300 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-0"></i>
+                </button>
+            </div>
+
+            <!-- Desktop Header Content -->
+            <div class="hidden lg:flex w-full items-center justify-between">
+                <div class="w-48 flex-shrink-0">
+                    <img src="../assets/logo-header.png" alt="NTA Logo" class="h-12 w-auto" 
+                         onerror="this.onerror=null;this.src='https://placehold.co/150x60/FFFFFF/000000?text=LOGO';" />
+                </div> 
+
+                <!-- Navigation Menu -->
+                <nav class="flex-grow flex justify-end">
+                    <ul class="flex space-x-6 text-white font-heading text-sm font-light uppercase">
+                        
+                        <!-- HOME Link -->
+                        <li><a href="index.html" class="p-2 rounded-none hover:bg-white/20 transition-colors">HOME</a></li>
+                        
+                        <!-- INFO Dropdown Menu -->
+                        <li class="relative group">
+                            <a href="#" class="p-2 rounded-none hover:bg-white/20 transition-colors">
+                                INFO
+                            </a>
+                            <!-- Dropdown Content -->
+                            <ul class="dropdown-menu absolute w-56 bg-black/80 shadow-lg text-white py-2">
+                                <li><a href="../about.html" class="block px-4 py-2 text-center hover:bg-white/10 transition-colors text-sm">ABOUT</a></li>
+                                <li><a href="policy.html" class="block px-4 py-2 text-center hover:bg-white/10 text-sm">POLICY</a></li>
+                                <li><a href="terms.html" class="block px-4 py-2 text-center hover:bg-white/10 text-sm">TERMS & CONDITIONS</a></li>
+                                <li><a href="faqs.html" class="block px-4 py-2 text-center hover:bg-white/10 text-sm">FAQS</a></li>
+                            </ul>
+                        </li>
+
+                        <!-- Remaining Scout Links - Scouted is active -->
+                        <li><a href="scouted.html" class="p-2 rounded-none bg-white/20 transition-colors">SCOUTED</a></li>
+                        <li><a href="getscouted.html" class="p-2 rounded-none hover:bg-white/20 transition-colors">GET SCOUTED</a></li>
+                        <li><a href="info-pack.html" class="p-2 rounded-none hover:bg-white/20 transition-colors">INFORMATION PACK</a></li>
+                        <li><a href="agencies.html" class="p-2 rounded-none hover:bg-white/20 transition-colors">ASSOCIATED AGENCIES</a></li>
+                        
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <!-- End Header -->
+
+    <!-- Mobile Menu Overlay (Reused) -->
+    <div id="mobile-menu" class="fixed top-0 left-0 w-full h-full bg-black/95 z-40 flex flex-col justify-start items-center text-white p-8 lg:hidden">
+        <nav class="flex flex-col space-y-4 text-xl font-heading text-center font-light w-full uppercase pt-16">
+            
+            <a href="index.html" class="p-2 hover:text-gray-400 transition-colors" onclick="toggleMobileMenu()">HOME</a>
+            
+            <button class="p-2 text-white hover:text-gray-400 transition-colors flex items-center justify-center" onclick="toggleMobileSubMenu('info-submenu')">
+                INFO
+            </button>
+            <div id="info-submenu" class="flex flex-col space-y-2 mt-2 text-lg hidden">
+                <a href="../about.html" class="p-1 hover:text-gray-400 transition-colors" onclick="toggleMobileMenu()">ABOUT</a>
+                <a href="policy.html" class="p-1 hover:text-gray-400 transition-colors" onclick="toggleMobileMenu()">POLICY</a>
+                <a href="terms.html" class="p-1 hover:text-gray-400 transition-colors" onclick="toggleMobileMenu()">TERMS & CONDITIONS</a>
+                <a href="faqs.html" class="p-1 hover:text-gray-400 transition-colors" onclick="toggleMobileMenu()">FAQS</a>
+            </div>
+
+            <a href="scouted.html" class="p-2 text-gray-300 transition-colors" onclick="toggleMobileMenu()">SCOUTED</a> 
+            <a href="getscouted.html" class="p-2 hover:text-gray-400 transition-colors" onclick="toggleMobileMenu()">GET SCOUTED</a>
+            <a href="info-pack.html" class="p-2 hover:text-gray-400 transition-colors" onclick="toggleMobileMenu()">INFORMATION PACK</a>
+            <a href="agencies.html" class="p-2 hover:text-gray-400 transition-colors" onclick="toggleMobileMenu()">ASSOCIATED AGENCIES</a>
+
+        </nav>
+    </div>
+    <!-- End Mobile Menu -->
+
+
+    <!-- Main Page Content - Scouted Gallery Section -->
+    <main class="min-h-screen bg-nta-white pt-24"> 
+        
+        <section class="container mx-auto px-4 py-12 lg:py-16 text-center">
+            
+            <!-- Centered Title -->
+            <h1 class="font-paragraph font-bold text-5xl md:text-6xl text-nta-black mb-12 border-b border-gray-300 pb-4 inline-block">
+                SCOUTED
+            </h1>
+            
+            <!-- Gallery Filter Buttons -->
+            <div class="flex justify-center space-x-2 md:space-x-6 mb-12 border-b border-gray-300 pb-2">
+                <!-- Poppins font applied directly using font-paragraph class -->
+                <button class="filter-button active font-paragraph" data-category="all" onclick="filterGallery('all')">ALL</button>
+                <button class="filter-button font-paragraph" data-category="female" onclick="filterGallery('female')">FEMALE</button>
+                <button class="filter-button font-paragraph" data-category="male" onclick="filterGallery('male')">MALE</button>
+                <button class="filter-button font-paragraph" data-category="nonbinary" onclick="filterGallery('nonbinary')">NON-BINARY</button>
+            </div>
+
+            <!-- Gallery Container (3 Models total) -->
+            <div id="gallery-container" class="flex flex-wrap justify-center gap-4 md:gap-8 lg:gap-10 max-w-7xl mx-auto">
+
+                <!-- 1. FEMALE MODEL - Only first name used -->
+                <div class="model-card female w-40 sm:w-48 lg:w-56 flex flex-col items-center">
+                    <a href="portfolios/samantha-williams.html" class="w-full aspect-[2/3] block overflow-hidden cursor-pointer rounded-none shadow-none">
+                        <img src="https://placehold.co/400x600/000000/FFFFFF?text=SAMANTHA" 
+                             alt="Samantha Williams" 
+                             class="w-full h-full object-cover block rounded-none shadow-none" 
+                             onerror="this.onerror=null;this.src='https://placehold.co/400x600/F0F0F0/000000?text=COMING+SOON';">
+                    </a>
+                    <p class="mt-2 text-base tracking-wider font-paragraph font-normal uppercase text-center">
+                        SAMANTHA
+                    </p>
+                </div>
+
+                <!-- 2. MALE MODEL - Only first name used -->
+                <div class="model-card male w-40 sm:w-48 lg:w-56 flex flex-col items-center">
+                    <a href="portfolios/lewis-dube.html" class="w-full aspect-[2/3] block overflow-hidden cursor-pointer rounded-none shadow-none">
+                        <img src="https://placehold.co/400x600/000000/FFFFFF?text=LEWIS" 
+                             alt="Lewis Dube" 
+                             class="w-full h-full object-cover block rounded-none shadow-none" 
+                             onerror="this.onerror=null;this.src='https://placehold.co/400x600/F0F0F0/000000?text=COMING+SOON';">
+                    </a>
+                    <p class="mt-2 text-base tracking-wider font-paragraph font-normal uppercase text-center">
+                        LEWIS
+                    </p>
+                </div>
+
+                <!-- 3. NON-BINARY MODEL - Only first name used -->
+                <div class="model-card nonbinary w-40 sm:w-48 lg:w-56 flex flex-col items-center">
+                    <a href="portfolios/alex-jones.html" class="w-full aspect-[2/3] block overflow-hidden cursor-pointer rounded-none shadow-none">
+                        <img src="https://placehold.co/400x600/000000/FFFFFF?text=ALEX" 
+                             alt="Alex Jones" 
+                             class="w-full h-full object-cover block rounded-none shadow-none" 
+                             onerror="this.onerror=null;this.src='https://placehold.co/400x600/F0F0F0/000000?text=COMING+SOON';">
+                    </a>
+                    <p class="mt-2 text-base tracking-wider font-paragraph font-normal uppercase text-center">
+                        ALEX
+                    </p>
+                </div>
+                
+                <!-- Placeholders to ensure 3-column spacing even with fewer items (only for larger screens) -->
+                <div class="w-40 sm:w-48 lg:w-56 hidden sm:block"></div>
+                <div class="w-40 sm:w-48 lg:w-56 hidden sm:block"></div>
+                
+            </div>
+            
+        </section>
+        
+    </main>
+    <!-- End Main Page Content -->
+
+
+    <!-- Footer (Reused) -->
+    <footer class="bg-nta-black text-white py-12 mt-10">
+        <div class="container mx-auto px-4 flex flex-col items-center">
+            
+            <img src="../assets/logo-header.png" alt="NTA Models Logo" class="h-32 mb-10 rounded-none shadow-none" onerror="this.onerror=null;this.src='https://placehold.co/200x90/FFFFFF/000000?text=NTA+Logo';" />
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-y-10 md:gap-x-12 w-full max-w-4xl text-center md:text-left">
+                
+                <div>
+                    <ul class="space-y-2 text-lg">
+                        <li><a href="../join.html" class="hover:text-gray-400 font-heading font-bold transition-colors">ENROLL</a></li>
+                        <li><a href="index.html" class="hover:text-gray-400 font-heading font-bold transition-colors">HOME</a></li>
+                        <li><a href="../contact.html" class="hover:text-gray-400 font-heading font-bold transition-colors">CONTACT</a></li>
+                    </ul>
+                </div>
+
+                <div class="md:col-span-1">
+                    <h4 class="text-xl font-heading font-bold mb-4">OPERATING HOURS:</h4>
+                    <p class="text-base font-paragraph">
+                        Monday - Friday (09:00 - 17:30)<br>
+                        Saturday (09:00 - 13:00)<br>
+                        Sunday (closed)
+                    </p>
+                </div>
+
+                <div class="md:col-span-1">
+                    <h4 class="text-xl font-heading font-bold mb-4">FOLLOW US:</h4>
+                    <div class="flex justify-center md:justify-start space-x-4 text-2xl">
+                        <a href="https://facebook.com/ntamodelss" target="_blank" class="hover:text-gray-400 transition-colors" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://instagram.com/ntamodelss" target="_blank" class="hover:text-gray-400 transition-colors" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://tiktok.com/@ntamodelssa" target="_blank" class="hover:text-gray-400 transition-colors" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <p class="mt-12 text-sm font-paragraph font-light text-center">
+                © 2025 NTA MODELS. All rights reserved. 
+                <span class="inline-block mt-2 md:mt-0 md:ml-2">
+                    Web Designs by <a href="https://webbytlotly.netlify.app/" target="_blank" class="text-white hover:text-gray-400 font-paragraph font-light">Tlotly</a>
+                </span>
+            </p>
+        </div>
+    </footer>
+
+
+    <script>
+        // --- Mobile Menu Toggle (Reused) ---
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const iconOpen = document.getElementById('menu-icon-open');
+        const iconClose = document.getElementById('menu-icon-close');
+        
+        function toggleMobileMenu() {
+            const isMenuOpen = mobileMenu.classList.toggle('open');
+            
+            iconOpen.classList.toggle('opacity-0', isMenuOpen);
+            iconClose.classList.toggle('opacity-0', !isMenuOpen);
+            iconClose.classList.toggle('opacity-100', isMenuOpen);
+
+            document.body.style.overflow = isMenuOpen ? 'hidden' : '';
+        }
+
+        menuToggle.addEventListener('click', toggleMobileMenu);
+
+        // --- Mobile Submenu Toggle (Reused) ---
+        function toggleMobileSubMenu(id) {
+            const submenu = document.getElementById(id);
+            submenu.classList.toggle('hidden');
+        }
+
+        // --- Gallery Filtering Logic FIX ---
+        function filterGallery(category) {
+            const cards = document.querySelectorAll('#gallery-container .model-card');
+            const buttons = document.querySelectorAll('.filter-button');
+
+            // 1. Update active button state
+            buttons.forEach(button => {
+                if (button.dataset.category === category) {
+                    button.classList.add('active');
+                } else {
+                    button.classList.remove('active');
+                }
+            });
+
+            // 2. Filter the cards
+            cards.forEach(card => {
+                // If category is 'all' OR the card has the category class
+                if (category === 'all' || card.classList.contains(category)) {
+                    // Show card
+                    card.classList.remove('hidden-card');
+                } else {
+                    // Hide card
+                    card.classList.add('hidden-card');
+                }
+            });
+        }
+        
+        // Initialize filtering to show ALL models when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+             filterGallery('all');
+        });
+
+    </script>
+</body>
+</html>
