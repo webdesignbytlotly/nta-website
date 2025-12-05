@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NTA MODELS - FAQs</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Ensuring Poppins font is loaded for consistency -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;700&family=Poppins:ital,wght@0,300;0,400;0,700&family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <script>
+        // Tailwind Configuration for Custom Fonts - Using Poppins exclusively
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'heading': ['Poppins', 'sans-serif'], 
+                        'paragraph': ['Poppins', 'sans-serif'],
+                        'serif': ['Poppins', 'serif'], 
+                    },
+                    colors: {
+                        'nta-black': '#000000',
+                        'nta-white': '#FFFFFF',
+                        'nta-red': '#E53E3E', 
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            /* Ensures Poppins is the default font for the entire body */
+            font-family: 'paragraph';
+            color: #000000;
+        }
+        #mobile-menu {
+            transition: transform 0.3s ease-in-out;
+            transform: translateX(100%);
+        }
+        #mobile-menu.open {
+            transform: translateX(0);
+        }
+        #desktop-header { z-index: 50; }
+        #mobile-menu { z-index: 40; }
+        .shadow-none { box-shadow: none !important; }
+        .rounded-none { border-radius: 0 !important; }
+        html { scroll-behavior: smooth; }
+        
+        /* Desktop Dropdown Styles */
+        .group:hover .dropdown-menu {
+            display: block;
+        }
+        .dropdown-menu {
+            display: none;
+            top: 100%; 
+            z-index: 30; 
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        /* Custom class for the answer transition - FIX APPLIED HERE */
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            /* Ensure all transitioning vertical properties are listed */
+            transition: max-height 0.4s ease-in-out, padding-top 0.4s ease-in-out, padding-bottom 0.4s ease-in-out;
+            padding-top: 0;
+            padding-bottom: 0; /* Ensures total collapse of the element */
+        }
+        .faq-answer.active {
+            max-height: 500px; /* Large enough value to contain content */
+            padding-top: 1rem; /* pt-4 equivalent */
+            padding-bottom: 1.25rem; /* pb-5 equivalent */
+        }
+    </style>
+</head>
+<body class="bg-nta-white font-light">
+
+    <!-- Header - Fixed Black Header -->
+    <header id="desktop-header" class="fixed top-0 left-0 w-full transition-colors duration-300 bg-black">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+            
+            <!-- Mobile Header Content -->
+            <div class="flex w-full justify-between items-center lg:hidden">
+                <div class="h-10">
+                    <img src="../assets/logo-header.png" alt="NTA Logo" class="h-full w-auto" 
+                         onerror="this.onerror=null;this.src='https://placehold.co/120x50/FFFFFF/000000?text=LOGO';" />
+                </div>
+                <button id="menu-toggle" class="text-white focus:outline-none p-2 relative z-50">
+                    <i id="menu-icon-open" class="fas fa-bars fa-lg transition-opacity duration-300"></i>
+                    <i id="menu-icon-close" class="fas fa-times fa-lg transition-opacity duration-300 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-0"></i>
+                </button>
+            </div>
+
+            <!-- Desktop Header Content -->
+            <div class="hidden lg:flex w-full items-center justify-between">
+                <div class="w-48 flex-shrink-0">
+                    <img src="../assets/logo-header.png" alt="NTA Logo" class="h-12 w-auto" 
+                         onerror="this.onerror=null;this.src='https://placehold.co/150x60/FFFFFF/000000?text=LOGO';" />
+                </div> 
+
+                <!-- Navigation Menu -->
+                <nav class="flex-grow flex justify-end">
+                    <ul class="flex space-x-6 text-white font-heading text-sm font-light uppercase">
+                        
+                        <!-- HOME Link -->
+                        <li><a href="index.html" class="p-2 rounded-none hover:bg-white/20 transition-colors">HOME</a></li>
+                        
+                        <!-- INFO Dropdown Menu -->
+                        <li class="relative group">
+                            <a href="#" class="p-2 rounded-none hover:bg-white/20 transition-colors">
+                                INFO
+                            </a>
+                            <!-- Dropdown Content -->
+                            <ul class="dropdown-menu absolute w-56 bg-black/80 shadow-lg text-white py-2">
+                                <li><a href="../about.html" class="block px-4 py-2 text-center hover:bg-white/10 transition-colors text-sm">ABOUT</a></li>
+                                <li><a href="policy.html" class="block px-4 py-2 text-center hover:bg-white/10 text-sm">POLICY</a></li>
+                                <li><a href="terms.html" class="block px-4 py-2 text-center hover:bg-white/10 text-sm">TERMS & CONDITIONS</a></li>
+                                <!-- FAQS Link is active/current page -->
+                                <li><a href="faqs.html" class="block px-4 py-2 text-center bg-white/20 text-sm">FAQS</a></li>
+                            </ul>
+                        </li>
+
+                        <!-- Remaining Scout Links -->
+                        <li><a href="scouted.html" class="p-2 rounded-none hover:bg-white/20 transition-colors">SCOUTED</a></li>
+                        <li><a href="getscouted.html" class="p-2 rounded-none hover:bg-white/20 transition-colors">GET SCOUTED</a></li>
+                        <li><a href="info-pack.html" class="p-2 rounded-none hover:bg-white/20 transition-colors">INFORMATION PACK</a></li>
+                        <li><a href="agencies.html" class="p-2 rounded-none hover:bg-white/20 transition-colors">ASSOCIATED AGENCIES</a></li>
+                        
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <!-- End Header -->
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="fixed top-0 left-0 w-full h-full bg-black/95 z-40 flex flex-col justify-start items-center text-white p-8 lg:hidden">
+        <nav class="flex flex-col space-y-4 text-xl font-heading text-center font-light w-full uppercase pt-16">
+            
+            <a href="index.html" class="p-2 hover:text-gray-400 transition-colors" onclick="toggleMobileMenu()">HOME</a>
+            
+            <button class="p-2 text-white hover:text-gray-400 transition-colors flex items-center justify-center" onclick="toggleMobileSubMenu('info-submenu')">
+                INFO
+            </button>
+            <div id="info-submenu" class="flex flex-col space-y-2 mt-2 text-lg hidden">
+                <a href="../about.html" class="p-1 hover:text-gray-400 transition-colors" onclick="toggleMobileMenu()">ABOUT</a>
+                <a href="policy.html" class="p-1 hover:text-gray-400 transition-colors" onclick="toggleMobileMenu()">POLICY</a>
+                <a href="terms.html" class="p-1 hover:text-gray-400 transition-colors" onclick="toggleMobileMenu()">TERMS & CONDITIONS</a>
+                <a href="faqs.html" class="p-1 text-gray-300 transition-colors" onclick="toggleMobileMenu()">FAQS</a> <!-- Highlighted active link -->
+            </div>
+
+            <a href="scouted.html" class="p-2 hover:text-gray-400 transition-colors" onclick="toggleMobileMenu()">SCOUTED</a>
+            <a href="getscouted.html" class="p-2 hover:text-gray-400 transition-colors" onclick="toggleMobileMenu()">GET SCOUTED</a>
+            <a href="info-pack.html" class="p-2 hover:text-gray-400 transition-colors" onclick="toggleMobileMenu()">INFORMATION PACK</a>
+            <a href="agencies.html" class="p-2 hover:text-gray-400 transition-colors" onclick="toggleMobileMenu()">ASSOCIATED AGENCIES</a>
+
+        </nav>
+    </div>
+    <!-- End Mobile Menu -->
+
+
+    <!-- Main Page Content - FAQs Section -->
+    <main class="min-h-screen bg-nta-white pt-24"> 
+        
+        <section class="container mx-auto px-4 py-12 lg:py-16">
+            
+            <!-- FAQs Title -->
+            <h1 class="font-paragraph font-bold text-5xl md:text-6xl text-nta-black mb-4 border-b border-gray-300 pb-4 text-left">
+                FREQUENTLY ASKED QUESTIONS
+            </h1>
+            
+            <!-- Introductory text -->
+            <p class="font-paragraph text-xl text-gray-700 mb-8 max-w-4xl text-left">
+                If your question is not listed below, you are welcome to direct your query to our team via email at 
+                <a href="mailto:info@ntamodels.co.za" class="text-nta-black hover:text-nta-red font-semibold transition-colors">info@ntamodels.co.za</a>.
+            </p>
+
+            <!-- FAQs Content Container (Accordion) -->
+            <div class="space-y-4 max-w-4xl mx-auto-0">
+
+                <!-- FAQ Item 1 -->
+                <div class="faq-item border border-gray-200 rounded-lg shadow-sm">
+                    <button class="flex justify-between items-center w-full text-left p-5 font-paragraph font-semibold text-lg md:text-xl text-nta-black hover:bg-gray-50 transition-colors" onclick="toggleAnswer('faq1')">
+                        <span>1. Is the NTA Models SA Scouting Division service truly free?</span>
+                        <i id="icon-faq1" class="fas fa-chevron-down transform transition-transform duration-300"></i>
+                    </button>
+                    <!-- FIX: Removed pb-5 from class list. Padding is now managed only by the .active state in CSS. -->
+                    <div id="faq1" class="faq-answer px-5 text-gray-700 leading-relaxed text-base md:text-lg">
+                        <p class="font-paragraph">Yes, the core scouting service is completely free! We are focused on finding and developing talent. If you were scouted directly by one of our agents and use their provided code, there is absolutely no charge to apply.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="faq-item border border-gray-200 rounded-lg shadow-sm">
+                    <button class="flex justify-between items-center w-full text-left p-5 font-paragraph font-semibold text-lg md:text-xl text-nta-black hover:bg-gray-50 transition-colors" onclick="toggleAnswer('faq2')">
+                        <span>2. What is the $1 administration fee for independent applicants?</span>
+                        <i id="icon-faq2" class="fas fa-chevron-down transform transition-transform duration-300"></i>
+                    </button>
+                    <!-- FIX: Removed pb-5 from class list. -->
+                    <div id="faq2" class="faq-answer px-5 text-gray-700 leading-relaxed text-base md:text-lg">
+                        <p class="font-paragraph">If you apply independently (without a scout code), a nominal $1 fee is charged. This is an administrative charge to process and securely store your application data. It helps us ensure that we are dedicating our time and resources to serious, committed candidates.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="faq-item border border-gray-200 rounded-lg shadow-sm">
+                    <button class="flex justify-between items-center w-full text-left p-5 font-paragraph font-semibold text-lg md:text-xl text-nta-black hover:bg-gray-50 transition-colors" onclick="toggleAnswer('faq3')">
+                        <span>3. What is the "Scout Code" and how do I get one?</span>
+                        <i id="icon-faq3" class="fas fa-chevron-down transform transition-transform duration-300"></i>
+                    </button>
+                    <!-- FIX: Removed pb-5 from class list. -->
+                    <div id="faq3" class="faq-answer px-5 text-gray-700 leading-relaxed text-base md:text-lg">
+                        <p class="font-paragraph">A Scout Code is a unique identifier provided to you by an official NTA Models scouting agent after they have approached you online or in person. This code exempts you from the $1 administration fee when submitting your application, confirming you are a direct discovery.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 4 -->
+                <div class="faq-item border border-gray-200 rounded-lg shadow-sm">
+                    <button class="flex justify-between items-center w-full text-left p-5 font-paragraph font-semibold text-lg md:text-xl text-nta-black hover:bg-gray-50 transition-colors" onclick="toggleAnswer('faq4')">
+                        <span>4. What happens after I submit my application?</span>
+                        <i id="icon-faq4" class="fas fa-chevron-down transform transition-transform duration-300"></i>
+                    </button>
+                    <!-- FIX: Removed pb-5 from class list. -->
+                    <div id="faq4" class="faq-answer px-5 text-gray-700 leading-relaxed text-base md:text-lg">
+                        <p class="font-paragraph">Your application is reviewed by our expert scouting team. If we see potential, we will contact you directly to discuss the next steps, which may include follow-up interviews, a portfolio shoot (if needed), and potential presentation to our network of associated agencies.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 5 -->
+                <div class="faq-item border border-gray-200 rounded-lg shadow-sm">
+                    <button class="flex justify-between items-center w-full text-left p-5 font-paragraph font-semibold text-lg md:text-xl text-nta-black hover:bg-gray-50 transition-colors" onclick="toggleAnswer('faq5')">
+                        <span>5. How long does the review process usually take?</span>
+                        <i id="icon-faq5" class="fas fa-chevron-down transform transition-transform duration-300"></i>
+                    </button>
+                    <!-- FIX: Removed pb-5 from class list. -->
+                    <div id="faq5" class="faq-answer px-5 text-gray-700 leading-relaxed text-base md:text-lg">
+                        <p class="font-paragraph">We aim to review all applications promptly. You should typically hear back from our team within 7 to 14 business days, especially if we are interested in moving forward. Please ensure your contact details are correct.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 6 -->
+                <div class="faq-item border border-gray-200 rounded-lg shadow-sm">
+                    <button class="flex justify-between items-center w-full text-left p-5 font-paragraph font-semibold text-lg md:text-xl text-nta-black hover:bg-gray-50 transition-colors" onclick="toggleAnswer('faq6')">
+                        <span>6. Do I need professional photos to apply?</span>
+                        <i id="icon-faq6" class="fas fa-chevron-down transform transition-transform duration-300"></i>
+                    </button>
+                    <!-- FIX: Removed pb-5 from class list. -->
+                    <div id="faq6" class="faq-answer px-5 text-gray-700 leading-relaxed text-base md:text-lg">
+                        <p class="font-paragraph">No. For the initial scouting phase, simple, clear, non-edited "digitals" or snapshots are preferred. We need to see your natural look—no heavy makeup, hats, or filters. If you are successful, we will advise on necessary professional imagery.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 7 -->
+                <div class="faq-item border border-gray-200 rounded-lg shadow-sm">
+                    <button class="flex justify-between items-center w-full text-left p-5 font-paragraph font-semibold text-lg md:text-xl text-nta-black hover:bg-gray-50 transition-colors" onclick="toggleAnswer('faq7')">
+                        <span>7. What is the commission structure if NTA Models successfully signs me?</span>
+                        <i id="icon-faq7" class="fas fa-chevron-down transform transition-transform duration-300"></i>
+                    </button>
+                    <!-- FIX: Removed pb-5 from class list. -->
+                    <div id="faq7" class="faq-answer px-5 text-gray-700 leading-relaxed text-base md:text-lg">
+                        <p class="font-paragraph">If we place you with an agency, you agree to pay NTA Models SA a **10% commission fee** from the first two successful bookings you receive with that agency. This is detailed in our Terms & Conditions and helps fund our continued talent scouting.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 8 -->
+                <div class="faq-item border border-gray-200 rounded-lg shadow-sm">
+                    <button class="flex justify-between items-center w-full text-left p-5 font-paragraph font-semibold text-lg md:text-xl text-nta-black hover:bg-gray-50 transition-colors" onclick="toggleAnswer('faq8')">
+                        <span>8. Can I apply if I am under 18 years old?</span>
+                        <i id="icon-faq8" class="fas fa-chevron-down transform transition-transform duration-300"></i>
+                    </button>
+                    <!-- FIX: Removed pb-5 from class list. -->
+                    <div id="faq8" class="faq-answer px-5 text-gray-700 leading-relaxed text-base md:text-lg">
+                        <p class="font-paragraph">Yes, you can apply if you are under 18, but you must have the explicit consent of a parent or legal guardian. If we contact you, all initial communications and contracting discussions will be held with your guardian.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 9 -->
+                <div class="faq-item border border-gray-200 rounded-lg shadow-sm">
+                    <button class="flex justify-between items-center w-full text-left p-5 font-paragraph font-semibold text-lg md:text-xl text-nta-black hover:bg-gray-50 transition-colors" onclick="toggleAnswer('faq9')">
+                        <span>9. Which regions or countries do you scout in?</span>
+                        <i id="icon-faq9" class="fas fa-chevron-down transform transition-transform duration-300"></i>
+                    </button>
+                    <!-- FIX: Removed pb-5 from class list. -->
+                    <div id="faq9" class="faq-answer px-5 text-gray-700 leading-relaxed text-base md:text-lg">
+                        <p class="font-paragraph">While our primary focus is in South Africa, we scout talent globally and work with associated agencies around the world. We look for models who are willing to travel and work internationally if the opportunity arises.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 10 -->
+                <div class="faq-item border border-gray-200 rounded-lg shadow-sm">
+                    <button class="flex justify-between items-center w-full text-left p-5 font-paragraph font-semibold text-lg md:text-xl text-nta-black hover:bg-gray-50 transition-colors" onclick="toggleAnswer('faq10')">
+                        <span>10. What kind of talent are you looking for?</span>
+                        <i id="icon-faq10" class="fas fa-chevron-down transform transition-transform duration-300"></i>
+                    </button>
+                    <!-- FIX: Removed pb-5 from class list. -->
+                    <div id="faq10" class="faq-answer px-5 text-gray-700 leading-relaxed text-base md:text-lg">
+                        <p class="font-paragraph">We are scouting for a diverse range of models, including commercial, fashion, plus-size, and specialized talent (e.g., fitness models, actors for commercials). We look for great potential, a professional attitude, and unique, striking looks.</p>
+                    </div>
+                </div>
+
+            </div>
+            
+        </section>
+        
+    </main>
+    <!-- End Main Page Content -->
+
+
+    <!-- Footer -->
+    <footer class="bg-nta-black text-white py-12">
+        <div class="container mx-auto px-4 flex flex-col items-center">
+            
+            <img src="../assets/logo-header.png" alt="NTA Models Logo" class="h-32 mb-10 rounded-none shadow-none" onerror="this.onerror=null;this.src='https://placehold.co/200x90/FFFFFF/000000?text=NTA+Logo';" />
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-y-10 md:gap-x-12 w-full max-w-4xl text-center md:text-left">
+                
+                <div>
+                    <ul class="space-y-2 text-lg">
+                        <li><a href="../join.html" class="hover:text-gray-400 font-heading font-bold transition-colors">ENROLL</a></li>
+                        <li><a href="index.html" class="hover:text-gray-400 font-heading font-bold transition-colors">HOME</a></li>
+                        <li><a href="../contact.html" class="hover:text-gray-400 font-heading font-bold transition-colors">CONTACT</a></li>
+                    </ul>
+                </div>
+
+                <div class="md:col-span-1">
+                    <h4 class="text-xl font-heading font-bold mb-4">OPERATING HOURS:</h4>
+                    <p class="text-base font-paragraph">
+                        Monday - Friday (09:00 - 17:30)<br>
+                        Saturday (09:00 - 13:00)<br>
+                        Sunday (closed)
+                    </p>
+                </div>
+
+                <div class="md:col-span-1">
+                    <h4 class="text-xl font-heading font-bold mb-4">FOLLOW US:</h4>
+                    <div class="flex justify-center md:justify-start space-x-4 text-2xl">
+                        <a href="https://facebook.com/ntamodelss" target="_blank" class="hover:text-gray-400 transition-colors" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://instagram.com/ntamodelss" target="_blank" class="hover:text-gray-400 transition-colors" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://tiktok.com/@ntamodelssa" target="_blank" class="hover:text-gray-400 transition-colors" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <p class="mt-12 text-sm font-paragraph font-light text-center">
+                © 2025 NTA MODELS. All rights reserved. 
+                <span class="inline-block mt-2 md:mt-0 md:ml-2">
+                    Web Designs by <a href="https://webbytlotly.netlify.app/" target="_blank" class="text-white hover:text-gray-400 font-paragraph font-light">Tlotly</a>
+                </span>
+            </p>
+        </div>
+    </footer>
+
+
+    <script>
+        // --- Mobile Menu Toggle ---
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const iconOpen = document.getElementById('menu-icon-open');
+        const iconClose = document.getElementById('menu-icon-close');
+        
+        function toggleMobileMenu() {
+            const isMenuOpen = mobileMenu.classList.toggle('open');
+            
+            iconOpen.classList.toggle('opacity-0', isMenuOpen);
+            iconClose.classList.toggle('opacity-0', !isMenuOpen);
+            iconClose.classList.toggle('opacity-100', isMenuOpen);
+
+            document.body.style.overflow = isMenuOpen ? 'hidden' : '';
+        }
+
+        menuToggle.addEventListener('click', toggleMobileMenu);
+
+        // --- Mobile Submenu Toggle ---
+        function toggleMobileSubMenu(id) {
+            const submenu = document.getElementById(id);
+            submenu.classList.toggle('hidden');
+        }
+        
+        // --- Accordion Logic for FAQs ---
+        function toggleAnswer(id) {
+            const answer = document.getElementById(id);
+            const icon = document.getElementById(`icon-${id}`);
+            
+            // Close all other active answers
+            document.querySelectorAll('.faq-answer.active').forEach(item => {
+                if (item.id !== id) {
+                    item.classList.remove('active');
+                    const otherIcon = document.getElementById(`icon-${item.id}`);
+                    if (otherIcon) {
+                         otherIcon.classList.remove('rotate-180');
+                    }
+                }
+            });
+
+            // Toggle the clicked answer and icon
+            answer.classList.toggle('active');
+            icon.classList.toggle('rotate-180', answer.classList.contains('active'));
+        }
+
+        // Hide mobile menu on link click (main links)
+        document.querySelectorAll('#mobile-menu > nav > a').forEach(link => {
+            link.addEventListener('click', toggleMobileMenu);
+        });
+
+        // Hide mobile menu on link click (submenu links)
+        document.querySelectorAll('#info-submenu a').forEach(link => {
+            link.addEventListener('click', toggleMobileMenu);
+        });
+
+    </script>
+</body>
+</html>
