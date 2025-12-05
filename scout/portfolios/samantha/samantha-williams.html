@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NTA MODELS - Samantha Williams</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,700&display=swap" rel="stylesheet">
+    
+    <script>
+        // Tailwind Configuration for Custom Fonts - Using Poppins exclusively
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'heading': ['Poppins', 'sans-serif'], 
+                        'paragraph': ['Poppins', 'sans-serif'],
+                        'serif': ['Poppins', 'sans-serif'], 
+                    },
+                    colors: {
+                        'nta-black': '#000000',
+                        'nta-white': '#FFFFFF',
+                        'nta-red': '#E53E3E', 
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            /* Ensures Poppins is the default font for the entire body */
+            font-family: 'paragraph';
+            color: #000000;
+        }
+        #mobile-menu {
+            transition: transform 0.3s ease-in-out;
+            transform: translateX(100%);
+        }
+        #mobile-menu.open {
+            transform: translateX(0);
+        }
+        #desktop-header { z-index: 50; }
+        #mobile-menu { z-index: 40; }
+        /* Ensuring no custom rounding or shadows as requested */
+        .shadow-none { box-shadow: none !important; }
+        .rounded-none { border-radius: 0 !important; }
+        html { scroll-behavior: smooth; }
+        
+        /* Desktop Dropdown Styles */
+        .group:hover .dropdown-menu {
+            display: block;
+        }
+        .dropdown-menu {
+            display: none;
+            top: 100%; 
+            z-index: 30; 
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        /* Portfolio Grid: Top 2 columns, then full-width content below (grid with col-span-2) */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 2rem;
+        }
+
+        /* Portfolio Tabs Styling */
+        .portfolio-tabs button {
+            transition: border-color 0.2s, color 0.2s;
+            /* Ensure Poppins, uppercase, and default font-light is used for non-active */
+            @apply font-paragraph uppercase font-light; 
+        }
+        .portfolio-tabs button.active {
+            @apply border-nta-black font-semibold text-nta-black;
+        }
+        .portfolio-tabs button:not(.active) {
+            @apply border-transparent text-gray-500 hover:border-gray-500 transition-colors;
+        }
+
+        /* Lightbox specific styling */
+        #lightbox-modal {
+            display: none; /* Controlled by JS to use hidden/flex */
+        }
+    </style>
+</head>
+<body class="bg-nta-white font-light">
+
+    <!-- Header - Fixed Black Header (Reused) -->
+    <header id="desktop-header" class="fixed top-0 left-0 w-full transition-colors duration-300 bg-black">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+            
+            <!-- Mobile Header Content -->
+            <div class="flex w-full justify-between items-center lg:hidden">
+                <div class="h-10">
+                    <img src="../../assets/logo-header.png" alt="NTA Logo" class="h-full w-auto" 
+                         onerror="this.onerror=null;this.src='https://placehold.co/120x50/FFFFFF/000000?text=LOGO';" />
+                </div>
+                <button id="menu-toggle" class="text-white focus:outline-none p-2 relative z-50">
+                    <i id="menu-icon-open" class="fas fa-bars fa-lg transition-opacity duration-300"></i>
+                    <i id="menu-icon-close" class="fas fa-times fa-lg transition-opacity duration-300 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-0"></i>
+                </button>
+            </div>
+
+            <!-- Desktop Header Content -->
+            <div class="hidden lg:flex w-full items-center justify-between">
+                <div class="w-48 flex-shrink-0">
+                    <img src="../../assets/logo-header.png" alt="NTA Logo" class="h-12 w-auto" 
+                         onerror="this.onerror=null;this.src='https://placehold.co/150x60/FFFFFF/000000?text=LOGO';" />
+                </div> 
+
+                <!-- Navigation Menu -->
+                <nav class="flex-grow flex justify-end">
+                    <ul class="flex space-x-6 text-white font-heading text-sm font-light uppercase">
+                        
+                        <!-- HOME Link -->
+                        <li><a href="../index.html" class="p-2 rounded-none hover:bg-white/20 transition-colors">HOME</a></li>
+                        
+                        <!-- INFO Dropdown Menu -->
+                        <li class="relative group">
+                            <a href="#" class="p-2 rounded-none hover:bg-white/20 transition-colors">
+                                INFO
+                            </a>
+                            <!-- Dropdown Content -->
+                            <ul class="dropdown-menu absolute w-56 bg-black/80 shadow-lg text-white py-2">
+                                <li><a href="../../about.html" class="block px-4 py-2 text-center hover:bg-white/10 transition-colors text-sm">ABOUT</a></li>
+                                <li><a href="../policy.html" class="block px-4 py-2 text-center hover:bg-white/10 text-sm">POLICY</a></li>
+                                <li><a href="../terms.html" class="block px-4 py-2 text-center hover:bg-white/10 text-sm">TERMS & CONDITIONS</a></li>
+                                <li><a href="../faqs.html" class="block px-4 py-2 text-center hover:bg-white/10 text-sm">FAQS</a></li>
+                            </ul>
+                        </li>
+
+                        <!-- Remaining Scout Links - Scouted is active -->
+                        <li><a href="../scouted.html" class="p-2 rounded-none bg-white/20 transition-colors">SCOUTED</a></li>
+                        <li><a href="../getscouted.html" class="p-2 rounded-none hover:bg-white/20 transition-colors">GET SCOUTED</a></li>
+                        <li><a href="../info-pack.html" class="p-2 rounded-none hover:bg-white/20 transition-colors">INFORMATION PACK</a></li>
+                        <li><a href="../agencies.html" class="p-2 rounded-none hover:bg-white/20 transition-colors">ASSOCIATED AGENCIES</a></li>
+                        
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <!-- End Header -->
+
+    <!-- Mobile Menu Overlay (Reused) -->
+    <div id="mobile-menu" class="fixed top-0 left-0 w-full h-full bg-black/95 z-40 flex flex-col justify-start items-center text-white p-8 lg:hidden">
+        <nav class="flex flex-col space-y-4 text-xl font-heading text-center font-light w-full uppercase pt-16">
+            
+            <a href="../index.html" class="p-2 hover:text-gray-400 transition-colors" onclick="toggleMobileMenu()">HOME</a>
+            
+            <button class="p-2 text-white hover:text-gray-400 transition-colors flex items-center justify-center" onclick="toggleMobileSubMenu('info-submenu')">
+                INFO
+            </button>
+            <div id="info-submenu" class="flex flex-col space-y-2 mt-2 text-lg hidden">
+                <a href="../../about.html" class="p-1 hover:text-gray-400 transition-colors" onclick="toggleMobileMenu()">ABOUT</a>
+                <a href="../policy.html" class="p-1 hover:text-gray-400 transition-colors" onclick="toggleMobileMenu()">POLICY</a>
+                <a href="../terms.html" class="p-1 hover:text-gray-400 transition-colors" onclick="toggleMobileMenu()">TERMS & CONDITIONS</a>
+                <a href="../faqs.html" class="p-1 hover:text-gray-400 transition-colors" onclick="toggleMobileMenu()">FAQS</a>
+            </div>
+
+            <a href="../scouted.html" class="p-2 text-gray-300 transition-colors" onclick="toggleMobileMenu()">SCOUTED</a> 
+            <a href="../getscouted.html" class="p-2 hover:text-gray-400 transition-colors" onclick="toggleMobileMenu()">GET SCOUTED</a>
+            <a href="../info-pack.html" class="p-2 hover:text-gray-400 transition-colors" onclick="toggleMobileMenu()">INFORMATION PACK</a>
+            <a href="../agencies.html" class="p-2 hover:text-gray-400 transition-colors" onclick="toggleMobileMenu()">ASSOCIATED AGENCIES</a>
+
+        </nav>
+    </div>
+    <!-- End Mobile Menu -->
+
+
+    <!-- Main Page Content - Model Portfolio Section -->
+    <main class="min-h-screen bg-nta-white pt-24"> 
+        
+        <section class="container mx-auto px-4 py-12 lg:py-16">
+            
+            <!-- Portfolio Grid Container -->
+            <div class="portfolio-grid max-w-5xl mx-auto">
+                
+                <!-- COLUMN 1: Model Details and Measurements (Centered) -->
+                <div class="flex flex-col items-center justify-start py-4">
+                    <div class="text-center font-paragraph font-light text-lg space-y-2 w-full">
+                        
+                        <!-- Model Name (Capital, Thin) with Back Button -->
+                        <h1 class="text-4xl font-light mb-8 tracking-widest uppercase relative">
+                            <a href=".../scouted.html" class="absolute left-0 top-1/2 -translate-y-1/2 text-2xl hover:text-gray-500 transition-colors" aria-label="Go Back to Scouted Gallery">
+                                <i class="fas fa-arrow-left"></i>
+                            </a>
+                            SAMANTHA 
+                        </h1> 
+                        
+                        <!-- Measurements List (Labels BOLDED and in CAPS) -->
+                        <div class="space-y-2">
+                            <!-- Measurement Labels BOLDED and in CAPS, Values NOT bolded -->
+                            <p><span class="font-bold uppercase">HEIGHT</span>: 173cm</p>
+                            <p><span class="font-bold uppercase">BUST</span>: 86cm</p>
+                            <p><span class="font-bold uppercase">WAIST</span>: 68cm</p>
+                            <p><span class="font-bold uppercase">HIPS</span>: 89cm</p>
+                            <p><span class="font-bold uppercase">SHOE</span>: 6 UK</p>
+                            <p><span class="font-bold uppercase">HAIR</span>: Brown</p>
+                            <p><span class="font-bold uppercase">EYES</span>: Brown</p>
+                        </div>
+                        
+                        <!-- Location/Age/Contact (Labels BOLDED and in CAPS, Contact value NOT bolded and lowercase) -->
+                        <div class="pt-8 space-y-1 text-base border-t border-gray-200 mt-8">
+                            <p><span class="font-bold uppercase">LOCATION</span>: Cape Town</p>
+                            <p><span class="font-bold uppercase">AGE</span>: 22</p>
+                            <!-- Email address in normal case, not bolded -->
+                            <p><span class="font-bold uppercase">CONTACT</span>: <a href="mailto:models@ntamodels.co.za" class="hover:underline font-light text-base">models@ntamodels.co.za</a></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- COLUMN 2: Profile Image (Centered) -->
+                <div class="flex flex-col items-center pt-4">
+                    <!-- Profile Image -->
+                    <div class="w-full max-w-sm">
+                        <img src="https://placehold.co/600x900/000000/FFFFFF?text=SAMANTHA+PROFILE" 
+                             alt="Samantha Williams Profile" 
+                             class="w-full h-auto aspect-[2/3] object-cover rounded-none shadow-none"
+                             onerror="this.onerror=null;this.src='https://placehold.co/600x900/F0F0F0/000000?text=PROFILE+IMAGE';"
+                             id="profile-img"
+                             onclick="openLightbox('profile-img')">
+                    </div>
+                </div>
+
+                <!-- FULL-WIDTH COLUMN: Tabs Navigation (Below Columns 1 & 2) -->
+                <div class="col-span-2 flex flex-col items-center pt-12">
+                    
+                    <!-- Tabs/Navigation -->
+                    <div class="portfolio-tabs flex justify-center space-x-4 md:space-x-8 text-base md:text-lg w-full max-w-lg border-b border-gray-300">
+                        <!-- Added classes directly to reinforce Poppins/uppercase -->
+                        <button class="px-2 py-2 md:px-3 border-b-2 active font-paragraph uppercase" data-tab="polaroids" onclick="showTab('polaroids')">Polaroids</button>
+                        <button class="px-2 py-2 md:px-3 border-b-2 font-paragraph uppercase" data-tab="portfolio" onclick="showTab('portfolio')">Portfolio</button>
+                        <button class="px-2 py-2 md:px-3 border-b-2 font-paragraph uppercase" data-tab="videos" onclick="showTab('videos')">Videos</button>
+                    </div>
+                    
+                </div>
+                
+                <!-- FULL-WIDTH COLUMN: Tab Content -->
+                
+                <!-- Polaroids Content (2 images per row always) -->
+                <div id="polaroids-content" class="tab-content col-span-2 grid grid-cols-2 gap-4 mt-8 max-w-5xl mx-auto">
+                    <div class="w-full aspect-[2/3] overflow-hidden cursor-pointer" onclick="openLightbox('polaroid_1')">
+                        <img id="polaroid_1" src="https://placehold.co/400x600/F0F0F0/000000?text=POLAROID+1" alt="Polaroid 1" class="w-full h-full object-cover rounded-none shadow-none">
+                    </div>
+                    <div class="w-full aspect-[2/3] overflow-hidden cursor-pointer" onclick="openLightbox('polaroid_2')">
+                        <img id="polaroid_2" src="https://placehold.co/400x600/F0F0F0/000000?text=POLAROID+2" alt="Polaroid 2" class="w-full h-full object-cover rounded-none shadow-none">
+                    </div>
+                    <div class="w-full aspect-[2/3] overflow-hidden cursor-pointer" onclick="openLightbox('polaroid_3')">
+                        <img id="polaroid_3" src="https://placehold.co/400x600/F0F0F0/000000?text=POLAROID+3" alt="Polaroid 3" class="w-full h-full object-cover rounded-none shadow-none">
+                    </div>
+                    <div class="w-full aspect-[2/3] overflow-hidden cursor-pointer" onclick="openLightbox('polaroid_4')">
+                        <img id="polaroid_4" src="https://placehold.co/400x600/F0F0F0/000000?text=POLAROID+4" alt="Polaroid 4" class="w-full h-full object-cover rounded-none shadow-none">
+                    </div>
+                </div>
+
+                <!-- Portfolio Content (3 images per row always) -->
+                <div id="portfolio-content" class="tab-content col-span-2 grid grid-cols-3 gap-6 mt-8 hidden max-w-5xl mx-auto">
+                    <div class="w-full aspect-square overflow-hidden cursor-pointer" onclick="openLightbox('portfolio_1')">
+                        <img id="portfolio_1" src="https://placehold.co/600x600/1C1C1C/FFFFFF?text=PORTFOLIO+1" alt="Portfolio Image 1" class="w-full h-full object-cover rounded-none shadow-none">
+                    </div>
+                    <div class="w-full aspect-square overflow-hidden cursor-pointer" onclick="openLightbox('portfolio_2')">
+                        <img id="portfolio_2" src="https://placehold.co/600x600/1C1C1C/FFFFFF?text=PORTFOLIO+2" alt="Portfolio Image 2" class="w-full h-full object-cover rounded-none shadow-none">
+                    </div>
+                    <div class="w-full aspect-square overflow-hidden cursor-pointer" onclick="openLightbox('portfolio_3')">
+                        <img id="portfolio_3" src="https://placehold.co/600x600/1C1C1C/FFFFFF?text=PORTFOLIO+3" alt="Portfolio Image 3" class="w-full h-full object-cover rounded-none shadow-none">
+                    </div>
+                    <div class="w-full aspect-square overflow-hidden cursor-pointer" onclick="openLightbox('portfolio_4')">
+                        <img id="portfolio_4" src="https://placehold.co/600x600/1C1C1C/FFFFFF?text=PORTFOLIO+4" alt="Portfolio Image 4" class="w-full h-full object-cover rounded-none shadow-none">
+                    </div>
+                    <div class="w-full aspect-square overflow-hidden cursor-pointer" onclick="openLightbox('portfolio_5')">
+                        <img id="portfolio_5" src="https://placehold.co/600x600/1C1C1C/FFFFFF?text=PORTFOLIO+5" alt="Portfolio Image 5" class="w-full h-full object-cover rounded-none shadow-none">
+                    </div>
+                    <div class="w-full aspect-square overflow-hidden cursor-pointer" onclick="openLightbox('portfolio_6')">
+                        <img id="portfolio_6" src="https://placehold.co/600x600/1C1C1C/FFFFFF?text=PORTFOLIO+6" alt="Portfolio Image 6" class="w-full h-full object-cover rounded-none shadow-none">
+                    </div>
+                </div>
+
+                <!-- Videos Content (1 on mobile, 2 on desktop) -->
+                <div id="videos-content" class="tab-content col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6 mt-8 hidden max-w-5xl mx-auto">
+                    <div class="w-full aspect-video">
+                        <iframe class="w-full h-full rounded-none shadow-none" src="https://www.youtube.com/embed/dQw4w9WgXcQ?controls=1" title="Video 1" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="w-full aspect-video">
+                        <iframe class="w-full h-full rounded-none shadow-none" src="https://www.youtube.com/embed/tgbNymZ7vqY?controls=1" title="Video 2" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                </div>
+                
+            </div>
+            
+        </section>
+        
+    </main>
+    <!-- End Main Page Content -->
+
+    <!-- Lightbox Modal Overlay (Fullscreen Image Viewer) -->
+    <div id="lightbox-modal" class="fixed inset-0 bg-black/90 hidden items-center justify-center z-[100] p-4" onclick="closeLightbox(event)">
+        <div class="relative max-w-5xl max-h-full">
+            <!-- Close Button -->
+            <button class="absolute top-4 right-4 text-white text-3xl z-[101] p-2 bg-black/50 rounded-full hover:bg-black/70 transition-colors" onclick="closeLightbox(event)" aria-label="Close Image">
+                <i class="fas fa-times"></i>
+            </button>
+            <!-- Image Container -->
+            <img id="lightbox-image" src="" alt="Full Screen Model Image" class="max-w-full max-h-[90vh] object-contain rounded-none shadow-none" />
+        </div>
+    </div>
+
+
+    <!-- Footer (Reused) -->
+    <footer class="bg-nta-black text-white py-12 mt-10">
+        <div class="container mx-auto px-4 flex flex-col items-center">
+            
+            <img src="../../assets/logo-header.png" alt="NTA Models Logo" class="h-32 mb-10 rounded-none shadow-none" onerror="this.onerror=null;this.src='https://placehold.co/200x90/FFFFFF/000000?text=NTA+Logo';" />
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-y-10 md:gap-x-12 w-full max-w-4xl text-center md:text-left">
+                
+                <div>
+                    <ul class="space-y-2 text-lg">
+                        <li><a href="../../join.html" class="hover:text-gray-400 font-heading font-bold transition-colors">ENROLL</a></li>
+                        <li><a href="../index.html" class="hover:text-gray-400 font-heading font-bold transition-colors">HOME</a></li>
+                        <li><a href="../../contact.html" class="hover:text-gray-400 font-heading font-bold transition-colors">CONTACT</a></li>
+                    </ul>
+                </div>
+
+                <div class="md:col-span-1">
+                    <h4 class="text-xl font-heading font-bold mb-4">OPERATING HOURS:</h4>
+                    <p class="text-base font-paragraph">
+                        Monday - Friday (09:00 - 17:30)<br>
+                        Saturday (09:00 - 13:00)<br>
+                        Sunday (closed)
+                    </p>
+                </div>
+
+                <div class="md:col-span-1">
+                    <h4 class="text-xl font-heading font-bold mb-4">FOLLOW US:</h4>
+                    <div class="flex justify-center md:justify-start space-x-4 text-2xl">
+                        <a href="https://facebook.com/ntamodelss" target="_blank" class="hover:text-gray-400 transition-colors" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://instagram.com/ntamodelss" target="_blank" class="hover:text-gray-400 transition-colors" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://tiktok.com/@ntamodelssa" target="_blank" class="hover:text-gray-400 transition-colors" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <p class="mt-12 text-sm font-paragraph font-light text-center">
+                © 2025 NTA MODELS. All rights reserved. 
+                <span class="inline-block mt-2 md:mt-0 md:ml-2">
+                    Web Designs by <a href="https://webbytlotly.netlify.app/" target="_blank" class="text-white hover:text-gray-400 font-paragraph font-light">Tlotly</a>
+                </span>
+            </p>
+        </div>
+    </footer>
+
+
+    <script>
+        // --- Mobile Menu Toggle (Reused) ---
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const iconOpen = document.getElementById('menu-icon-open');
+        const iconClose = document.getElementById('menu-icon-close');
+        
+        function toggleMobileMenu() {
+            const isMenuOpen = mobileMenu.classList.toggle('open');
+            
+            iconOpen.classList.toggle('opacity-0', isMenuOpen);
+            iconClose.classList.toggle('opacity-0', !isMenuOpen);
+            iconClose.classList.toggle('opacity-100', isMenuOpen);
+
+            document.body.style.overflow = isMenuOpen ? 'hidden' : '';
+        }
+
+        menuToggle.addEventListener('click', toggleMobileMenu);
+
+        // --- Mobile Submenu Toggle (Reused) ---
+        function toggleMobileSubMenu(id) {
+            const submenu = document.getElementById(id);
+            submenu.classList.toggle('hidden');
+        }
+
+
+        // --- Tab Switching Logic ---
+        function showTab(tabName) {
+            // Hide all tab content
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+            // Show the selected tab content
+            const selectedContent = document.getElementById(`${tabName}-content`);
+            if (selectedContent) {
+                selectedContent.classList.remove('hidden');
+            }
+
+            // Deactivate all buttons
+            document.querySelectorAll('.portfolio-tabs button').forEach(button => {
+                button.classList.remove('active');
+            });
+            // Activate the selected button
+            const selectedButton = document.querySelector(`.portfolio-tabs button[data-tab="${tabName}"]`);
+            if (selectedButton) {
+                selectedButton.classList.add('active');
+            }
+        }
+
+        // --- Lightbox/Modal Logic ---
+        const lightbox = document.getElementById('lightbox-modal');
+        const lightboxImage = document.getElementById('lightbox-image');
+
+        function openLightbox(imageId) {
+            const imgElement = document.getElementById(imageId);
+            if (!imgElement) return;
+
+            lightboxImage.src = imgElement.src;
+            lightboxImage.alt = imgElement.alt;
+            lightbox.classList.remove('hidden');
+            lightbox.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox(event) {
+            // Check if the click was on the image itself, if so, do nothing (to allow navigation/focus)
+            if (event && event.target.id === 'lightbox-image') {
+                return;
+            }
+            
+            // Check if the click was inside the image container but not on the close button or backdrop
+            const imageContainer = lightbox.querySelector('div');
+            if (event && imageContainer.contains(event.target) && !event.target.closest('button') && event.target.id !== 'lightbox-modal') {
+                return;
+            }
+
+            // Actual closing logic (runs if click was on close button or backdrop)
+            lightbox.classList.add('hidden');
+            lightbox.classList.remove('flex');
+            lightboxImage.src = '';
+            lightboxImage.alt = '';
+            document.body.style.overflow = '';
+        }
+
+        // Initial tab setup
+        document.addEventListener('DOMContentLoaded', () => {
+            showTab('polaroids'); // Default to show Polaroids tab
+        });
+
+    </script>
+</body>
+</html>
