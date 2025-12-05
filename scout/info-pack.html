@@ -9,10 +9,10 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,600;0,700&display=swap" rel="stylesheet">
     
     <script>
-        // Tailwind Configuration for Custom Fonts - Using Poppins exclusively
+        // Tailwind Configuration for Custom Fonts - Poppins is defined here
         tailwind.config = {
             theme: {
                 extend: {
@@ -24,7 +24,6 @@
                     colors: {
                         'nta-black': '#000000',
                         'nta-white': '#FFFFFF',
-                        'nta-red': '#E53E3E', 
                     }
                 }
             }
@@ -32,11 +31,13 @@
     </script>
 
     <style>
-        /* Global body style ensures default text is Poppins */
-        body {
-            font-family: 'paragraph';
+        /* *** FONT OVERRIDE: Universal Poppins Application *** */
+        body, h1, h2, h3, h4, h5, h6, p, ul, ol, li, a {
+            font-family: 'Poppins', sans-serif !important; 
             color: #000000;
         }
+        
+        /* General Layout CSS */
         #mobile-menu {
             transition: transform 0.3s ease-in-out;
             transform: translateX(100%);
@@ -60,7 +61,12 @@
             left: 50%;
             transform: translateX(-50%);
         }
+        
         /* Specific styles for the Info Pack content */
+        .info-section h1 {
+            font-weight: 300;
+            text-align: left;
+        }
         .info-section h2 {
             font-size: 1.5rem; /* text-2xl */
             font-weight: 600; /* font-semibold */
@@ -69,21 +75,22 @@
             margin-bottom: 1rem; /* mb-4 */
             border-left: 4px solid #000000;
             padding-left: 0.75rem;
-            font-family: 'heading', sans-serif;
         }
         .info-section h3 {
             font-size: 1.25rem; /* text-xl */
             font-weight: 600; /* font-semibold */
             margin-top: 1.5rem; /* mt-6 */
             margin-bottom: 0.75rem; /* mb-3 */
-            color: #E53E3E; /* nta-red */
-            font-family: 'heading', sans-serif;
+            color: #000000;
         }
         .info-section p, .info-section li {
             font-size: 1rem;
             line-height: 1.75;
             color: #1a202c; /* near-black for body text */
-            font-family: 'paragraph', sans-serif;
+            text-align: left;
+        }
+        .info-section .text-center {
+            text-align: center; /* Override for specific elements like the introductory paragraph */
         }
     </style>
 </head>
@@ -110,12 +117,12 @@
                 </div> 
 
                 <nav class="flex-grow flex justify-end">
-                    <ul class="flex space-x-6 text-white font-heading text-sm font-light uppercase">
+                    <ul class="flex space-x-6 text-white text-sm font-light uppercase">
                         
                         <li><a href="index.html" class="p-2 rounded-none hover:bg-white/20 transition-colors">HOME</a></li>
                         
                         <li class="relative group">
-                            <a href="#" class="p-2 rounded-none bg-white/20 transition-colors">
+                            <a href="#" class="p-2 rounded-none hover:bg-white/20 transition-colors">
                                 INFO
                             </a>
                             <ul class="dropdown-menu absolute w-56 bg-black/80 shadow-lg text-white py-2">
@@ -128,7 +135,7 @@
 
                         <li><a href="scouted.html" class="p-2 rounded-none hover:bg-white/20 transition-colors">SCOUTED</a></li>
                         <li><a href="getscouted.html" class="p-2 rounded-none hover:bg-white/20 transition-colors">GET SCOUTED</a></li>
-                        <li><a href="info-pack.html" class="p-2 rounded-none bg-white/20 transition-colors">INFORMATION PACK</a></li>
+                        <li><a href="info-pack.html" class="p-2 rounded-none hover:bg-white/20 transition-colors">INFORMATION PACK</a></li>
                         <li><a href="agencies.html" class="p-2 rounded-none hover:bg-white/20 transition-colors">ASSOCIATED AGENCIES</a></li>
                         
                     </ul>
@@ -138,14 +145,14 @@
     </header>
     
     <div id="mobile-menu" class="fixed top-0 left-0 w-full h-full bg-black/95 z-40 flex flex-col justify-start items-center text-white p-8 lg:hidden">
-        <nav class="flex flex-col space-y-4 text-xl font-heading text-center font-light w-full uppercase pt-16">
+        <nav class="flex flex-col space-y-4 text-xl text-center font-light w-full uppercase pt-16">
             
             <a href="index.html" class="p-2 hover:text-gray-400 transition-colors" onclick="toggleMobileMenu()">HOME</a>
             
-            <button class="p-2 text-gray-300 transition-colors flex items-center justify-center" onclick="toggleMobileSubMenu('info-submenu')">
+            <button class="p-2 hover:text-gray-400 transition-colors flex items-center justify-center" onclick="toggleMobileSubMenu('info-submenu')">
                 INFO
             </button>
-            <div id="info-submenu" class="flex flex-col space-y-2 mt-2 text-lg">
+            <div id="info-submenu" class="flex flex-col space-y-2 mt-2 text-lg hidden">
                 <a href="../about.html" class="p-1 hover:text-gray-400 transition-colors" onclick="toggleMobileMenu()">ABOUT</a>
                 <a href="policy.html" class="p-1 hover:text-gray-400 transition-colors" onclick="toggleMobileMenu()">POLICY</a>
                 <a href="terms.html" class="p-1 hover:text-gray-400 transition-colors" onclick="toggleMobileMenu()">TERMS & CONDITIONS</a>
@@ -154,7 +161,7 @@
 
             <a href="scouted.html" class="p-2 hover:text-gray-400 transition-colors" onclick="toggleMobileMenu()">SCOUTED</a> 
             <a href="getscouted.html" class="p-2 hover:text-gray-400 transition-colors" onclick="toggleMobileMenu()">GET SCOUTED</a>
-            <a href="info-pack.html" class="p-2 text-gray-300 transition-colors" onclick="toggleMobileMenu()">INFORMATION PACK</a>
+            <a href="info-pack.html" class="p-2 hover:text-gray-400 transition-colors" onclick="toggleMobileMenu()">INFORMATION PACK</a>
             <a href="agencies.html" class="p-2 hover:text-gray-400 transition-colors" onclick="toggleMobileMenu()">ASSOCIATED AGENCIES</a>
 
         </nav>
@@ -166,11 +173,11 @@
             
             <div class="max-w-4xl mx-auto info-section">
                 
-                <h1 class="text-5xl md:text-6xl font-heading font-light mb-8 text-center tracking-widest uppercase border-b border-black pb-4">
+                <h1 class="text-5xl md:text-6xl font-light mb-8 text-left tracking-widest uppercase border-b border-black pb-4">
                     NTA MODELS SCOUTING INFORMATION PACK
                 </h1>
                 
-                <p class="text-center text-lg font-paragraph mb-12 max-w-3xl mx-auto">
+                <p class="text-left text-lg mb-12 max-w-3xl mx-auto">
                     This document is designed to explain, in simple language, how the NTA Models Scouting Division ("we", "our" or "the Scout") discovers and places new faces with modelling agencies. It is not a contract for signing - it is an information and terms document to help models and agencies understand how we operate and what to expect.
                 </p>
 
@@ -178,11 +185,11 @@
                 <p>
                     We find new models (faces), prepare them for agencies, and introduce them to reputable local and international modelling agencies.
                 </p>
-                <p class="font-semibold text-nta-red">
+                <p class="font-semibold text-black">
                     Our scouting service is free for models - there is no upfront fee. If a model signs with an agency because of our introduction and then completes paid work, we receive a 10% commission from the model's FIRST TWO (2) paid jobs resulting from that placement.
                 </p>
                 <p class="p-4 bg-gray-100 border-l-4 border-black mt-4">
-                    **Note on Submissions:** Unsolicited applications (those not scouted by an agent) incur a mandatory **$1 Admin Fee** upon submission (paid via the Get Scouted form) to cover administrative processing costs. If you are formally scouted, this fee is waived.
+                    Note on Submissions: Unsolicited applications (those not scouted by an agent) incur a mandatory $1 Admin Fee upon submission (paid via the Get Scouted form) to cover administrative processing costs. If you are formally scouted, this fee is waived.
                 </p>
                 <p>
                     This document is for reading and understanding only - it does not require signing.
@@ -212,11 +219,11 @@
 
                 <h2>3. How the Scouting Process Works (Step-by-Step)</h2>
                 <ol class="list-decimal list-inside space-y-3 pl-4">
-                    <li>**Discovery:** We find potential models by social media, referrals, events or direct submissions. We look for potential and suitability for agencies (height, look, market fit, professionalism).</li>
-                    <li>**Initial Review:** We review submitted photos and basic details (age, location, measurements, experience). If a model looks promising, we advise on any simple fixes (lighting, clothing) and prepare a basic submission packet to send to agencies.</li>
-                    <li>**Introduction to Agencies:** We email or message the agency with the model's information and samples. We keep records of which agencies were contacted and when.</li>
-                    <li>**Follow Up & Placement:** If an agency expresses interest, they will usually request more material, a meeting, or invite the model to a casting. If the agency signs the model, the agency handles the contract and bookings.</li>
-                    <li>**Commission Tracking:** Once the model starts working, we track the first two paid jobs that came from the agency we introduced. We ask to be notified and to be paid the agreed commission.</li>
+                    <li>Discovery: We find potential models by social media, referrals, events or direct submissions. We look for potential and suitability for agencies (height, look, market fit, professionalism).</li>
+                    <li>Initial Review: We review submitted photos and basic details (age, location, measurements, experience). If a model looks promising, we advise on any simple fixes (lighting, clothing) and prepare a basic submission packet to send to agencies.</li>
+                    <li>Introduction to Agencies: We email or message the agency with the model's information and samples. We keep records of which agencies were contacted and when.</li>
+                    <li>Follow Up & Placement: If an agency expresses interest, they will usually request more material, a meeting, or invite the model to a casting. If the agency signs the model, the agency handles the contract and bookings.</li>
+                    <li>Commission Tracking: Once the model starts working, we track the first two paid jobs that came from the agency we introduced. We ask to be notified and to be paid the agreed commission.</li>
                 </ol>
 
                 <h2>4. For Models - What to Expect and Your Responsibilities</h2>
@@ -235,8 +242,8 @@
 
                 <h3>What You Must Do After Placement:</h3>
                 <ul class="list-disc list-inside space-y-2 pl-4">
-                    <li>**Tell us immediately** if you sign with an agency we introduced. This helps us track commission for the agreed first two paid jobs.</li>
-                    <li>If you receive money for a job that is part of the first two (after the agency signed you), pay the agreed 10% commission to us within **seven (7) days** of receiving your payment. If the agency pays us directly, we will receive the commission from them instead.</li>
+                    <li>Tell us immediately if you sign with an agency we introduced. This helps us track commission for the agreed first two paid jobs.</li>
+                    <li>If you receive money for a job that is part of the first two (after the agency signed you), pay the agreed 10% commission to us within seven (7) days of receiving your payment. If the agency pays us directly, we will receive the commission from them instead.</li>
                 </ul>
 
                 <h3>If You Change Agencies or Sign Independently:</h3>
@@ -249,42 +256,42 @@
                 
                 <h3>Commission Basics (Simple):</h3>
                 <ul class="list-disc list-inside space-y-2 pl-4">
-                    <li>**Commission Rate:** 10% of the model's gross pay from the **FIRST TWO** paid jobs that result from placements with an agency we introduced.</li>
-                    <li>**Currency:** Commission is calculated in United States Dollars (USD, \$). If the job pays in a different currency, we will convert to USD using the bank or payment processor exchange rate at the time of payment.</li>
+                    <li>Commission Rate: 10% of the model's gross pay from the FIRST TWO paid jobs that result from placements with an agency we introduced.</li>
+                    <li>Currency: Commission is calculated in United States Dollars (USD, $). If the job pays in a different currency, we will convert to USD using the bank or payment processor exchange rate at the time of payment.</li>
                 </ul>
 
                 <h3>How Payment Can Flow (Two Common Ways):</h3>
                 <ol class="list-decimal list-inside space-y-2 pl-4">
-                    <li>**Model Pays the Scout Directly:** The model receives the full payment from the job, then transfers the 10% commission to the Scout within 7 days.</li>
-                    <li>**Agency Deducts and Remits:** The agency withholds the Scout's 10% from the model's pay and pays us directly (agreed between agency & scout).</li>
+                    <li>Model Pays the Scout Directly: The model receives the full payment from the job, then transfers the 10% commission to the Scout within 7 days.</li>
+                    <li>Agency Deducts and Remits: The agency withholds the Scout's 10% from the model's pay and pays us directly (agreed between agency & scout).</li>
                 </ol>
                 
                 <h3>Examples (USD) Arithmetic Shown Clearly:</h3>
                 <p class="bg-gray-50 p-4 border rounded-lg space-y-2">
-                    **Example A: Job 1 pays $1,000.00**
+                    Example A: Job 1 pays $1,000.00
                     <br>
-                    10% of $1,000.00 = $1,000.00 x 0.10 = **$100.00** (Commission).
+                    10% of $1,000.00 = $1,000.00 x 0.10 = $100.00 (Commission).
                     <br>
-                    The model keeps $1,000.00 - $100.00 = **$900.00**.
+                    The model keeps $1,000.00 - $100.00 = $900.00.
                     <br><br>
-                    **Example B: Job 2 pays $500.00**
+                    Example B: Job 2 pays $500.00
                     <br>
-                    10% of $500.00 = $500.00 x 0.10 = **$50.00** (Commission).
+                    10% of $500.00 = $500.00 x 0.10 = $50.00 (Commission).
                     <br>
-                    The model keeps $500.00 - $50.00 = **$450.00**.
+                    The model keeps $500.00 - $50.00 = $450.00.
                     <br><br>
-                    **Combined for first two jobs:**
+                    Combined for first two jobs:
                     <br>
-                    Total commissions = $100.00 + $50.00 = **$150.00**.
+                    Total commissions = $100.00 + $50.00 = $150.00.
                     <br>
-                    Total kept by model = $900.00 + $450.00 = **$1,350.00**.
+                    Total kept by model = $900.00 + $450.00 = $1,350.00.
                 </p>
 
                 <h3>Important Payment Details:</h3>
                 <ul class="list-disc list-inside space-y-2 pl-4">
-                    <li>**Payment Deadline:** Commission should be paid to the Scout within **seven (7) days** of the model receiving their job payment unless the agency agreed to pay on behalf of the model.</li>
-                    <li>**Payment Methods:** We accept bank transfer (international bank details on request), PayPal, or other agreed payment processors. Please contact us at <a href="mailto:models@ntamodels.co.za" class="text-nta-red hover:underline font-semibold">models@ntamodels.co.za</a> to arrange the method.</li>
-                    <li>**Invoicing:** We will issue an invoice for the commission when requested. Agencies can also provide written confirmation of deduction if they handle the payment.</li>
+                    <li>Payment Deadline: Commission should be paid to the Scout within seven (7) days of the model receiving their job payment unless the agency agreed to pay on behalf of the model.</li>
+                    <li>Payment Methods: We accept bank transfer (international bank details on request), PayPal, or other agreed payment processors. Please contact us at <a href="mailto:models@ntamodels.co.za" class="text-black hover:underline font-semibold">models@ntamodels.co.za</a> to arrange the method.</li>
+                    <li>Invoicing: We will issue an invoice for the commission when requested. Agencies can also provide written confirmation of deduction if they handle the payment.</li>
                     <li>If there is a dispute about whether a job is one of the first two resulting from our introduction, we will ask for documentation (booking emails, payment receipts) and try to resolve it collaboratively.</li>
                 </ul>
 
@@ -325,7 +332,7 @@
                 <h3>How We Use Your Materials and Personal Data:</h3>
                 <ul class="list-disc list-inside space-y-2 pl-4">
                     <li>We use photos, videos and personal details only to introduce models to agencies and to promote them for placement opportunities. We do NOT sell your images or personal information to unrelated third parties.</li>
-                    <li>We retain contact details and submission materials for a reasonable time to track introductions and commissions. If you want your information removed, email us at <a href="mailto:models@ntamodels.co.za" class="text-nta-red hover:underline font-semibold">models@ntamodels.co.za</a> and we will delete it on request unless we need to keep records for commission or dispute reasons.</li>
+                    <li>We retain contact details and submission materials for a reasonable time to track introductions and commissions. If you want your information removed, email us at <a href="mailto:models@ntamodels.co.za" class="text-black hover:underline font-semibold">models@ntamodels.co.za</a> and we will delete it on request unless we need to keep records for commission or dispute reasons.</li>
                 </ul>
 
                 <h3>Consent & Under-18s:</h3>
@@ -351,37 +358,37 @@
                 
                 <h3>How We Prefer to Solve Disagreements:</h3>
                 <ul class="list-disc list-inside space-y-2 pl-4">
-                    <li>**Talk First:** If there is a payment or placement dispute, contact us at <a href="mailto:models@ntamodels.co.za" class="text-nta-red hover:underline font-semibold">models@ntamodels.co.za</a> with details and any receipts or emails.</li>
-                    <li>**Evidence:** Provide booking emails, agency confirmation or proof of payment so we can check our records.</li>
-                    <li>**Mediation:** If we cannot resolve the issue, we may suggest mediation or a neutral third-party to help.</li>
-                    <li>**Legal Steps:** As a last resort, matters can be taken to legal channels - this is rare and we prefer to resolve amicably.</li>
+                    <li>Talk First: If there is a payment or placement dispute, contact us at <a href="mailto:models@ntamodels.co.za" class="text-black hover:underline font-semibold">models@ntamodels.co.za</a> with details and any receipts or emails.</li>
+                    <li>Evidence: Provide booking emails, agency confirmation or proof of payment so we can check our records.</li>
+                    <li>Mediation: If we cannot resolve the issue, we may suggest mediation or a neutral third-party to help.</li>
+                    <li>Legal Steps: As a last resort, matters can be taken to legal channels - this is rare and we prefer to resolve amicably.</li>
                 </ul>
 
                 <h2>11. Frequently Asked Questions (Plain Language)</h2>
                 
                 <h3 class="text-black mt-4">Q: Do models have to pay anything to be scouted?</h3>
                 <p class="pl-4">
-                    **A:** No. Scouting and introductions are free. Commission only applies when a model is paid for work after being placed by an agency we introduced. Unsolicited applicants (non-scouted) are required to pay a **$1 Admin Fee** upon form submission to cover processing costs.
+                    A: No. Scouting and introductions are free. Commission only applies when a model is paid for work after being placed by an agency we introduced. Unsolicited applicants (non-scouted) are required to pay a $1 Admin Fee upon form submission to cover processing costs.
                 </p>
 
                 <h3 class="text-black mt-4">Q: Who enforces the commission?</h3>
                 <p class="pl-4">
-                    **A:** We keep records of introductions and will ask for confirmation when a model is signed. Most agencies cooperate. If payment is not made, we will follow the dispute steps above.
+                    A: We keep records of introductions and will ask for confirmation when a model is signed. Most agencies cooperate. If payment is not made, we will follow the dispute steps above.
                 </p>
                 
                 <h3 class="text-black mt-4">Q: Will my photos be shared publicly?</h3>
                 <p class="pl-4">
-                    **A:** We only share photos with agencies during the placement process. We do not publish or sell them without your consent. If you want them removed, contact us.
+                    A: We only share photos with agencies during the placement process. We do not publish or sell them without your consent. If you want them removed, contact us.
                 </p>
 
                 <h3 class="text-black mt-4">Q: How long does scouting take?</h3>
                 <p class="pl-4">
-                    **A:** Times vary. Some models are contacted by agencies within days; others may take weeks or months depending on fit and demand.
+                    A: Times vary. Some models are contacted by agencies within days; others may take weeks or months depending on fit and demand.
                 </p>
 
                 <h3 class="text-black mt-4">Q: What if a model is offered work but it's not through the agency?</h3>
                 <p class="pl-4">
-                    **A:** If work is not connected to the agency that signed the model through our introduction, the commission may or may not apply. We will review the situation case-by-case.
+                    A: If work is not connected to the agency that signed the model through our introduction, the commission may or may not apply. We will review the situation case-by-case.
                 </p>
 
                 <h2>12. How to Proceed - Quick Checklist & Sample Messages</h2>
@@ -389,7 +396,7 @@
                 <h3>If You Are a Model:</h3>
                 <ol class="list-decimal list-inside space-y-2 pl-4">
                     <li>Prepare 2-4 clear photos (headshot + full body).</li>
-                    <li>Send your full name, DOB, height, measurements, location, and contact details to <a href="mailto:models@ntamodels.co.za" class="text-nta-red hover:underline font-semibold">models@ntamodels.co.za</a> OR submit via the **Get Scouted** page (which requires the $1 Admin Fee if not scouted).</li>
+                    <li>Send your full name, DOB, height, measurements, location, and contact details to <a href="mailto:models@ntamodels.co.za" class="text-black hover:underline font-semibold">models@ntamodels.co.za</a> OR submit via the Get Scouted page (which requires the $1 Admin Fee if not scouted).</li>
                     <li>Tell us if you already have agency representation.</li>
                 </ol>
 
@@ -402,7 +409,7 @@
                 <div class="mt-12 p-6 bg-gray-100 border-t border-b border-black">
                     <h3 class="text-black text-center mb-4">Contact & Final Notes</h3>
                     <p class="text-center">
-                        If you have questions or need help: email **<a href="mailto:models@ntamodels.co.za" class="text-nta-red hover:underline font-semibold">models@ntamodels.co.za</a>** or call/WhatsApp **+27 78 009 3318**.
+                        If you have questions or need help: email <a href="mailto:models@ntamodels.co.za" class="text-black hover:underline font-semibold">models@ntamodels.co.za</a> or call/WhatsApp +27 78 009 3318.
                     </p>
                     <p class="text-center mt-4 text-sm">
                         This document was prepared by Tlotlisang Maile for NTA Models Scouting Division. It is intended to make our processes clear and easy to understand. We may update this document from time to time; the latest version will be posted at scout.ntamodels.co.za.
@@ -421,31 +428,31 @@
         
     </main>
     <footer class="bg-nta-black text-white py-12 mt-10">
-        <div class="container mx-auto px-4 flex flex-col items-center">
+        <div class="container mx-auto px-4 flex flex-col items-start md:items-center">
             
-            <img src="../assets/logo-header.png" alt="NTA Models Logo" class="h-32 mb-10 rounded-none shadow-none" onerror="this.onerror=null;this.src='https://placehold.co/200x90/FFFFFF/000000?text=NTA+Logo';" />
+            <img src="../assets/logo-header.png" alt="NTA Models Logo" class="h-32 mb-10 rounded-none shadow-none mx-auto" onerror="this.onerror=null;this.src='https://placehold.co/200x90/FFFFFF/000000?text=NTA+Logo';" />
             
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-y-10 md:gap-x-12 w-full max-w-4xl text-center md:text-left">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-y-10 md:gap-x-12 w-full max-w-4xl text-left mx-auto">
                 
-                <div>
+                <div class="text-center md:text-left mx-auto md:mx-0">
                     <ul class="space-y-2 text-lg">
-                        <li><a href="../join.html" class="hover:text-gray-400 font-heading font-bold transition-colors">ENROLL</a></li>
-                        <li><a href="../index.html" class="hover:text-gray-400 font-heading font-bold transition-colors">HOME</a></li>
-                        <li><a href="../contact.html" class="hover:text-gray-400 font-heading font-bold transition-colors">CONTACT</a></li>
+                        <li><a href="../join.html" class="hover:text-gray-400 font-bold transition-colors">ENROLL</a></li>
+                        <li><a href="../index.html" class="hover:text-gray-400 font-bold transition-colors">HOME</a></li>
+                        <li><a href="../contact.html" class="hover:text-gray-400 font-bold transition-colors">CONTACT</a></li>
                     </ul>
                 </div>
 
-                <div class="md:col-span-1">
-                    <h4 class="text-xl font-heading font-bold mb-4">OPERATING HOURS:</h4>
-                    <p class="text-base font-paragraph">
+                <div class="md:col-span-1 text-center md:text-left">
+                    <h4 class="text-xl font-bold mb-4">OPERATING HOURS:</h4>
+                    <p class="text-base">
                         Monday - Friday (09:00 - 17:30)<br>
                         Saturday (09:00 - 13:00)<br>
                         Sunday (closed)
                     </p>
                 </div>
 
-                <div class="md:col-span-1">
-                    <h4 class="text-xl font-heading font-bold mb-4">FOLLOW US:</h4>
+                <div class="md:col-span-1 text-center md:text-left">
+                    <h4 class="text-xl font-bold mb-4">FOLLOW US:</h4>
                     <div class="flex justify-center md:justify-start space-x-4 text-2xl">
                         <a href="https://facebook.com/ntamodelss" target="_blank" class="hover:text-gray-400 transition-colors" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
                         <a href="https://instagram.com/ntamodelss" target="_blank" class="hover:text-gray-400 transition-colors" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
@@ -454,10 +461,10 @@
                 </div>
             </div>
 
-            <p class="mt-12 text-sm font-paragraph font-light text-center">
+            <p class="mt-12 text-sm font-light text-center w-full">
                 © 2025 NTA MODELS. All rights reserved. 
                 <span class="inline-block mt-2 md:mt-0 md:ml-2">
-                    Web Designs by <a href="https://webbytlotly.netlify.app/" target="_blank" class="text-white hover:text-gray-400 font-paragraph font-light">Tlotly</a>
+                    Web Designs by <a href="https://webbytlotly.netlify.app/" target="_blank" class="text-white hover:text-gray-400 font-light">Tlotly</a>
                 </span>
             </p>
         </div>
