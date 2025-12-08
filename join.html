@@ -70,15 +70,15 @@
 
         .marquee-content {
             display: inline-block;
-            animation: marquee 30s linear infinite; 
-            padding-bottom: 5px; 
+            animation: marquee 30s linear infinite;  
+            padding-bottom: 5px;  
         }
 
         .marquee-item {
             display: inline-block;
-            width: 25vw; 
-            min-width: 150px; 
-            padding: 0 5px; 
+            width: 25vw;  
+            min-width: 150px;  
+            padding: 0 5px;  
             box-sizing: border-box;
         }
 
@@ -90,8 +90,8 @@
 
         @media (max-width: 640px) {
             .marquee-item {
-                width: 30vw; 
-                min-width: 80px; 
+                width: 30vw;  
+                min-width: 80px;  
             }
             .marquee-item img {
                 height: 80px; /* Smaller height for mobile */
@@ -100,7 +100,7 @@
 
         @keyframes marquee {
             0% { transform: translate3d(0, 0, 0); }
-            100% { transform: translate3d(-50%, 0, 0); } 
+            100% { transform: translate3d(-50%, 0, 0); }  
         }
         
         /* Custom scrollbar for T&C box */
@@ -114,13 +114,22 @@
 </head>
 <body class="bg-nta-white font-light">
 
+    <form name="enrollment" netlify hidden>
+        <input type="text" name="Full Name">
+        <input type="email" name="Email">
+        <input type="tel" name="Phone Number">
+        <input type="number" name="Age">
+        <input type="text" name="Location">
+        <select name="Selected Course"></select>
+        <input type="checkbox" name="Terms & Conditions Acceptance">
+    </form>
     <header id="desktop-header" class="fixed top-0 left-0 w-full transition-colors duration-300 bg-black">
         <div class="container mx-auto px-4 py-4 flex items-center justify-between">
             
             <div class="flex w-full justify-between items-center lg:hidden">
                 <div class="h-10">
                     <img src="assets/logo-header.png" alt="NTA Logo" class="h-full w-auto" 
-                                onerror="this.onerror=null;this.src='https://placehold.co/120x50/FFFFFF/000000?text=LOGO';" />
+                                 onerror="this.onerror=null;this.src='https://placehold.co/120x50/FFFFFF/000000?text=LOGO';" />
                 </div>
                 <button id="menu-toggle" class="text-white focus:outline-none p-2 relative z-50">
                     <i id="menu-icon-open" class="fas fa-bars fa-lg transition-opacity duration-300"></i>
@@ -131,7 +140,7 @@
             <div class="hidden lg:flex w-full items-center justify-between">
                 <div class="w-48 flex-shrink-0">
                     <img src="assets/logo-header.png" alt="NTA Logo" class="h-12 w-auto" 
-                                onerror="this.onerror=null;this.src='https://placehold.co/150x60/FFFFFF/000000?text=LOGO';" />
+                                 onerror="this.onerror=null;this.src='https://placehold.co/150x60/FFFFFF/000000?text=LOGO';" />
                 </div> 
 
                 <nav class="flex-grow flex justify-end">
@@ -189,7 +198,7 @@
                         </div>
                         
                         <p class="text-base font-paragraph mt-6 text-gray-700 font-bold">
-                            To finalize your application, a non-refundable 50% registration deposit of R105.00 is required upon submission.
+                            To finalize your application, a non-refundable 50% registration deposit of **R105.00** is required upon submission.
                         </p>
                         
                         <div class="w-full bg-white py-4 overflow-hidden rounded-none mt-8 border border-gray-100">
@@ -212,8 +221,7 @@
                         <h3 class="font-heading text-xl md:text-2xl font-bold mb-4 uppercase text-nta-black">
                             Enrollment Checkout Form
                         </h3>
-                        <form id="application-form" class="bg-white p-6" name="enrollment" method="POST" data-netlify="true" action="/join.html?redirect=payfast">
-                            
+                        <form id="application-form" class="bg-white p-6" name="enrollment-submit" method="POST" data-netlify="true" action="/join.html?redirect=payfast">
                             <input type="hidden" name="form-name" value="enrollment" />
 
                             <div class="mb-4">
@@ -375,7 +383,6 @@
 
         // --- APPLICATION AND PAYMENT LOGIC (REVISED) ---
 
-        // Note: YOUR_SITE_BASE_URL is now for client-side Payfast redirects only.
         const YOUR_SITE_BASE_URL = 'https://ntamodels.co.za'; 
 
         const messageBox = document.getElementById('message-box');
@@ -438,6 +445,8 @@
             if (redirectParam === 'payfast') {
                 // 1. Gather data from the form (We need it for Payfast fields)
                 // Note: Netlify has already successfully saved the form data at this point.
+                
+                // IMPORTANT: We need to recreate the FormData object from the form's current state.
                 const formData = new FormData(form);
                 const data = Object.fromEntries(formData.entries());
 
@@ -445,11 +454,11 @@
                 const payfastForm = document.getElementById('payfast-form');
                 
                 // Extract Name/Email for Payfast
-                const fullName = data['Full Name'].split(' ');
+                const fullName = (data['Full Name'] || '').split(' ');
                 const firstName = fullName[0] || '';
                 const lastName = fullName.slice(1).join(' ') || '';
 
-                // Generate a pseudo-reference ID (or better: a timestamp) to prevent duplicate transactions
+                // Generate a pseudo-reference ID (or better: a timestamp)
                 const transactionReference = 'NTA-' + Date.now();
 
                 // Populate Payfast form fields
@@ -460,15 +469,24 @@
                 // Use the reference ID for the custom data field
                 document.getElementById('pf-custom-data').value = transactionReference; 
 
-                // Set the success and cancel URLs. No need for a Notify URL anymore.
+                // Set the success and cancel URLs.
                 const currentUrlBase = YOUR_SITE_BASE_URL; // Use the absolute URL
                 document.getElementById('pf-return-url').value = currentUrlBase + '/join.html?pf_status=success';
                 document.getElementById('pf-cancel-url').value = currentUrlBase + '/join.html?pf_status=cancel';
 
-                // 3. Store the user data *temporarily* in session/local storage 
-                // to be displayed on the return page, as the form fields will be reset.
+                // 3. Store the user data *temporarily* in local storage 
                 localStorage.setItem('temp_application_data', JSON.stringify(data));
                 localStorage.setItem('temp_ref_id', transactionReference);
+                
+                // Optional: Show a brief message before redirect
+                const formContainer = document.getElementById('form-container');
+                formContainer.innerHTML = `
+                    <h1 class="font-heading text-2xl md:text-3xl uppercase font-bold text-nta-black mb-2">Redirecting to Payment...</h1>
+                    <p class="font-serif text-4xl md:text-5xl font-normal text-gray-800 mb-6">Securing Deposit</p>
+                    <div class="p-4 mb-6 rounded-none font-bold text-white bg-blue-600 shadow-none">
+                        Please wait while we redirect you to the **Payfast** secure payment gateway to complete the R105.00 deposit.
+                    </div>
+                `;
 
                 // 4. Submit the hidden Payfast form (This redirects the user)
                 payfastForm.submit();
@@ -511,7 +529,7 @@
 
             } else if (status === 'cancel') {
                 // Payment Failure/Cancel: Show error as requested
-                showMessage("❌ Payment Failed or Cancelled. Your application was not completed, and your enrollment was not finalized.", 'error');
+                showMessage("❌ Payment Failed or Cancelled. Your application was not completed, and your enrollment was not finalized. Please try again.", 'error');
                 
                 // Reset button state
                 submitButton.disabled = false;
@@ -533,6 +551,4 @@
 </body>
 
 </html>
-
-
 
