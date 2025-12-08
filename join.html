@@ -1,537 +1,1069 @@
-
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NTA MODELS - Enroll</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:ital,wght@0,300;0,400;0,700&family=Red+Hat+Display:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <script>
-        // Tailwind Configuration for Custom Fonts
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        'heading': ['"Red Hat Display"', 'sans-serif'],
-                        'paragraph': ['Poppins', 'sans-serif'],
-                        'serif': ['"Playfair Display"', 'serif'],
-                    },
-                    colors: {
-                        'nta-black': '#000000',
-                        'nta-white': '#FFFFFF',
-                        'nta-red': '#E53E3E',
-                    }
-                }
-            }
-        }
-    </script>
 
-    <style>
-        body {
-            font-family: 'paragraph';
-            color: #000000;
-        }
-        #mobile-menu {
-            transition: transform 0.3s ease-in-out;
-            transform: translateX(100%);
-        }
-        #mobile-menu.open {
-            transform: translateX(0);
-        }
-        #desktop-header { z-index: 50; }
-        #mobile-menu { z-index: 40; }
-        .shadow-none { box-shadow: none !important; }
-        .rounded-none { border-radius: 0 !important; }
-        .page-title-spacing { letter-spacing: 0.25em; }
-        html { scroll-behavior: smooth; }
-        
-        /* Input styling */
-        .form-input {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 0;
-            margin-top: 8px;
-            margin-bottom: 20px;
-            font-family: 'paragraph';
-        }
+    <meta charset="UTF-8">
 
-        /* MARQUEE CSS */
-        .marquee-container {
-            overflow: hidden;
-            white-space: nowrap;
-            width: 100%;
-        }
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        .marquee-content {
-            display: inline-block;
-            animation: marquee 30s linear infinite; 
-            padding-bottom: 5px; 
-        }
+    <title>NTA MODELS - Enroll</title>
 
-        .marquee-item {
-            display: inline-block;
-            width: 25vw; 
-            min-width: 150px; 
-            padding: 0 5px; 
-            box-sizing: border-box;
-        }
+    <script src="https://cdn.tailwindcss.com"></script>
 
-        .marquee-item img {
-            width: 100%;
-            height: 120px; /* Smaller height for desktop */
-            object-fit: cover;
-        }
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-        @media (max-width: 640px) {
-            .marquee-item {
-                width: 30vw; 
-                min-width: 80px; 
-            }
-            .marquee-item img {
-                height: 80px; /* Smaller height for mobile */
-            }
-        }
+    
 
-        @keyframes marquee {
-            0% { transform: translate3d(0, 0, 0); }
-            100% { transform: translate3d(-50%, 0, 0); } 
-        }
-        
-        /* Custom scrollbar for T&C box */
-        .terms-box {
-            max-height: 300px;
-            overflow-y: auto;
-            border: 1px solid #e0e0e0;
-            background-color: #f9f9f9;
-        }
-    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:ital,wght@0,300;0,400;0,700&family=Red+Hat+Display:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    
+
+    <script>
+
+        // Tailwind Configuration for Custom Fonts
+
+        tailwind.config = {
+
+            theme: {
+
+                extend: {
+
+                    fontFamily: {
+
+                        'heading': ['"Red Hat Display"', 'sans-serif'],
+
+                        'paragraph': ['Poppins', 'sans-serif'],
+
+                        'serif': ['"Playfair Display"', 'serif'],
+
+                    },
+
+                    colors: {
+
+                        'nta-black': '#000000',
+
+                        'nta-white': '#FFFFFF',
+
+                        'nta-red': '#E53E3E',
+
+                    }
+
+                }
+
+            }
+
+        }
+
+    </script>
+
+
+
+    <style>
+
+        body {
+
+            font-family: 'paragraph';
+
+            color: #000000;
+
+        }
+
+        #mobile-menu {
+
+            transition: transform 0.3s ease-in-out;
+
+            transform: translateX(100%);
+
+        }
+
+        #mobile-menu.open {
+
+            transform: translateX(0);
+
+        }
+
+        #desktop-header { z-index: 50; }
+
+        #mobile-menu { z-index: 40; }
+
+        .shadow-none { box-shadow: none !important; }
+
+        .rounded-none { border-radius: 0 !important; }
+
+        .page-title-spacing { letter-spacing: 0.25em; }
+
+        html { scroll-behavior: smooth; }
+
+        
+
+        /* Input styling */
+
+        .form-input {
+
+            width: 100%;
+
+            padding: 10px;
+
+            border: 1px solid #ccc;
+
+            border-radius: 0;
+
+            margin-top: 8px;
+
+            margin-bottom: 20px;
+
+            font-family: 'paragraph';
+
+        }
+
+
+
+        /* MARQUEE CSS */
+
+        .marquee-container {
+
+            overflow: hidden;
+
+            white-space: nowrap;
+
+            width: 100%;
+
+        }
+
+
+
+        .marquee-content {
+
+            display: inline-block;
+
+            animation: marquee 30s linear infinite; 
+
+            padding-bottom: 5px; 
+
+        }
+
+
+
+        .marquee-item {
+
+            display: inline-block;
+
+            width: 25vw; 
+
+            min-width: 150px; 
+
+            padding: 0 5px; 
+
+            box-sizing: border-box;
+
+        }
+
+
+
+        .marquee-item img {
+
+            width: 100%;
+
+            height: 120px; /* Smaller height for desktop */
+
+            object-fit: cover;
+
+        }
+
+
+
+        @media (max-width: 640px) {
+
+            .marquee-item {
+
+                width: 30vw; 
+
+                min-width: 80px; 
+
+            }
+
+            .marquee-item img {
+
+                height: 80px; /* Smaller height for mobile */
+
+            }
+
+        }
+
+
+
+        @keyframes marquee {
+
+            0% { transform: translate3d(0, 0, 0); }
+
+            100% { transform: translate3d(-50%, 0, 0); } 
+
+        }
+
+        
+
+        /* Custom scrollbar for T&C box */
+
+        .terms-box {
+
+            max-height: 300px;
+
+            overflow-y: auto;
+
+            border: 1px solid #e0e0e0;
+
+            background-color: #f9f9f9;
+
+        }
+
+    </style>
+
 </head>
+
 <body class="bg-nta-white font-light">
 
-    <header id="desktop-header" class="fixed top-0 left-0 w-full transition-colors duration-300 bg-black">
-        <div class="container mx-auto px-4 py-4 flex items-center justify-between">
-            
-            <div class="flex w-full justify-between items-center lg:hidden">
-                <div class="h-10">
-                    <img src="assets/logo-header.png" alt="NTA Logo" class="h-full w-auto" 
-                                onerror="this.onerror=null;this.src='https://placehold.co/120x50/FFFFFF/000000?text=LOGO';" />
-                </div>
-                <button id="menu-toggle" class="text-white focus:outline-none p-2 relative z-50">
-                    <i id="menu-icon-open" class="fas fa-bars fa-lg transition-opacity duration-300"></i>
-                    <i id="menu-icon-close" class="fas fa-times fa-lg transition-opacity duration-300 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-0"></i>
-                </button>
-            </div>
-
-            <div class="hidden lg:flex w-full items-center justify-between">
-                <div class="w-48 flex-shrink-0">
-                    <img src="assets/logo-header.png" alt="NTA Logo" class="h-12 w-auto" 
-                                onerror="this.onerror=null;this.src='https://placehold.co/150x60/FFFFFF/000000?text=LOGO';" />
-                </div> 
-
-                <nav class="flex-grow flex justify-end">
-                    <ul class="flex space-x-8 text-white font-heading text-lg font-light">
-                        <li><a href="index.html" class="p-2 rounded-none hover:bg-white/20 transition-colors">HOME</a></li>
-                        <li><a href="about.html" class="p-2 rounded-none hover:bg-white/20 transition-colors">ABOUT</a></li>
-                        <li><a href="courses.html" class="p-2 rounded-none hover:bg-white/20 transition-colors">COURSES</a></li>
-                        <li><a href="join.html" class="p-2 rounded-none transition-colors">ENROLL</a></li>
-                        <li><a href="scout/index.html" class="p-2 rounded-none hover:bg-white/20 transition-colors">SCOUTING</a></li>
-                        <li><a href="contact.html" class="p-2 rounded-none hover:bg-white/20 transition-colors">CONTACT</a></li>
-                        <li><a href="https://portal.ntamodels.co.za" target="_blank" class="p-2 rounded-none hover:bg-white/20 transition-colors">LOGIN</a></li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
-    </header>
-    <div id="mobile-menu" class="fixed top-0 left-0 w-full h-full bg-black/95 z-40 flex flex-col justify-center items-center text-white p-8 lg:hidden">
-        <nav class="flex flex-col space-y-4 text-xl font-heading text-center font-light w-full">
-            <a href="index.html" class="p-2 hover:text-gray-400 transition-colors" onclick="toggleMobileMenu()">HOME</a>
-            <a href="about.html" class="p-2 hover:text-gray-400 transition-colors" onclick="toggleMobileMenu()">ABOUT</a>
-            <a href="courses.html" class="p-2 hover:text-gray-400 transition-colors" onclick="toggleMobileMenu()">COURSES</a>
-            <a href="join.html" class="p-2 hover:text-gray-400 transition-colors" onclick="toggleMobileMenu()">ENROLL</a>
-            <a href="scout/index.html" class="p-2 hover:text-gray-400 transition-colors" onclick="toggleMobileMenu()">SCOUTING</a>
-            <a href="contact.html" class="p-2 hover:text-gray-400 transition-colors" onclick="toggleMobileMenu()">CONTACT</a>
-            <a href="https://portal.ntamodels.co.za" target="_blank" class="p-2 hover:text-gray-400 transition-colors" onclick="toggleMobileMenu()">LOGIN</a>
-        </nav>
-    </div>
-    
-    <main class="pt-24 lg:pt-32 min-h-screen bg-nta-white">
-        <div class="container mx-auto px-4 py-8 max-w-5xl">
-            <div id="form-container" class="p-4 md:p-8 lg:p-12">
-                
-                <h1 class="font-heading text-2xl md:text-3xl uppercase font-bold text-nta-black mb-2">
-                    NTA ACADEMY ENROLLMENT
-                </h1>
-                <h2 class="font-serif text-4xl md:text-5xl font-normal text-gray-800 mb-10">Start Your Journey</h2>
-                
-                <div id="message-box" class="hidden p-4 mb-6 rounded-none font-bold text-white shadow-none"></div>
-                
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
-                    
-                    <div class="bg-white p-6 lg:p-0">
-                        <h3 class="font-heading text-xl md:text-2xl font-bold mb-4 uppercase text-nta-black">
-                            Application Requirements
-                        </h3>
-                        <div class="p-6 bg-white border-l-4 border-nta-black rounded-none shadow-sm">
-                            <h4 class="font-heading text-lg font-bold mb-3 uppercase">General Guidelines</h4>
-                            <ul class="list-disc list-inside text-sm font-paragraph space-y-2 text-gray-700">
-                                <li>Ensure all personal details are accurate and current.</li>
-                                <li>A minimum age of 13 is required to apply.</li>
-                                <li>You must successfully complete the R105.00 deposit via Payfast for your application to be processed.</li>
-                                <li>Failing to complete payment will result in the application not being submitted to NTA MODELS.</li>
-                                <li>We will contact you via email or phone within 7 business days of successful submission.</li>
-                            </ul>
-                        </div>
-                        
-                        <p class="text-base font-paragraph mt-6 text-gray-700 font-bold">
-                            To finalize your application, a non-refundable 50% registration deposit of R105.00 is required upon submission.
-                        </p>
-                        
-                        <div class="w-full bg-white py-4 overflow-hidden rounded-none mt-8 border border-gray-100">
-                            <div class="marquee-container">
-                                <div class="marquee-content">
-                                    <div class="marquee-item"><img src="assets/nta3.jpg" alt="NTA Model Photo" class="rounded-none shadow-none" onerror="this.onerror=null;this.src='https://placehold.co/400x120/5D5D5D/FFFFFF?text=Model+1';"></div>
-                                    <div class="marquee-item"><img src="assets/nta4.jpg" alt="NTA Model Photo" class="rounded-none shadow-none" onerror="this.onerror=null;this.src='https://placehold.co/400x120/7A7A7A/FFFFFF?text=Model+2';"></div>
-                                    <div class="marquee-item"><img src="assets/nta5.jpg" alt="NTA Model Photo" class="rounded-none shadow-none" onerror="this.onerror=null;this.src='https://placehold.co/400x120/9D9D9D/FFFFFF?text=Model+3';"></div>
-                                    <div class="marquee-item"><img src="assets/nta3.jpg" alt="NTA Model Photo" class="rounded-none shadow-none" onerror="this.onerror=null;this.src='https://placehold.co/400x120/B6B6B6/FFFFFF?text=Model+4';"></div>
-                                    <div class="marquee-item"><img src="assets/nta3.jpg" alt="NTA Model Photo" class="rounded-none shadow-none" onerror="this.onerror=null;this.src='https://placehold.co/400x120/5D5D5D/FFFFFF?text=Model+1';"></div>
-                                    <div class="marquee-item"><img src="assets/nta4.jpg" alt="NTA Model Photo" class="rounded-none shadow-none" onerror="this.onerror=null;this.src='https://placehold.co/400x120/7A7A7A/FFFFFF?text=Model+2';"></div>
-                                    <div class="marquee-item"><img src="assets/nta5.jpg" alt="NTA Model Photo" class="rounded-none shadow-none" onerror="this.onerror=null;this.src='https://placehold.co/400x120/9D9D9D/FFFFFF?text=Model+3';"></div>
-                                    <div class="marquee-item"><img src="assets/nta3.jpg" alt="NTA Model Photo" class="rounded-none shadow-none" onerror="this.onerror=null;this.src='https://placehold.co/400x120/B6B6B6/FFFFFF?text=Model+4';"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div>
-                        <h3 class="font-heading text-xl md:text-2xl font-bold mb-4 uppercase text-nta-black">
-                            Enrollment Checkout Form
-                        </h3>
-                        <form id="application-form" class="bg-white p-6" name="enrollment" method="POST" data-netlify="true" action="/join.html?redirect=payfast">
-                            
-                            <input type="hidden" name="form-name" value="enrollment" />
-
-                            <div class="mb-4">
-                                <label for="full_name" class="block text-sm font-bold text-gray-700 font-heading">Full Name and Surname</label>
-                                <input type="text" id="full_name" name="Full Name" class="form-input" required>
-                            </div>
-
-                            <div class="mb-4">
-                                <label for="email" class="block text-sm font-bold text-gray-700 font-heading">Email Address</label>
-                                <input type="email" id="email" name="Email" class="form-input" required>
-                            </div>
-                            
-                            <div class="mb-4">
-                                <label for="phone" class="block text-sm font-bold text-gray-700 font-heading">Phone Number</label>
-                                <input type="tel" id="phone" name="Phone Number" class="form-input" required>
-                            </div>
-
-                            <div class="mb-4">
-                                <label for="age" class="block text-sm font-bold text-gray-700 font-heading">Age</label>
-                                <input type="number" id="age" name="Age" class="form-input" required min="13">
-                            </div>
-                            
-                            <div class="mb-4">
-                                <label for="location" class="block text-sm font-bold text-gray-700 font-heading">Current City / Location</label>
-                                <input type="text" id="location" name="Location" class="form-input" required>
-                            </div>
-
-                            <div class="mb-6">
-                                <label for="course" class="block text-sm font-bold text-gray-700 font-heading">Select Course</label>
-                                <select id="course" name="Selected Course" class="form-input" required>
-                                    <option value="" disabled selected>Choose a program...</option>
-                                    <option value="PMDP (R5,000)">Development 101</option>
-                                    <option value="Catwalk Masterclass (R2,500)">3 Months Intensive Course</option>
-                                    <option value="Digital Pro Workshop (R1,500)">Digital Media & Personal Branding Workshop</option>
-                                </select>
-                            </div>
-                            
-                            <h4 class="font-heading text-base font-bold mb-3 uppercase text-nta-black mt-6">
-                                Terms & Conditions of Enrollment
-                            </h4>
-                            <div class="terms-box p-4 mb-6">
-                                <ol class="list-decimal list-inside text-sm font-paragraph space-y-3 text-gray-700">
-                                    <li>Deposit Policy: The R105.00 registration deposit is non-refundable, regardless of the application outcome or subsequent withdrawal from the program.</li>
-                                    <li>Age Requirement: All applicants must be 13 years of age or older at the time of submission. NTA MODELS reserves the right to request proof of age.</li>
-                                    <li>Application Processing: Applications are officially processed only upon successful completion of the R105.00 deposit via Payfast. Incomplete applications will be automatically discarded after 30 days.</li>
-                                    <li>Course Fees: The paid deposit is credited against the total course fee. The remaining balance is strictly due on or before the first day of the selected program commencement.</li>
-                                    <li>Data Privacy: NTA MODELS will use the personal data provided solely for the purpose of enrollment, communication, and internal marketing, in accordance with applicable privacy laws.</li>
-                                    <li>Model Release: By submitting this application, you acknowledge that NTA MODELS may request and utilize images or likeness (provided later in the process) exclusively for promotional material related to the course or agency scouting.</li>
-                                    <li>Right to Refuse: NTA MODELS reserves the unequivocal right to refuse any application without providing a detailed explanation. The deposit remains non-refundable even in this event.</li>
-                                    <li>Program Changes: NTA MODELS reserves the right to make necessary changes to course content, schedules, and assigned facilitators. Significant changes will be communicated to enrolled students promptly.</li>
-                                    <li>Online & In-Person Conduct: All students must adhere to a code of respectful and professional conduct during all scheduled training sessions, whether in-person or virtual. Violation may lead to expulsion without financial refund.</li>
-                                    <li>Liability Waiver: Participants acknowledge that NTA MODELS is not liable for any injury, personal loss, or damage to property sustained during any officially organized training session, photoshoot, or event.</li>
-                                </ol>
-                            </div>
-
-                            <div class="mb-6 flex items-start">
-                                <input type="checkbox" id="terms_conditions" name="Terms & Conditions Acceptance" class="mt-1 mr-3 h-4 w-4 text-nta-black border-gray-300 rounded-none focus:ring-nta-black" required>
-                                <label for="terms_conditions" class="text-sm font-paragraph text-gray-700 font-bold">
-                                    I confirm that I have read, understood, and agree to the 10-point Terms & Conditions listed above.
-                                </label>
-                            </div>
-                            
-                            <button type="submit" class="w-full px-4 py-3 bg-nta-black text-white font-heading text-sm font-bold uppercase rounded-none hover:bg-gray-800 transition-colors shadow-none disabled:bg-gray-400" id="submit-button">
-                                Proceed to Payment (R105.00 Deposit)
-                            </button>
-                            
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <form id="payfast-form" method="post" action="https://www.payfast.co.za/eng/process" class="hidden">
-                <input type="hidden" name="merchant_id" value="30920829">
-                <input type="hidden" name="merchant_key" value="gqnzkfosq9fc8">
-                
-                <input type="hidden" name="amount" value="105.00">
-                <input type="hidden" name="item_name" value="NTA Registration Fee Deposit">
-                
-                <input type="hidden" name="email_address" id="pf-email">
-                <input type="hidden" name="name_first" id="pf-name-first">
-                <input type="hidden" name="name_last" id="pf-name-last">
-
-                <input type="hidden" name="return_url" id="pf-return-url">
-                <input type="hidden" name="cancel_url" id="pf-cancel-url">
-                <input type="hidden" name="custom_str1" id="pf-custom-data">
-                
-                <input type="hidden" name="payment_method" value="cc">
-            </form>
-        </div>
-    </main>
-    
-    <footer class="bg-nta-black text-white py-12">
-        <div class="container mx-auto px-4 flex flex-col items-center">
-            
-            <img src="assets/logo-header.png" alt="NTA Models Logo" class="h-32 mb-10 rounded-none shadow-none" onerror="this.onerror=null;this.src='https://placehold.co/200x90/FFFFFF/000000?text=NTA+Logo';" />
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-y-10 md:gap-x-12 w-full max-w-4xl text-center md:text-left">
-                
-                <div>
-                    <ul class="space-y-2 text-lg">
-                        <li><a href="join.html" class="hover:text-gray-400 font-heading font-bold transition-colors">ENROLL</a></li>
-                        <li><a href="scout/index.html" class="hover:text-gray-400 font-heading font-bold transition-colors">SCOUTING</a></li>
-                        <li><a href="contact.html" class="hover:text-gray-400 font-heading font-bold transition-colors">CONTACT</a></li>
-                        <li><a href="https://portal.ntamodels.co.za" target="_blank" class="hover:text-gray-400 font-heading font-bold transition-colors">LOGIN</a></li>
-                    </ul>
-                </div>
-
-                <div class="md:col-span-1">
-                    <h4 class="text-xl font-heading font-bold mb-4">OPERATING HOURS:</h4>
-                    <p class="text-base font-paragraph">
-                        Monday - Friday (09:00 - 17:30)<br>
-                        Saturday (09:00 - 13:00)<br>
-                        Sunday (closed)
-                    </p>
-                </div>
-
-                <div class="md:col-span-1">
-                    <h4 class="text-xl font-heading font-bold mb-4">FOLLOW US:</h4>
-                    <div class="flex justify-center md:justify-start space-x-4 text-2xl">
-                        <a href="https://facebook.com/ntamodelss" target="_blank" class="hover:text-gray-400 transition-colors" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                        <a href="https://instagram.com/ntamodelss" target="_blank" class="hover:text-gray-400 transition-colors" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                        <a href="https://tiktok.com/@ntamodelssa" target="_blank" class="hover:text-gray-400 transition-colors" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
-                    </div>
-                </div>
-            </div>
-
-            <p class="mt-12 text-sm font-paragraph font-light text-center">
-                © 2025 NTA MODELS. All rights reserved. 
-                <span class="inline-block mt-2 md:mt-0 md:ml-2">
-                    Web Designs by <a href="https://webbytlotly.netlify.app/" target="_blank" class="text-white hover:text-gray-400 font-paragraph font-light">Tlotly</a>
-                </span>
-            </p>
-        </div>
-    </footer>
 
 
-    <script>
-        const menuToggle = document.getElementById('menu-toggle');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const iconOpen = document.getElementById('menu-icon-open');
-        const iconClose = document.getElementById('menu-icon-close');
-        
-        // --- Mobile Menu Toggle ---
-        function toggleMobileMenu() {
-            const isMenuOpen = mobileMenu.classList.toggle('open');
-            
-            iconOpen.classList.toggle('opacity-0', isMenuOpen);
-            iconClose.classList.toggle('opacity-0', !isMenuOpen);
-            iconClose.classList.toggle('opacity-100', isMenuOpen);
+    <header id="desktop-header" class="fixed top-0 left-0 w-full transition-colors duration-300 bg-black">
 
-            document.body.style.overflow = isMenuOpen ? 'hidden' : '';
-        }
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between">
 
-        menuToggle.addEventListener('click', toggleMobileMenu);
+            
 
-        document.querySelectorAll('#mobile-menu a').forEach(link => {
-            link.addEventListener('click', toggleMobileMenu);
-        });
+            <div class="flex w-full justify-between items-center lg:hidden">
 
+                <div class="h-10">
 
-        // --- APPLICATION AND PAYMENT LOGIC (REVISED) ---
+                    <img src="assets/logo-header.png" alt="NTA Logo" class="h-full w-auto" 
 
-        // Note: YOUR_SITE_BASE_URL is now for client-side Payfast redirects only.
-        const YOUR_SITE_BASE_URL = 'https://ntamodels.co.za'; 
+                                onerror="this.onerror=null;this.src='https://placehold.co/120x50/FFFFFF/000000?text=LOGO';" />
 
-        const messageBox = document.getElementById('message-box');
-        const form = document.getElementById('application-form');
-        const submitButton = document.getElementById('submit-button');
-        const termsCheckbox = document.getElementById('terms_conditions'); 
+                </div>
 
-        /**
-         * Utility function to display messages to the user.
-         */
-        function showMessage(message, type = 'error') {
-            messageBox.textContent = message;
-            messageBox.className = 'p-4 mb-6 rounded-none font-bold text-white shadow-none'; 
+                <button id="menu-toggle" class="text-white focus:outline-none p-2 relative z-50">
 
-            if (type === 'success') {
-                messageBox.classList.add('bg-green-600');
-            } else if (type === 'error') {
-                messageBox.classList.add('bg-nta-red');
-            } else {
-                messageBox.classList.add('bg-blue-600'); 
-            }
-            messageBox.classList.remove('hidden');
-        }
+                    <i id="menu-icon-open" class="fas fa-bars fa-lg transition-opacity duration-300"></i>
 
-        /**
-         * REVISED: Handles the form submission and Payfast redirection.
-         * The form is configured with Netlify's `action` attribute to handle the form data.
-         * On success, Netlify redirects to `/join.html?redirect=payfast`.
-         */
-        form.addEventListener('submit', function(event) {
-            
-            // Check required fields and T&C
-            if (!form.checkValidity() || !termsCheckbox.checked) {
-                // Let the browser handle standard validation UI (e.g., pop-up messages)
-                if (!termsCheckbox.checked) {
-                    showMessage("You must agree to the Terms & Conditions before proceeding to payment.", 'error');
-                } else {
-                    showMessage("Please fill out all required fields correctly before proceeding.", 'error');
-                }
-                event.preventDefault(); // Stop the Netlify submission/redirect
-                return;
-            }
+                    <i id="menu-icon-close" class="fas fa-times fa-lg transition-opacity duration-300 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-0"></i>
 
-            // Payfast logic will be executed after Netlify captures the form data.
-            // This is handled by a direct redirect after Netlify processes the form.
-            
-            submitButton.disabled = true;
-            submitButton.textContent = "Processing and Redirecting...";
-            // We allow the default form submission to Netlify to occur here.
-        });
+                </button>
+
+            </div>
 
 
-        /**
-         * Step 2: Payfast Redirection (Triggered by Netlify's redirect after form capture)
-         */
-        function handlePayfastRedirect() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const redirectParam = urlParams.get('redirect');
 
-            if (redirectParam === 'payfast') {
-                // 1. Gather data from the form (We need it for Payfast fields)
-                // Note: Netlify has already successfully saved the form data at this point.
-                const formData = new FormData(form);
-                const data = Object.fromEntries(formData.entries());
+            <div class="hidden lg:flex w-full items-center justify-between">
 
-                // 2. Prepare Payfast form for submission
-                const payfastForm = document.getElementById('payfast-form');
-                
-                // Extract Name/Email for Payfast
-                const fullName = data['Full Name'].split(' ');
-                const firstName = fullName[0] || '';
-                const lastName = fullName.slice(1).join(' ') || '';
+                <div class="w-48 flex-shrink-0">
 
-                // Generate a pseudo-reference ID (or better: a timestamp) to prevent duplicate transactions
-                const transactionReference = 'NTA-' + Date.now();
+                    <img src="assets/logo-header.png" alt="NTA Logo" class="h-12 w-auto" 
 
-                // Populate Payfast form fields
-                document.getElementById('pf-email').value = data['Email'];
-                document.getElementById('pf-name-first').value = firstName;
-                document.getElementById('pf-name-last').value = lastName;
-                
-                // Use the reference ID for the custom data field
-                document.getElementById('pf-custom-data').value = transactionReference; 
+                                onerror="this.onerror=null;this.src='https://placehold.co/150x60/FFFFFF/000000?text=LOGO';" />
 
-                // Set the success and cancel URLs. No need for a Notify URL anymore.
-                const currentUrlBase = YOUR_SITE_BASE_URL; // Use the absolute URL
-                document.getElementById('pf-return-url').value = currentUrlBase + '/join.html?pf_status=success';
-                document.getElementById('pf-cancel-url').value = currentUrlBase + '/join.html?pf_status=cancel';
+                </div> 
 
-                // 3. Store the user data *temporarily* in session/local storage 
-                // to be displayed on the return page, as the form fields will be reset.
-                localStorage.setItem('temp_application_data', JSON.stringify(data));
-                localStorage.setItem('temp_ref_id', transactionReference);
 
-                // 4. Submit the hidden Payfast form (This redirects the user)
-                payfastForm.submit();
-            }
-        }
-        
-        /**
-         * Step 3: Handles the client-side return from Payfast.
-         */
-        function handlePayfastReturn() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const status = urlParams.get('pf_status');
-            const refId = localStorage.getItem('temp_ref_id') || 'N/A';
-            const applicationData = localStorage.getItem('temp_application_data');
-            
-            // If any status is found, clear the URL to prevent re-triggering on refresh
-            if (status) {
-                // Clear the URL to the base page path
-                history.replaceState(null, '', window.location.pathname);
-            }
 
-            if (status === 'success') {
-                // Payment Success: Show success message and form data
-                const userData = applicationData ? JSON.parse(applicationData) : { 'Full Name': 'Applicant' };
-                
-                document.getElementById('form-container').innerHTML = `
-                    <h1 class="font-heading text-2xl md:text-3xl uppercase font-bold text-nta-black mb-2">Thank You!</h1>
-                    <p class="font-serif text-4xl md:text-5xl font-normal text-gray-800 mb-6">${userData['Full Name']}</p>
-                    <div class="p-4 mb-6 rounded-none font-bold text-white bg-green-600 shadow-none">
-                        🎉 **Payment successful!** Your deposit (R105.00) has been processed. Your application was submitted to NTA MODELS. You will receive an enrollment email confirmation shortly.
-                        <br><br>
-                        **Transaction Reference:** ${refId}
-                    </div>
-                    <p class="text-sm text-gray-700">You may now close this page or navigate back to the <a href="index.html" class="text-nta-black font-bold underline">Home Page</a>.</p>
-                `;
-                
-                // Clear the temporary storage
-                localStorage.removeItem('temp_ref_id');
-                localStorage.removeItem('temp_application_data');
+                <nav class="flex-grow flex justify-end">
 
-            } else if (status === 'cancel') {
-                // Payment Failure/Cancel: Show error as requested
-                showMessage(" Payment Failed or Cancelled. Your application was not completed, and your enrollment was not finalized.", 'error');
-                
-                // Reset button state
-                submitButton.disabled = false;
-                submitButton.textContent = "Proceed to Payment (R105.00 Deposit)";
-                
-                // Clear the temporary storage (to force re-entry if they try again)
-                localStorage.removeItem('temp_ref_id');
-                localStorage.removeItem('temp_application_data');
-            }
-        }
-        
-        // This handles the form submission flow first.
-        window.addEventListener('load', function() {
-            handlePayfastRedirect(); // Check if Netlify has redirected to start Payfast process
-            handlePayfastReturn(); // Check if Payfast has returned a status
-        });
+                    <ul class="flex space-x-8 text-white font-heading text-lg font-light">
 
-    </script>
+                        <li><a href="index.html" class="p-2 rounded-none hover:bg-white/20 transition-colors">HOME</a></li>
+
+                        <li><a href="about.html" class="p-2 rounded-none hover:bg-white/20 transition-colors">ABOUT</a></li>
+
+                        <li><a href="courses.html" class="p-2 rounded-none hover:bg-white/20 transition-colors">COURSES</a></li>
+
+                        <li><a href="join.html" class="p-2 rounded-none transition-colors">ENROLL</a></li>
+
+                        <li><a href="scout/index.html" class="p-2 rounded-none hover:bg-white/20 transition-colors">SCOUTING</a></li>
+
+                        <li><a href="contact.html" class="p-2 rounded-none hover:bg-white/20 transition-colors">CONTACT</a></li>
+
+                        <li><a href="https://portal.ntamodels.co.za" target="_blank" class="p-2 rounded-none hover:bg-white/20 transition-colors">LOGIN</a></li>
+
+                    </ul>
+
+                </nav>
+
+            </div>
+
+        </div>
+
+    </header>
+
+    <div id="mobile-menu" class="fixed top-0 left-0 w-full h-full bg-black/95 z-40 flex flex-col justify-center items-center text-white p-8 lg:hidden">
+
+        <nav class="flex flex-col space-y-4 text-xl font-heading text-center font-light w-full">
+
+            <a href="index.html" class="p-2 hover:text-gray-400 transition-colors" onclick="toggleMobileMenu()">HOME</a>
+
+            <a href="about.html" class="p-2 hover:text-gray-400 transition-colors" onclick="toggleMobileMenu()">ABOUT</a>
+
+            <a href="courses.html" class="p-2 hover:text-gray-400 transition-colors" onclick="toggleMobileMenu()">COURSES</a>
+
+            <a href="join.html" class="p-2 hover:text-gray-400 transition-colors" onclick="toggleMobileMenu()">ENROLL</a>
+
+            <a href="scout/index.html" class="p-2 hover:text-gray-400 transition-colors" onclick="toggleMobileMenu()">SCOUTING</a>
+
+            <a href="contact.html" class="p-2 hover:text-gray-400 transition-colors" onclick="toggleMobileMenu()">CONTACT</a>
+
+            <a href="https://portal.ntamodels.co.za" target="_blank" class="p-2 hover:text-gray-400 transition-colors" onclick="toggleMobileMenu()">LOGIN</a>
+
+        </nav>
+
+    </div>
+
+    
+
+    <main class="pt-24 lg:pt-32 min-h-screen bg-nta-white">
+
+        <div class="container mx-auto px-4 py-8 max-w-5xl">
+
+            <div id="form-container" class="p-4 md:p-8 lg:p-12">
+
+                
+
+                <h1 class="font-heading text-2xl md:text-3xl uppercase font-bold text-nta-black mb-2">
+
+                    NTA ACADEMY ENROLLMENT
+
+                </h1>
+
+                <h2 class="font-serif text-4xl md:text-5xl font-normal text-gray-800 mb-10">Start Your Journey</h2>
+
+                
+
+                <div id="message-box" class="hidden p-4 mb-6 rounded-none font-bold text-white shadow-none"></div>
+
+                
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+
+                    
+
+                    <div class="bg-white p-6 lg:p-0">
+
+                        <h3 class="font-heading text-xl md:text-2xl font-bold mb-4 uppercase text-nta-black">
+
+                            Application Requirements
+
+                        </h3>
+
+                        <div class="p-6 bg-white border-l-4 border-nta-black rounded-none shadow-sm">
+
+                            <h4 class="font-heading text-lg font-bold mb-3 uppercase">General Guidelines</h4>
+
+                            <ul class="list-disc list-inside text-sm font-paragraph space-y-2 text-gray-700">
+
+                                <li>Ensure all personal details are accurate and current.</li>
+
+                                <li>A minimum age of 13 is required to apply.</li>
+
+                                <li>You must successfully complete the R105.00 deposit via Payfast for your application to be processed.</li>
+
+                                <li>Failing to complete payment will result in the application not being submitted to NTA MODELS.</li>
+
+                                <li>We will contact you via email or phone within 7 business days of successful submission.</li>
+
+                            </ul>
+
+                        </div>
+
+                        
+
+                        <p class="text-base font-paragraph mt-6 text-gray-700 font-bold">
+
+                            To finalize your application, a non-refundable 50% registration deposit of R105.00 is required upon submission.
+
+                        </p>
+
+                        
+
+                        <div class="w-full bg-white py-4 overflow-hidden rounded-none mt-8 border border-gray-100">
+
+                            <div class="marquee-container">
+
+                                <div class="marquee-content">
+
+                                    <div class="marquee-item"><img src="assets/nta3.jpg" alt="NTA Model Photo" class="rounded-none shadow-none" onerror="this.onerror=null;this.src='https://placehold.co/400x120/5D5D5D/FFFFFF?text=Model+1';"></div>
+
+                                    <div class="marquee-item"><img src="assets/nta4.jpg" alt="NTA Model Photo" class="rounded-none shadow-none" onerror="this.onerror=null;this.src='https://placehold.co/400x120/7A7A7A/FFFFFF?text=Model+2';"></div>
+
+                                    <div class="marquee-item"><img src="assets/nta5.jpg" alt="NTA Model Photo" class="rounded-none shadow-none" onerror="this.onerror=null;this.src='https://placehold.co/400x120/9D9D9D/FFFFFF?text=Model+3';"></div>
+
+                                    <div class="marquee-item"><img src="assets/nta3.jpg" alt="NTA Model Photo" class="rounded-none shadow-none" onerror="this.onerror=null;this.src='https://placehold.co/400x120/B6B6B6/FFFFFF?text=Model+4';"></div>
+
+                                    <div class="marquee-item"><img src="assets/nta3.jpg" alt="NTA Model Photo" class="rounded-none shadow-none" onerror="this.onerror=null;this.src='https://placehold.co/400x120/5D5D5D/FFFFFF?text=Model+1';"></div>
+
+                                    <div class="marquee-item"><img src="assets/nta4.jpg" alt="NTA Model Photo" class="rounded-none shadow-none" onerror="this.onerror=null;this.src='https://placehold.co/400x120/7A7A7A/FFFFFF?text=Model+2';"></div>
+
+                                    <div class="marquee-item"><img src="assets/nta5.jpg" alt="NTA Model Photo" class="rounded-none shadow-none" onerror="this.onerror=null;this.src='https://placehold.co/400x120/9D9D9D/FFFFFF?text=Model+3';"></div>
+
+                                    <div class="marquee-item"><img src="assets/nta3.jpg" alt="NTA Model Photo" class="rounded-none shadow-none" onerror="this.onerror=null;this.src='https://placehold.co/400x120/B6B6B6/FFFFFF?text=Model+4';"></div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div>
+
+                        <h3 class="font-heading text-xl md:text-2xl font-bold mb-4 uppercase text-nta-black">
+
+                            Enrollment Checkout Form
+
+                        </h3>
+
+                        <form id="application-form" class="bg-white p-6" name="enrollment" method="POST" data-netlify="true" action="/join.html?redirect=payfast">
+
+                            
+
+                            <input type="hidden" name="form-name" value="enrollment" />
+
+
+
+                            <div class="mb-4">
+
+                                <label for="full_name" class="block text-sm font-bold text-gray-700 font-heading">Full Name and Surname</label>
+
+                                <input type="text" id="full_name" name="Full Name" class="form-input" required>
+
+                            </div>
+
+
+
+                            <div class="mb-4">
+
+                                <label for="email" class="block text-sm font-bold text-gray-700 font-heading">Email Address</label>
+
+                                <input type="email" id="email" name="Email" class="form-input" required>
+
+                            </div>
+
+                            
+
+                            <div class="mb-4">
+
+                                <label for="phone" class="block text-sm font-bold text-gray-700 font-heading">Phone Number</label>
+
+                                <input type="tel" id="phone" name="Phone Number" class="form-input" required>
+
+                            </div>
+
+
+
+                            <div class="mb-4">
+
+                                <label for="age" class="block text-sm font-bold text-gray-700 font-heading">Age</label>
+
+                                <input type="number" id="age" name="Age" class="form-input" required min="13">
+
+                            </div>
+
+                            
+
+                            <div class="mb-4">
+
+                                <label for="location" class="block text-sm font-bold text-gray-700 font-heading">Current City / Location</label>
+
+                                <input type="text" id="location" name="Location" class="form-input" required>
+
+                            </div>
+
+
+
+                            <div class="mb-6">
+
+                                <label for="course" class="block text-sm font-bold text-gray-700 font-heading">Select Course</label>
+
+                                <select id="course" name="Selected Course" class="form-input" required>
+
+                                    <option value="" disabled selected>Choose a program...</option>
+
+                                    <option value="PMDP (R5,000)">Development 101</option>
+
+                                    <option value="Catwalk Masterclass (R2,500)">3 Months Intensive Course</option>
+
+                                    <option value="Digital Pro Workshop (R1,500)">Digital Media & Personal Branding Workshop</option>
+
+                                </select>
+
+                            </div>
+
+                            
+
+                            <h4 class="font-heading text-base font-bold mb-3 uppercase text-nta-black mt-6">
+
+                                Terms & Conditions of Enrollment
+
+                            </h4>
+
+                            <div class="terms-box p-4 mb-6">
+
+                                <ol class="list-decimal list-inside text-sm font-paragraph space-y-3 text-gray-700">
+
+                                    <li>Deposit Policy: The R105.00 registration deposit is non-refundable, regardless of the application outcome or subsequent withdrawal from the program.</li>
+
+                                    <li>Age Requirement: All applicants must be 13 years of age or older at the time of submission. NTA MODELS reserves the right to request proof of age.</li>
+
+                                    <li>Application Processing: Applications are officially processed only upon successful completion of the R105.00 deposit via Payfast. Incomplete applications will be automatically discarded after 30 days.</li>
+
+                                    <li>Course Fees: The paid deposit is credited against the total course fee. The remaining balance is strictly due on or before the first day of the selected program commencement.</li>
+
+                                    <li>Data Privacy: NTA MODELS will use the personal data provided solely for the purpose of enrollment, communication, and internal marketing, in accordance with applicable privacy laws.</li>
+
+                                    <li>Model Release: By submitting this application, you acknowledge that NTA MODELS may request and utilize images or likeness (provided later in the process) exclusively for promotional material related to the course or agency scouting.</li>
+
+                                    <li>Right to Refuse: NTA MODELS reserves the unequivocal right to refuse any application without providing a detailed explanation. The deposit remains non-refundable even in this event.</li>
+
+                                    <li>Program Changes: NTA MODELS reserves the right to make necessary changes to course content, schedules, and assigned facilitators. Significant changes will be communicated to enrolled students promptly.</li>
+
+                                    <li>Online & In-Person Conduct: All students must adhere to a code of respectful and professional conduct during all scheduled training sessions, whether in-person or virtual. Violation may lead to expulsion without financial refund.</li>
+
+                                    <li>Liability Waiver: Participants acknowledge that NTA MODELS is not liable for any injury, personal loss, or damage to property sustained during any officially organized training session, photoshoot, or event.</li>
+
+                                </ol>
+
+                            </div>
+
+
+
+                            <div class="mb-6 flex items-start">
+
+                                <input type="checkbox" id="terms_conditions" name="Terms & Conditions Acceptance" class="mt-1 mr-3 h-4 w-4 text-nta-black border-gray-300 rounded-none focus:ring-nta-black" required>
+
+                                <label for="terms_conditions" class="text-sm font-paragraph text-gray-700 font-bold">
+
+                                    I confirm that I have read, understood, and agree to the 10-point Terms & Conditions listed above.
+
+                                </label>
+
+                            </div>
+
+                            
+
+                            <button type="submit" class="w-full px-4 py-3 bg-nta-black text-white font-heading text-sm font-bold uppercase rounded-none hover:bg-gray-800 transition-colors shadow-none disabled:bg-gray-400" id="submit-button">
+
+                                Proceed to Payment (R105.00 Deposit)
+
+                            </button>
+
+                            
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <form id="payfast-form" method="post" action="https://www.payfast.co.za/eng/process" class="hidden">
+
+                <input type="hidden" name="merchant_id" value="30920829">
+
+                <input type="hidden" name="merchant_key" value="gqnzkfosq9fc8">
+
+                
+
+                <input type="hidden" name="amount" value="105.00">
+
+                <input type="hidden" name="item_name" value="NTA Registration Fee Deposit">
+
+                
+
+                <input type="hidden" name="email_address" id="pf-email">
+
+                <input type="hidden" name="name_first" id="pf-name-first">
+
+                <input type="hidden" name="name_last" id="pf-name-last">
+
+
+
+                <input type="hidden" name="return_url" id="pf-return-url">
+
+                <input type="hidden" name="cancel_url" id="pf-cancel-url">
+
+                <input type="hidden" name="custom_str1" id="pf-custom-data">
+
+                
+
+                <input type="hidden" name="payment_method" value="cc">
+
+            </form>
+
+        </div>
+
+    </main>
+
+    
+
+    <footer class="bg-nta-black text-white py-12">
+
+        <div class="container mx-auto px-4 flex flex-col items-center">
+
+            
+
+            <img src="assets/logo-header.png" alt="NTA Models Logo" class="h-32 mb-10 rounded-none shadow-none" onerror="this.onerror=null;this.src='https://placehold.co/200x90/FFFFFF/000000?text=NTA+Logo';" />
+
+            
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-y-10 md:gap-x-12 w-full max-w-4xl text-center md:text-left">
+
+                
+
+                <div>
+
+                    <ul class="space-y-2 text-lg">
+
+                        <li><a href="join.html" class="hover:text-gray-400 font-heading font-bold transition-colors">ENROLL</a></li>
+
+                        <li><a href="scout/index.html" class="hover:text-gray-400 font-heading font-bold transition-colors">SCOUTING</a></li>
+
+                        <li><a href="contact.html" class="hover:text-gray-400 font-heading font-bold transition-colors">CONTACT</a></li>
+
+                        <li><a href="https://portal.ntamodels.co.za" target="_blank" class="hover:text-gray-400 font-heading font-bold transition-colors">LOGIN</a></li>
+
+                    </ul>
+
+                </div>
+
+
+
+                <div class="md:col-span-1">
+
+                    <h4 class="text-xl font-heading font-bold mb-4">OPERATING HOURS:</h4>
+
+                    <p class="text-base font-paragraph">
+
+                        Monday - Friday (09:00 - 17:30)<br>
+
+                        Saturday (09:00 - 13:00)<br>
+
+                        Sunday (closed)
+
+                    </p>
+
+                </div>
+
+
+
+                <div class="md:col-span-1">
+
+                    <h4 class="text-xl font-heading font-bold mb-4">FOLLOW US:</h4>
+
+                    <div class="flex justify-center md:justify-start space-x-4 text-2xl">
+
+                        <a href="https://facebook.com/ntamodelss" target="_blank" class="hover:text-gray-400 transition-colors" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+
+                        <a href="https://instagram.com/ntamodelss" target="_blank" class="hover:text-gray-400 transition-colors" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+
+                        <a href="https://tiktok.com/@ntamodelssa" target="_blank" class="hover:text-gray-400 transition-colors" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <p class="mt-12 text-sm font-paragraph font-light text-center">
+
+                © 2025 NTA MODELS. All rights reserved. 
+
+                <span class="inline-block mt-2 md:mt-0 md:ml-2">
+
+                    Web Designs by <a href="https://webbytlotly.netlify.app/" target="_blank" class="text-white hover:text-gray-400 font-paragraph font-light">Tlotly</a>
+
+                </span>
+
+            </p>
+
+        </div>
+
+    </footer>
+
+
+
+
+
+    <script>
+
+        const menuToggle = document.getElementById('menu-toggle');
+
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        const iconOpen = document.getElementById('menu-icon-open');
+
+        const iconClose = document.getElementById('menu-icon-close');
+
+        
+
+        // --- Mobile Menu Toggle ---
+
+        function toggleMobileMenu() {
+
+            const isMenuOpen = mobileMenu.classList.toggle('open');
+
+            
+
+            iconOpen.classList.toggle('opacity-0', isMenuOpen);
+
+            iconClose.classList.toggle('opacity-0', !isMenuOpen);
+
+            iconClose.classList.toggle('opacity-100', isMenuOpen);
+
+
+
+            document.body.style.overflow = isMenuOpen ? 'hidden' : '';
+
+        }
+
+
+
+        menuToggle.addEventListener('click', toggleMobileMenu);
+
+
+
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+
+            link.addEventListener('click', toggleMobileMenu);
+
+        });
+
+
+
+
+
+        // --- APPLICATION AND PAYMENT LOGIC (REVISED) ---
+
+
+
+        // Note: YOUR_SITE_BASE_URL is now for client-side Payfast redirects only.
+
+        const YOUR_SITE_BASE_URL = 'https://ntamodels.co.za'; 
+
+
+
+        const messageBox = document.getElementById('message-box');
+
+        const form = document.getElementById('application-form');
+
+        const submitButton = document.getElementById('submit-button');
+
+        const termsCheckbox = document.getElementById('terms_conditions'); 
+
+
+
+        /**
+
+         * Utility function to display messages to the user.
+
+         */
+
+        function showMessage(message, type = 'error') {
+
+            messageBox.textContent = message;
+
+            messageBox.className = 'p-4 mb-6 rounded-none font-bold text-white shadow-none'; 
+
+
+
+            if (type === 'success') {
+
+                messageBox.classList.add('bg-green-600');
+
+            } else if (type === 'error') {
+
+                messageBox.classList.add('bg-nta-red');
+
+            } else {
+
+                messageBox.classList.add('bg-blue-600'); 
+
+            }
+
+            messageBox.classList.remove('hidden');
+
+        }
+
+
+
+        /**
+
+         * REVISED: Handles the form submission and Payfast redirection.
+
+         * The form is configured with Netlify's `action` attribute to handle the form data.
+
+         * On success, Netlify redirects to `/join.html?redirect=payfast`.
+
+         */
+
+        form.addEventListener('submit', function(event) {
+
+            
+
+            // Check required fields and T&C
+
+            if (!form.checkValidity() || !termsCheckbox.checked) {
+
+                // Let the browser handle standard validation UI (e.g., pop-up messages)
+
+                if (!termsCheckbox.checked) {
+
+                    showMessage("You must agree to the Terms & Conditions before proceeding to payment.", 'error');
+
+                } else {
+
+                    showMessage("Please fill out all required fields correctly before proceeding.", 'error');
+
+                }
+
+                event.preventDefault(); // Stop the Netlify submission/redirect
+
+                return;
+
+            }
+
+
+
+            // Payfast logic will be executed after Netlify captures the form data.
+
+            // This is handled by a direct redirect after Netlify processes the form.
+
+            
+
+            submitButton.disabled = true;
+
+            submitButton.textContent = "Processing and Redirecting...";
+
+            // We allow the default form submission to Netlify to occur here.
+
+        });
+
+
+
+
+
+        /**
+
+         * Step 2: Payfast Redirection (Triggered by Netlify's redirect after form capture)
+
+         */
+
+        function handlePayfastRedirect() {
+
+            const urlParams = new URLSearchParams(window.location.search);
+
+            const redirectParam = urlParams.get('redirect');
+
+
+
+            if (redirectParam === 'payfast') {
+
+                // 1. Gather data from the form (We need it for Payfast fields)
+
+                // Note: Netlify has already successfully saved the form data at this point.
+
+                const formData = new FormData(form);
+
+                const data = Object.fromEntries(formData.entries());
+
+
+
+                // 2. Prepare Payfast form for submission
+
+                const payfastForm = document.getElementById('payfast-form');
+
+                
+
+                // Extract Name/Email for Payfast
+
+                const fullName = data['Full Name'].split(' ');
+
+                const firstName = fullName[0] || '';
+
+                const lastName = fullName.slice(1).join(' ') || '';
+
+
+
+                // Generate a pseudo-reference ID (or better: a timestamp) to prevent duplicate transactions
+
+                const transactionReference = 'NTA-' + Date.now();
+
+
+
+                // Populate Payfast form fields
+
+                document.getElementById('pf-email').value = data['Email'];
+
+                document.getElementById('pf-name-first').value = firstName;
+
+                document.getElementById('pf-name-last').value = lastName;
+
+                
+
+                // Use the reference ID for the custom data field
+
+                document.getElementById('pf-custom-data').value = transactionReference; 
+
+
+
+                // Set the success and cancel URLs. No need for a Notify URL anymore.
+
+                const currentUrlBase = YOUR_SITE_BASE_URL; // Use the absolute URL
+
+                document.getElementById('pf-return-url').value = currentUrlBase + '/join.html?pf_status=success';
+
+                document.getElementById('pf-cancel-url').value = currentUrlBase + '/join.html?pf_status=cancel';
+
+
+
+                // 3. Store the user data *temporarily* in session/local storage 
+
+                // to be displayed on the return page, as the form fields will be reset.
+
+                localStorage.setItem('temp_application_data', JSON.stringify(data));
+
+                localStorage.setItem('temp_ref_id', transactionReference);
+
+
+
+                // 4. Submit the hidden Payfast form (This redirects the user)
+
+                payfastForm.submit();
+
+            }
+
+        }
+
+        
+
+        /**
+
+         * Step 3: Handles the client-side return from Payfast.
+
+         */
+
+        function handlePayfastReturn() {
+
+            const urlParams = new URLSearchParams(window.location.search);
+
+            const status = urlParams.get('pf_status');
+
+            const refId = localStorage.getItem('temp_ref_id') || 'N/A';
+
+            const applicationData = localStorage.getItem('temp_application_data');
+
+            
+
+            // If any status is found, clear the URL to prevent re-triggering on refresh
+
+            if (status) {
+
+                // Clear the URL to the base page path
+
+                history.replaceState(null, '', window.location.pathname);
+
+            }
+
+
+
+            if (status === 'success') {
+
+                // Payment Success: Show success message and form data
+
+                const userData = applicationData ? JSON.parse(applicationData) : { 'Full Name': 'Applicant' };
+
+                
+
+                document.getElementById('form-container').innerHTML = `
+
+                    <h1 class="font-heading text-2xl md:text-3xl uppercase font-bold text-nta-black mb-2">Thank You!</h1>
+
+                    <p class="font-serif text-4xl md:text-5xl font-normal text-gray-800 mb-6">${userData['Full Name']}</p>
+
+                    <div class="p-4 mb-6 rounded-none font-bold text-white bg-green-600 shadow-none">
+
+                        🎉 **Payment successful!** Your deposit (R105.00) has been processed. Your application was submitted to NTA MODELS. You will receive an enrollment email confirmation shortly.
+
+                        <br><br>
+
+                        **Transaction Reference:** ${refId}
+
+                    </div>
+
+                    <p class="text-sm text-gray-700">You may now close this page or navigate back to the <a href="index.html" class="text-nta-black font-bold underline">Home Page</a>.</p>
+
+                `;
+
+                
+
+                // Clear the temporary storage
+
+                localStorage.removeItem('temp_ref_id');
+
+                localStorage.removeItem('temp_application_data');
+
+
+
+            } else if (status === 'cancel') {
+
+                // Payment Failure/Cancel: Show error as requested
+
+                showMessage("❌ Payment Failed or Cancelled. Your application was not completed, and your enrollment was not finalized.", 'error');
+
+                
+
+                // Reset button state
+
+                submitButton.disabled = false;
+
+                submitButton.textContent = "Proceed to Payment (R105.00 Deposit)";
+
+                
+
+                // Clear the temporary storage (to force re-entry if they try again)
+
+                localStorage.removeItem('temp_ref_id');
+
+                localStorage.removeItem('temp_application_data');
+
+            }
+
+        }
+
+        
+
+        // This handles the form submission flow first.
+
+        window.addEventListener('load', function() {
+
+            handlePayfastRedirect(); // Check if Netlify has redirected to start Payfast process
+
+            handlePayfastReturn(); // Check if Payfast has returned a status
+
+        });
+
+
+
+    </script>
+
 </body>
 
-</html>
 
+
+</html>
